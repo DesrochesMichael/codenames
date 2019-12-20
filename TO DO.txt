@@ -1,0 +1,4 @@
+- affichage pour maitre espion
+- afficahge pour agent
+- se conncter pour joueur 
+- gerer l'enregistrement des joueurs connecter
