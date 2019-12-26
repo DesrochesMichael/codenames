@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import codenames.dao.IDAOCarteNomDeCode;
 import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Equipe;

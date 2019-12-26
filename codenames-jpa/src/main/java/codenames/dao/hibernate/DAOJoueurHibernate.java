@@ -13,9 +13,24 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 		this.cls = Joueur.class;
 	}
 
+	public Joueur connect(Joueur j) {
+		
+		try {
+			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.pseudo = :nom and j.mdp):mdp", Joueur.class);
+			myQuery.setParameter("nom", j.getPseudo());
+			myQuery.setParameter("mdp", j.getMdp());
+			return myQuery.getSingleResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 	public Joueur findByNom(String nom) {
 		try {
-			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur p where p.libelle = :nom", Joueur.class);
+			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.libelle = :nom", Joueur.class);
 			myQuery.setParameter("nom", nom);
 			return myQuery.getSingleResult();
 

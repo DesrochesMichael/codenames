@@ -30,8 +30,8 @@ public class Equipe {
 
 	
 	@OneToMany(mappedBy ="equipe")
-	private List<Tour> listeTour = new ArrayList<Tour>();
 
+	private List<Tour> listeTour = new ArrayList<Tour>();
 
 
 	public int getId() {

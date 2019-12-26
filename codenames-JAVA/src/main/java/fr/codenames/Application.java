@@ -7,8 +7,8 @@ import java.util.Scanner;
 import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
 import codenames.dao.hibernate.DAOJoueurHibernate;
 import fr.codenames.model.CartesNomDeCode;
+import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
-
 
 public class Application {
 	static Scanner sc = new Scanner(System.in);
@@ -32,15 +32,14 @@ public class Application {
 		int histo;
 
 		Joueur test = new Joueur();
-		
+
 		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
 
 		List<CartesNomDeCode> listeCarte = new ArrayList<CartesNomDeCode>();
 		List<Joueur> listeJoueur = new ArrayList<Joueur>();
-		
-		
-		
+		List<Equipe> equipes = new ArrayList<Equipe>();
+
 		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
 
@@ -49,9 +48,9 @@ public class Application {
 			case 1:
 				// NOUVELLE PARTIE
 				Partie partie = new Partie();
-				partie.choixMots();
-				partie.affecterEquipe(listeJoueur);
-				
+				listeCarte = partie.choixMots();
+				equipes = partie.affecterEquipe(listeJoueur);
+
 				break;
 			case 2:
 				do {
@@ -59,19 +58,32 @@ public class Application {
 					switch (joueur) {
 
 					case 1:// conenxion
+						Joueur joueurconnect = new Joueur();
+						Scanner scanPseudo = new Scanner(System.in);
+						System.out.println("nom du nouveau joueur ?");
+						joueurconnect.setPseudo(scanPseudo.nextLine());
+						Scanner scanMDP = new Scanner(System.in);
+						System.out.println("mot de passe du nouveau joueur ?");
+						joueurconnect.setMdp(scanMDP.nextLine());
+						if (joueurs.connect(joueurconnect)!=null) {
+							listeJoueur.add(joueurs.connect(joueurconnect));
+						}
+						else {
+							System.out.println("La combinaison pseudo/mdp est incorrecte");
+						}
 						
 						break;
 
 					case 2:// creer joueur
 						Joueur joueur1 = new Joueur();
-						Scanner scanPseudo = new Scanner(System.in);
+						Scanner scanPseudo1 = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur ?");
-						joueur1.setPseudo(scanPseudo.nextLine());
-						Scanner scanMDP = new Scanner(System.in);
+						joueur1.setPseudo(scanPseudo1.nextLine());
+						Scanner scanMDP1 = new Scanner(System.in);
 						System.out.println("mot de passe du nouveau joueur ?");
-						joueur1.setMdp(scanPseudo.nextLine());
-//						joueurs.save(joueur1);
-						
+						joueur1.setMdp(scanPseudo1.nextLine());
+						joueurs.save(joueur1);
+						listeJoueur.add(joueur1);
 						break;
 
 					case 3:
@@ -84,23 +96,21 @@ public class Application {
 						System.out.println("Nom du joueur à modifier ?");
 						joueur2.setId(scanPseudo3.nextInt());
 						joueurs.save(joueur2);
-						
+
 						break;
 					case 4:// supprimer joueur
 						Joueur joueursup = new Joueur();
 						Scanner scansup = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur a supprimer ?");
 						joueursup.setPseudo(scansup.nextLine());
-//						joueurs.delete(joueursup);
-						
-						
+						joueurs.delete(joueursup);
+
 						break;
 					case 0:
 						menu();
 					}
 
 				} while (joueur != 0);
-					
 
 				break;
 			case 3:
@@ -235,8 +245,7 @@ public class Application {
 		} catch (Exception e) {
 			return 0;
 		}
-		
-	
+
 	}
 
 	// Demander nombre de joueur
