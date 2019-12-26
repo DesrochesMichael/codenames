@@ -31,6 +31,9 @@ public class Cases {
 	@Column(name = "CASE_COULEUR", nullable = false)
 	@NotNull
 	private String couleur;
+	
+	
+	private CartesCles cartescles;
 
 	
 	
