@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,10 @@ public class CartesNomDeCode {
 	@NotNull
 	private String nom;
 
+	@ManyToOne
+	@JoinColumn(name = "NOM_DE_CODE_TOUR_ID")
+	private Tour tour;
+	
 	public int getId() {
 		return id;
 	}

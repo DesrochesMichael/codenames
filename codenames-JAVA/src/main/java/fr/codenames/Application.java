@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import codenames.dao.IDAOCarteNomDeCode;
-import codenames.dao.IDAOJoueur;
-import codenames.dao.sql.DAOCarteNomDeCodeSQL;
-import codenames.dao.sql.DAOJoueurSQL;
+import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
+import codenames.dao.hibernate.DAOJoueurHibernate;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Joueur;
 

@@ -28,9 +28,12 @@ public class Equipe {
 	@OneToMany(mappedBy = "equipe")
 	private List<Joueur> listeJoueur = new ArrayList<Joueur>();
 
-	@OneToMany
-	private 
 	
+	@OneToMany(mappedBy ="equipe")
+	private List<Tour> listeTour = new ArrayList<Tour>();
+
+
+
 	public int getId() {
 		return id;
 	}
