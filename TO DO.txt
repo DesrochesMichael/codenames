@@ -2,3 +2,4 @@
 - afficahge pour agent
 - se conncter pour joueur 
 - gerer l'enregistrement des joueurs connecter
+- creer un em et emf avec tout le mappage des modeles
