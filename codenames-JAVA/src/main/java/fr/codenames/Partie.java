@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import codenames.dao.IDAOCarteNomDeCode;
-import codenames.dao.sql.DAOCarteNomDeCodeSQL;
+import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
@@ -17,7 +17,7 @@ public class Partie {
 
 	public List<CartesNomDeCode> choixMots() {
 
-		IDAOCarteNomDeCode cartes = new DAOCarteNomDeCodeSQL();
+		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
 
 		List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 		List<CartesNomDeCode> liste = new ArrayList<CartesNomDeCode>();
@@ -33,7 +33,6 @@ public class Partie {
 
 	}
 
-// a finir !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public List<Equipe> affecterEquipe(List<Joueur> joueurs) {
 		List<Equipe> equipes = new ArrayList<Equipe>();
 

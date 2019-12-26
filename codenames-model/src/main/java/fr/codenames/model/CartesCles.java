@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Id;
+
+
+
 public class CartesCles {
 	protected static List<Cases> cartescles = new ArrayList<Cases>(25);
 

@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import codenames.dao.IDAOCarteNomDeCode;
 import codenames.dao.IDAOJoueur;
-import codenames.dao.sql.DAOCarteNomDeCodeSQL;
-import codenames.dao.sql.DAOJoueurSQL;
+import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
+import codenames.dao.hibernate.DAOJoueurHibernate;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Joueur;
 
@@ -36,8 +36,8 @@ public class Application {
 		Joueur test = new Joueur();
 		
 		
-		IDAOJoueur joueurs = new DAOJoueurSQL();
-		IDAOCarteNomDeCode cartes = new DAOCarteNomDeCodeSQL();
+		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
+		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
 
 		List<CartesNomDeCode> listeCarte = new ArrayList<CartesNomDeCode>();
 		List<Joueur> listeJoueur = new ArrayList<Joueur>();
@@ -51,6 +51,10 @@ public class Application {
 			switch (menu) {
 			case 1:
 				// NOUVELLE PARTIE
+				Partie partie = new Partie();
+				partie.choixMots();
+				partie.affecterEquipe(listeJoueur);
+				
 				break;
 			case 2:
 				do {
@@ -82,7 +86,7 @@ public class Application {
 						Scanner scanPseudo3 = new Scanner(System.in);
 						System.out.println("Nom du joueur à modifier ?");
 						joueur2.setId(scanPseudo3.nextInt());
-						joueurs.update(joueur2);
+						joueurs.save(joueur2);
 						
 						break;
 					case 4:// supprimer joueur
