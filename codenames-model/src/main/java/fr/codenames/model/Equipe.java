@@ -28,7 +28,6 @@ public class Equipe {
 	private List<Joueur> listeJoueur;
 
 	@OneToMany(mappedBy = "equipe")
-
 	private List<Tour> listeTour;
 
 	public int getId() {
