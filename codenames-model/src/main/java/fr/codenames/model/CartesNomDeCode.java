@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,8 +24,15 @@ public class CartesNomDeCode {
 	private String nom;
 
 	@ManyToOne
-	@JoinColumn(name = "NOM_DE_CODE_TOUR_ID")
+	@JoinColumn(name = "listeCartesNomDeCode")
 	private Tour tour;
+	
+	@OneToOne
+	@JoinColumn(name="cartenomdecode")
+	private Cases code_cases;
+	
+	
+	
 	
 	public int getId() {
 		return id;

@@ -1,6 +1,5 @@
 package fr.codenames.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,13 +25,11 @@ public class Equipe {
 	private String nom;
 
 	@OneToMany(mappedBy = "equipe")
-	private List<Joueur> listeJoueur = new ArrayList<Joueur>();
+	private List<Joueur> listeJoueur;
 
-	
-	@OneToMany(mappedBy ="equipe")
+	@OneToMany(mappedBy = "equipe")
 
-	private List<Tour> listeTour = new ArrayList<Tour>();
-
+	private List<Tour> listeTour;
 
 	public int getId() {
 		return id;
