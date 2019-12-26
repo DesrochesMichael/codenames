@@ -22,7 +22,7 @@ public class Partie {
 		List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 		List<CartesNomDeCode> liste = new ArrayList<CartesNomDeCode>();
 
-		liste = cartes.findAll();
+//		liste = cartes.findAll();
 		Collections.shuffle(liste);
 
 		for (int i = 0; i < 25; i++) {

@@ -62,4 +62,6 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 
 	}
 
+	
+
 }

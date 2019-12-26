@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import codenames.dao.IDAOCarteNomDeCode;
 import codenames.dao.IDAOJoueur;
-import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
-import codenames.dao.hibernate.DAOJoueurHibernate;
+import codenames.dao.sql.DAOCarteNomDeCodeSQL;
+import codenames.dao.sql.DAOJoueurSQL;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Joueur;
 
@@ -17,7 +17,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+//
 //		Partie maPartie = new Partie();
 //		List<CartesNomDeCode> mots = new ArrayList<CartesNomDeCode>();
 //		mots = maPartie.ChoixMots();
@@ -34,7 +34,6 @@ public class Application {
 		int histo;
 
 		Joueur test = new Joueur();
-		
 		
 		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
@@ -73,7 +72,7 @@ public class Application {
 						Scanner scanMDP = new Scanner(System.in);
 						System.out.println("mot de passe du nouveau joueur ?");
 						joueur1.setMdp(scanPseudo.nextLine());
-						joueurs.save(joueur1);
+//						joueurs.save(joueur1);
 						
 						break;
 
@@ -94,7 +93,7 @@ public class Application {
 						Scanner scansup = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur a supprimer ?");
 						joueursup.setPseudo(scansup.nextLine());
-						joueurs.delete(joueursup);
+//						joueurs.delete(joueursup);
 						
 						
 						break;
@@ -112,7 +111,7 @@ public class Application {
 					switch (carte) {
 
 					case 1:// find all
-						listeCarte = cartes.findAll();
+//						listeCarte = cartes.findAll();
 						for (CartesNomDeCode c : listeCarte) {
 							System.out.println(c.getNom());
 						}
@@ -123,7 +122,7 @@ public class Application {
 						Scanner scanCreer = new Scanner(System.in);
 						System.out.println("Nom de la nouvelle carte nom de code ? ");
 						cartecreer.setNom(scanCreer.nextLine());
-						cartes.save(cartecreer);
+//						cartes.save(cartecreer);
 						break;
 
 					case 3:
@@ -132,7 +131,7 @@ public class Application {
 						Scanner scanSupprimer = new Scanner(System.in);
 						System.out.println("Nom de la carte nom de code a supprimer ? ");
 						cartesup.setNom(scanSupprimer.nextLine());
-						cartes.delete(cartesup);
+//						cartes.delete(cartesup);
 						break;
 
 					case 0:
@@ -149,7 +148,7 @@ public class Application {
 					switch (histo) {
 
 					case 1:// find all
-						listeJoueur = joueurs.findAll();
+//						listeJoueur = joueurs.findAll();
 						for (Joueur j : listeJoueur) {
 							System.out.println(j.getPseudo());
 						}
@@ -160,7 +159,7 @@ public class Application {
 						System.out.println("Saisir le nom du joueur :");
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
-						joueur1 = joueurs.findByNom(nom);
+//						joueur1 = joueurs.findByNom(nom);
 						System.out.println("Le jouer " + joueur1.getPseudo() + " a joué " + joueur1.getNbrPartie()
 								+ " parties et en a gagné " + joueur1.getNbrVictoire() + ". Il a joué MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");

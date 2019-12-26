@@ -4,11 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-
-
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+@Entity
+@Table(name = "cartes_cles")
 public class CartesCles {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CLES_ID")
+	private int id;
+	
 	protected static List<Cases> cartescles = new ArrayList<Cases>(25);
 
 	public int bleuourouge() {
