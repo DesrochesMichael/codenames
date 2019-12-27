@@ -22,6 +22,7 @@ public class Application {
 		int joueur;
 		int menu;
 		int histo;
+		int modif;
 
 		boolean booleen = true;
 
@@ -131,7 +132,6 @@ public class Application {
 						Joueur joueur1 = new Joueur();
 						Scanner scanPseudo1 = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur ?");
-
 						joueur1.setPseudo(scanPseudo1.nextLine());
 						toutJoueur = joueurs.findAll();
 						for (int i = 0; i < toutJoueur.size(); i++) {
@@ -160,16 +160,54 @@ public class Application {
 						break;
 
 					case 3:
-						// modifier joueur
-						Joueur joueur2 = new Joueur();
-						Scanner scanPseudo2 = new Scanner(System.in);
-						System.out.println("Nouveau nom du joueur ?");
-						joueur2.setPseudo(scanPseudo2.nextLine());
-						Scanner scanPseudo3 = new Scanner(System.in);
-						System.out.println("ID du joueur ï¿½ modifier ?");
-						joueur2.setId(scanPseudo3.nextInt());
-						joueurs.save(joueur2);
+						do {
+							modif = menuModif();
+							switch (modif) {
+							case 1:
+								// modifier pseudo du joueur
+								Joueur joueur2 = new Joueur();
+								System.out.println("Nom du joueur à modifier ?");
+								Scanner scanPseudo2 = new Scanner(System.in);
+								String nom = scanPseudo2.nextLine();
+								joueur2 = joueurs.findByNom(nom);
+	//							System.out.println("test .. " + joueur2.getPseudo() + " .. test .." + joueur2.getNbrPartie()
+	//									+ " .. test .. " + joueur2.getNbrVictoire() + ". ..test .."
+	//									+ joueur2.getNbrMaitreEspion() + " .. test." + joueur2.getMdp());
+	
+								Joueur joueur3 = new Joueur();
+								Scanner scanPseudo3 = new Scanner(System.in);
+								System.out.println("Nouveau nom du joueur ?");
+								joueur3=joueur2;
+								joueur3.setPseudo(scanPseudo3.nextLine());
+								joueurs.save(joueur3);
+							break;
+							
+							case 2 :
+								
+								//A REVOIR POUR MODIFIER LE MDP EN FONCTION DU JOUEUR ET PAS JUSTE N'IMPORTE QUEL MDP
+								
+								// modifier mdp du joueur
+								Joueur joueur4 = new Joueur();
+								System.out.println("Mot de passe du joueur à modifier ?");
+								Scanner scanMdp = new Scanner(System.in);
+								String mdp = scanMdp.nextLine();
+								joueur4 = joueurs.findByMdp(mdp);
 
+								Joueur joueur5 = new Joueur();
+								Scanner scanMdp2 = new Scanner(System.in);
+								System.out.println("Nouveau mot de passe du joueur ?");
+								joueur5=joueur4;
+								joueur5.setMdp(scanMdp2.nextLine());
+								joueurs.save(joueur5);
+								
+							break;
+							
+							case 0:
+								menu();
+							}
+						}while (modif != 0);
+						
+			
 						break;
 					case 4:// supprimer joueur de la partie
 						Scanner scanPseudo21 = new Scanner(System.in);
@@ -250,7 +288,7 @@ public class Application {
 
 				break;
 			case 4:
-				histo = menuHistorique();
+
 				do {
 					histo = menuHistorique();
 					switch (histo) {
@@ -269,8 +307,8 @@ public class Application {
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
 						joueur1 = joueurs.findByNom(nom);
-						System.out.println("Le joueur " + joueur1.getPseudo() + " a jouï¿½ " + joueur1.getNbrPartie()
-								+ " parties et en a gagnï¿½ " + joueur1.getNbrVictoire() + ". Il a jouï¿½ MaitreEspion "
+						System.out.println("Le joueur " + joueur1.getPseudo() + " a joué " + joueur1.getNbrPartie()
+								+ " parties et en a gagné " + joueur1.getNbrVictoire() + ". Il a joué MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");
 						break;
 
@@ -347,6 +385,17 @@ public class Application {
 		return lireEntier();
 	}
 
+	public static int menuModif() {
+		System.out.println();
+		System.out.println("----------------------");
+		System.out.println("1- Modifier pseudo");
+		System.out.println("2- Modifier mot de passe");
+		System.out.println("0- Retour ");
+		System.out.println("----------------------");
+		System.out.println("Votre choix : ");
+		return lireEntier();
+	}
+	
 	static int lireEntier() {
 		Scanner myScanner = new Scanner(System.in);
 		try {
