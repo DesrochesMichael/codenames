@@ -45,6 +45,10 @@ public class Joueur {
 	@JoinColumn(name = "JOUEUR_EQUIPE_ID")
 	private Equipe equipe;
 	
+	@ManyToOne
+	@JoinColumn(name = "JOUEUR_CARTE_CLES_ID")
+	private CartesCles cartecles;
+	
 	public int getNbrPartie() {
 		return nbrPartie;
 	}

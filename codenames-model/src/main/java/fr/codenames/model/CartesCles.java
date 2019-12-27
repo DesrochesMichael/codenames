@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
@@ -26,6 +27,8 @@ public class CartesCles {
 	@JoinColumn(name="cartescles")
 	private Cases cles_cases;
 	
+	@OneToMany(mappedBy = "cartecles")
+	private List<Joueur> listeJoueur;
 	
 	protected static List<Cases> cartescles = new ArrayList<Cases>(25);
 
