@@ -14,9 +14,10 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 	}
 
 	public Joueur connect(Joueur j) {
-		
+
 		try {
-			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.pseudo = :nom and j.mdp):mdp", Joueur.class);
+			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.pseudo = :nom and j.mdp=:mdp",
+					Joueur.class);
 			myQuery.setParameter("nom", j.getPseudo());
 			myQuery.setParameter("mdp", j.getMdp());
 			return myQuery.getSingleResult();
@@ -25,9 +26,9 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
-	
+
 	public Joueur findByNom(String nom) {
 		try {
 			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.libelle = :nom", Joueur.class);
@@ -36,7 +37,8 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Pas de joueur de ce nom");;
+			System.out.println("Pas de joueur de ce nom");
+			;
 		}
 		return null;
 	}
@@ -76,7 +78,5 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 		delete(sup);
 
 	}
-
-	
 
 }

@@ -51,6 +51,11 @@ public class Application {
 				listeCarte = partie.choixMots();
 				equipes = partie.affecterEquipe(listeJoueur);
 
+				for (Equipe e : equipes) {
+						System.out.println(e.getNom() + e.getListeJoueur().get(0).getPseudo());
+				}
+					
+				
 				break;
 			case 2:
 				do {
@@ -60,18 +65,21 @@ public class Application {
 					case 1:// conenxion
 						Joueur joueurconnect = new Joueur();
 						Scanner scanPseudo = new Scanner(System.in);
-						System.out.println("nom du nouveau joueur ?");
+						System.out.println("nom du joueur ?");
 						joueurconnect.setPseudo(scanPseudo.nextLine());
 						Scanner scanMDP = new Scanner(System.in);
-						System.out.println("mot de passe du nouveau joueur ?");
+						System.out.println("mot de passe du joueur ?");
 						joueurconnect.setMdp(scanMDP.nextLine());
-						if (joueurs.connect(joueurconnect)!=null) {
+						if (joueurs.connect(joueurconnect) != null) {
 							listeJoueur.add(joueurs.connect(joueurconnect));
-						}
-						else {
+						} else {
 							System.out.println("La combinaison pseudo/mdp est incorrecte");
 						}
-						
+
+						System.out.println("Joueur present pour le moment dans la prochaine partie :");
+						for (Joueur j : listeJoueur) {
+							System.out.println(j.getPseudo());
+						}
 						break;
 
 					case 2:// creer joueur
@@ -84,6 +92,10 @@ public class Application {
 						joueur1.setMdp(scanPseudo1.nextLine());
 						joueurs.save(joueur1);
 						listeJoueur.add(joueur1);
+						System.out.println("Joueur present pour le moment dans la prochaine partie :");
+						for (Joueur j : listeJoueur) {
+							System.out.println(j.getPseudo());
+						}
 						break;
 
 					case 3:

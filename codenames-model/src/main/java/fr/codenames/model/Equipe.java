@@ -28,8 +28,11 @@ public class Equipe {
 	private List<Joueur> listeJoueur;
 
 	@OneToMany(mappedBy = "equipe")
-
 	private List<Tour> listeTour;
+
+	public void choixEquipe(Joueur j) {
+		this.listeJoueur.add(j);
+	}
 
 	public int getId() {
 		return id;
@@ -41,10 +44,6 @@ public class Equipe {
 
 	public Equipe(String nom) {
 		this.nom = nom;
-	}
-
-	public void choixEquipe(Joueur j) {
-		this.listeJoueur.add(j);
 	}
 
 	public String getNom() {
