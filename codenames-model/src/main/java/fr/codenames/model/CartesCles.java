@@ -30,9 +30,9 @@ public class CartesCles {
 	@OneToMany(mappedBy = "cartecles")
 	private List<Joueur> listeJoueur;
 	
-	protected static List<Cases> cartescles = new ArrayList<Cases>(25);
-
 	
+	
+
 	
 	public int bleuourouge() {
 		int max = 1;
@@ -42,10 +42,11 @@ public class CartesCles {
 		return rand;
 	}
 
-	public List attributionCases(List<CartesNomDeCode> cartenomdecode) {
+	public List<Cases> attributionCases(List<CartesNomDeCode> cartenomdecode) {
 		// 0 == bleu ==> commence
 		// 1 == rouge ==> commence
-
+		List<Cases> cartescles = new ArrayList<Cases>();
+		
 		for (int i = 0; i < 8; i++) {
 			Cases cases = new Cases();
 			cases.setCouleur("rouge");
@@ -93,17 +94,28 @@ public class CartesCles {
 
 	}
 
-	public static List<Cases> getCartescles() {
-		return cartescles;
+	public int getId() {
+		return id;
 	}
 
-	public static void setCartescles(List<Cases> cartescles) {
-		CartesCles.cartescles = cartescles;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-// booelan random 8 ou 9 mpour commencer
+	public Cases getCles_cases() {
+		return cles_cases;
+	}
 
-	// generation random de 8 ou 9 positions sur la grille pour chaque equipe =>
-	// random 8 bleu, random 8 rouge et 1 noir pusi gris
+	public void setCles_cases(Cases cles_cases) {
+		this.cles_cases = cles_cases;
+	}
+
+	public List<Joueur> getListeJoueur() {
+		return listeJoueur;
+	}
+
+	public void setListeJoueur(List<Joueur> listeJoueur) {
+		this.listeJoueur = listeJoueur;
+	}
 
 }

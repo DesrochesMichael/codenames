@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
+import fr.codenames.model.CartesCles;
 import fr.codenames.model.CartesNomDeCode;
+import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
 
@@ -13,6 +15,23 @@ public class Partie {
 	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
+
+	public void affichageAgent(List<Cases> list) {
+		int min =0;
+		int max = 5;
+		for (int i = 0; i < 5; i++) {
+			for (int j = min; j < max; j++) {
+				System.out.print(list.get(j).getCartenomdecode().getNom()+"   ");
+			}
+			min=min+5;
+			max=max+5;
+			System.out.println();
+		}
+	}
+
+	public void affichageMaitreEspion(List<Cases> list) {
+
+	}
 
 	public List<CartesNomDeCode> choixMots() {
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
@@ -23,7 +42,7 @@ public class Partie {
 		Collections.shuffle(liste);
 
 		for (int i = 0; i < 25; i++) {
-			liste25.add(liste.remove(0));
+			liste25.add(liste.get(i));
 		}
 
 		return liste25;
@@ -55,7 +74,7 @@ public class Partie {
 		}
 
 		// on attribut une equipe aux autres joueurs.
-		for (int i = 0; i < joueurs.size() / 2+1; i++) {
+		for (int i = 0; i < joueurs.size() / 2 + 1; i++) {
 
 			rouge.getListeJoueur().add(joueurs.remove(0));
 			bleu.getListeJoueur().add(joueurs.remove(0));
@@ -76,10 +95,10 @@ public class Partie {
 		int rand1 = (int) (Math.random() * range1) + min1;
 
 		rouge.getListeJoueur().get(rand1).setRole("MaitreEspion");
-		
+
 		equipes.add(bleu);
 		equipes.add(rouge);
-		
+
 		return equipes;
 	}
 

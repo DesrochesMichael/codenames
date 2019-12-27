@@ -6,40 +6,35 @@ import java.util.Scanner;
 
 import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
 import codenames.dao.hibernate.DAOJoueurHibernate;
+import fr.codenames.model.CartesCles;
 import fr.codenames.model.CartesNomDeCode;
+import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
+import fr.codenames.model.Tour;
 
 public class Application {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-//
-//		Partie maPartie = new Partie();
-//		List<CartesNomDeCode> mots = new ArrayList<CartesNomDeCode>();
-//		mots = maPartie.ChoixMots();
-//
-//		for (CartesNomDeCode c : mots) {
-//			System.out.println(c.getNom());
-//		}
-//		
-//		Joueur test = new Joueur();
-//		test.créerJoueur();
+
 		int carte;
 		int joueur;
 		int menu;
 		int histo;
 
+		boolean booleen = true;
+
 		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
-
-		List<CartesNomDeCode> listeCarte = new ArrayList<CartesNomDeCode>();
 		Partie mapartie = new Partie();
-		List<Equipe> equipes = new ArrayList<Equipe>();
-		boolean booleen = true;
-		List<Joueur> listeJoueur = new ArrayList<Joueur>();
+		Tour tour = new Tour();
+		CartesCles cartescles = new CartesCles();
 
+		List<Equipe> equipes = new ArrayList<Equipe>();
+		List<Joueur> listeJoueur = new ArrayList<Joueur>();
+		List<CartesNomDeCode> listeCartes = new ArrayList<CartesNomDeCode>();
+		List<Cases> listeCases = new ArrayList<Cases>();
 
 		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
@@ -49,12 +44,16 @@ public class Application {
 			case 1:
 				// NOUVELLE PARTIE
 
-				listeCarte = mapartie.choixMots();
+				listeCartes = mapartie.choixMots();
+
+				listeCases = cartescles.attributionCases(listeCartes);
+
+				mapartie.affichageAgent(listeCases);
 
 				equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
 
 				System.out.println("composition des équipes :");
-
+				// montre les equipes
 				for (Equipe e : equipes) {
 					System.out.println("equipe " + e.getNom());
 
@@ -64,7 +63,7 @@ public class Application {
 					}
 					System.out.println();
 				}
-
+				// montre le maitre espion
 				for (Equipe e : equipes) {
 					for (int i = 0; i < e.getListeJoueur().size(); i++) {
 						if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
@@ -75,6 +74,10 @@ public class Application {
 					}
 
 				}
+				System.out.println("Voici les mots utilisez pour cette partie : ");
+				mapartie.affichageAgent(listeCases);
+				tour.motMaitreEspion();
+				tour.nbrMotMaitreEspion();
 
 				break;
 			case 2:
@@ -153,6 +156,7 @@ public class Application {
 								}
 							}
 						}
+						booleen = true;
 						break;
 
 					case 3:
@@ -168,8 +172,29 @@ public class Application {
 
 						break;
 					case 4:// supprimer joueur de la partie
-						
+						Scanner scanPseudo21 = new Scanner(System.in);
+						System.out.println("Nom du joueur a supprimer de la partie ?");
+						String nom = scanPseudo21.nextLine();
 
+						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
+
+							if (mapartie.getJoueurspartie().get(i).getPseudo().equalsIgnoreCase(nom)) {
+								mapartie.getJoueurspartie().remove(i);
+
+								System.out.println("Le joueur a ete supprime");
+								booleen = false;
+							}
+						}
+						if (booleen == true) {
+							System.out.println("Le joueur n'est pas dans la partie");
+						}
+
+						System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
+						for (Joueur j : mapartie.getJoueurspartie()) {
+							System.out.println(j.getPseudo());
+						}
+
+						booleen = true;
 						break;
 					case 0:
 						menu();
@@ -184,18 +209,28 @@ public class Application {
 					switch (carte) {
 
 					case 1:// find all
-						listeCarte = cartes.findAll();
-						for (CartesNomDeCode c : listeCarte) {
+						listeCartes = cartes.findAll();
+						for (CartesNomDeCode c : listeCartes) {
 							System.out.println(c.getNom());
 						}
 						break;
 
 					case 2:// creer carte
+						listeCartes = cartes.findAll();
 						CartesNomDeCode cartecreer = new CartesNomDeCode();
 						Scanner scanCreer = new Scanner(System.in);
 						System.out.println("Nom de la nouvelle carte nom de code ? ");
 						cartecreer.setNom(scanCreer.nextLine());
-						cartes.save(cartecreer);
+
+						for (CartesNomDeCode c : listeCartes) {
+							if (c.getNom().equalsIgnoreCase(cartecreer.getNom())) {
+								System.out.println("Cette carte existe deja");
+								booleen = false;
+							}
+						}
+						if (booleen == true) {
+							cartes.save(cartecreer);
+						}
 						break;
 
 					case 3:
@@ -239,13 +274,11 @@ public class Application {
 								+ joueur1.getNbrMaitreEspion() + " fois.");
 						break;
 
-					case 3://suppression de la bdd d'un joueur
+					case 3:// suppression de la bdd d'un joueur
 						Joueur joueursup = new Joueur();
 						Scanner scansup = new Scanner(System.in);
-//						System.out.println("Nom du joueur a supprimer ?");
-						System.out.println("ID du joueur a supprimer ?");
-						joueursup.setId(scansup.nextInt());
-//						joueursup.setPseudo(scansup.nextLine());
+						System.out.println("Nom du joueur a supprimer ?");
+						joueursup.setPseudo(scansup.nextLine());
 						joueurs.delete(joueursup);
 					case 0:
 						menu();
@@ -294,7 +327,7 @@ public class Application {
 		System.out.println();
 		System.out.println("----------------------");
 		System.out.println("1- Liste des Cartes");
-		System.out.println("2- Cr�er Carte");
+		System.out.println("2- Creer Carte");
 		System.out.println("3- Supprimer Carte");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");

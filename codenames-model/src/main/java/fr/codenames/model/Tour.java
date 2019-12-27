@@ -1,6 +1,7 @@
 package fr.codenames.model;
 
 import java.util.List;
+import java.util.Scanner;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +27,22 @@ public class Tour {
 	
 	@OneToMany(mappedBy ="tour")
 	private List<CartesNomDeCode> listeCartesNomDeCode;
+	
+	
+	public String motMaitreEspion() {
+		System.out.println("Quel mot donnez vous aux agent ?");
+		Scanner sc = new Scanner(System.in);
+		return sc.nextLine();
+	}
+	
+	public int nbrMotMaitreEspion() {
+		System.out.println("Quel nombre de mots les agents doivent ils deviner ?");
+		Scanner sc = new Scanner(System.in);
+		return sc.nextInt();
+	}
+	
+	
+	
 	
 	public int getId() {
 		return id;

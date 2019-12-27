@@ -1,5 +1,6 @@
 package codenames.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -52,11 +53,6 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 
 	@Override
 	public Joueur save(Joueur entity) {
-		if (this.findByNom(entity.getPseudo()) != null) {
-			System.out.println("Ce nom de joueur existe deja");
-			return null;
-		}
-
 		try {
 
 			em.getTransaction().begin();
