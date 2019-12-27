@@ -31,7 +31,7 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 
 	public Joueur findByNom(String nom) {
 		try {
-			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.libelle = :nom", Joueur.class);
+			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.pseudo = :nom", Joueur.class);
 			myQuery.setParameter("nom", nom);
 			return myQuery.getSingleResult();
 
