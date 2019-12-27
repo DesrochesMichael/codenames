@@ -24,17 +24,5 @@ public abstract class DAOHibernate<T> {
 		
 	}
 
-	
-	public void delete(T entity) {
-		try {
-			em.getTransaction().begin();
-			em.remove(em.merge(entity));
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			em.getTransaction().rollback();
-		}
-
-	}
 
 }

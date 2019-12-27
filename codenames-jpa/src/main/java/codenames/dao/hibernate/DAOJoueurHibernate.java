@@ -2,6 +2,7 @@ package codenames.dao.hibernate;
 
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import codenames.dao.IDAO;
@@ -76,6 +77,14 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 		return entity;
 	}
 
+	@Override
+	public void delete(Joueur entity) {
+		em.getTransaction().begin();
+		Query query = em.createQuery("delete from Joueur j where j.pseudo = :pseudo");
+		query.setParameter("pseudo",entity.getPseudo()).executeUpdate();
+		em.getTransaction().commit();
+	}
+	
 	@Override
 	public void deleteByID(Integer id) {
 		Joueur sup = new Joueur();

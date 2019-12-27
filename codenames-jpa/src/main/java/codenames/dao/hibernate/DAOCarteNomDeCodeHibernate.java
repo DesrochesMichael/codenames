@@ -2,6 +2,8 @@ package codenames.dao.hibernate;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import codenames.dao.IDAO;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Joueur;
@@ -43,6 +45,14 @@ public class DAOCarteNomDeCodeHibernate extends DAOHibernate<CartesNomDeCode> im
 		sup.setId(id);
 		delete(sup);
 		
+	}
+
+	@Override
+	public void delete(CartesNomDeCode entity) {
+		em.getTransaction().begin();
+		Query query = em.createQuery("delete from CartesNomDeCode c where c.nom = :nom");
+		query.setParameter("nom",entity.getNom()).executeUpdate();
+		em.getTransaction().commit();
 	}
 
 

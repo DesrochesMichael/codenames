@@ -37,23 +37,9 @@ public class Application {
 		List<CartesNomDeCode> listeCarte = new ArrayList<CartesNomDeCode>();
 		Partie mapartie = new Partie();
 		List<Equipe> equipes = new ArrayList<Equipe>();
-		List<Joueur> listeJoueur = new ArrayList<Joueur>();
 		boolean booleen = true;
+		List<Joueur> listeJoueur = new ArrayList<Joueur>();
 
-//		Joueur mika = new Joueur();
-//		Joueur pl = new Joueur();
-//		Joueur jerem = new Joueur();
-//		Joueur jojo = new Joueur();
-//
-//		mika.setPseudo("mika");
-//		pl.setPseudo("pl");
-//		jerem.setPseudo("jerem");
-//		jojo.setPseudo("jojo");
-//
-//		mapartie.getJoueurspartie().add(mika);
-//		mapartie.getJoueurspartie().add(pl);
-//		mapartie.getJoueurspartie().add(jerem);
-//		mapartie.getJoueurspartie().add(jojo);
 
 		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
