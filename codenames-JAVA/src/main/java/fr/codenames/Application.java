@@ -37,21 +37,23 @@ public class Application {
 		List<CartesNomDeCode> listeCarte = new ArrayList<CartesNomDeCode>();
 		Partie mapartie = new Partie();
 		List<Equipe> equipes = new ArrayList<Equipe>();
+		List<Joueur> listeJoueur = new ArrayList<Joueur>();
+		boolean booleen = true;
 
-		Joueur mika = new Joueur();
-		Joueur pl = new Joueur();
-		Joueur jerem = new Joueur();
-		Joueur jojo = new Joueur();
-
-		mika.setPseudo("mika");
-		pl.setPseudo("pl");
-		jerem.setPseudo("jerem");
-		jojo.setPseudo("jojo");
-
-		mapartie.getJoueurspartie().add(mika);
-		mapartie.getJoueurspartie().add(pl);
-		mapartie.getJoueurspartie().add(jerem);
-		mapartie.getJoueurspartie().add(jojo);
+//		Joueur mika = new Joueur();
+//		Joueur pl = new Joueur();
+//		Joueur jerem = new Joueur();
+//		Joueur jojo = new Joueur();
+//
+//		mika.setPseudo("mika");
+//		pl.setPseudo("pl");
+//		jerem.setPseudo("jerem");
+//		jojo.setPseudo("jojo");
+//
+//		mapartie.getJoueurspartie().add(mika);
+//		mapartie.getJoueurspartie().add(pl);
+//		mapartie.getJoueurspartie().add(jerem);
+//		mapartie.getJoueurspartie().add(jojo);
 
 		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
@@ -68,12 +70,24 @@ public class Application {
 				System.out.println("composition des équipes :");
 
 				for (Equipe e : equipes) {
-					System.out.println("equipe "+e.getNom());
+					System.out.println("equipe " + e.getNom());
 
 					for (int i = 0; i < e.getListeJoueur().size(); i++) {
 						System.out.println(e.getListeJoueur().get(i).getPseudo());
+
 					}
 					System.out.println();
+				}
+
+				for (Equipe e : equipes) {
+					for (int i = 0; i < e.getListeJoueur().size(); i++) {
+						if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
+							System.out.println(e.getListeJoueur().get(i).getPseudo() + " est maitre espion de l'equipe "
+									+ e.getNom());
+						}
+
+					}
+
 				}
 
 				break;
@@ -87,36 +101,71 @@ public class Application {
 						Scanner scanPseudo = new Scanner(System.in);
 						System.out.println("nom du joueur ?");
 						joueurconnect.setPseudo(scanPseudo.nextLine());
-						Scanner scanMDP = new Scanner(System.in);
-						System.out.println("mot de passe du joueur ?");
-						joueurconnect.setMdp(scanMDP.nextLine());
-						if (joueurs.connect(joueurconnect) != null) {
 
-							mapartie.getJoueurspartie().add(joueurs.connect(joueurconnect));
-						} else {
-							System.out.println("La combinaison pseudo/mdp est incorrecte");
+						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
+							if (joueurconnect.getPseudo()
+									.equalsIgnoreCase(mapartie.getJoueurspartie().get(i).getPseudo()) == true) {
+								System.out.println("Le joueur est déjà connecte a la partie");
+								booleen = false;
+							}
 						}
 
-						System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
-						for (Joueur j : listeJoueur) {
-							System.out.println(j.getPseudo());
+						if (booleen == true) {
+
+							Scanner scanMDP = new Scanner(System.in);
+							System.out.println("mot de passe du joueur ?");
+							joueurconnect.setMdp(scanMDP.nextLine());
+							joueurconnect = joueurs.connect(joueurconnect);
+
+							if (joueurconnect != null) {
+								System.out.println("Le joueur " + joueurs.connect(joueurconnect).getPseudo()
+										+ " rejoint la partie");
+
+								mapartie.getJoueurspartie().add(joueurs.connect(joueurconnect));
+							}
+
+							else {
+								System.out.println("La combinaison pseudo/mdp est incorrecte");
+							}
+
+							System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
+							for (Joueur j : mapartie.getJoueurspartie()) {
+								System.out.println(j.getPseudo());
+							}
+
 						}
+						booleen = true;
 						break;
 
 					case 2:// creer joueur
+						List<Joueur> toutJoueur = new ArrayList<Joueur>();
 						Joueur joueur1 = new Joueur();
 						Scanner scanPseudo1 = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur ?");
-						joueur1.setPseudo(scanPseudo1.nextLine());
-						Scanner scanMDP1 = new Scanner(System.in);
-						System.out.println("mot de passe du nouveau joueur ?");
-						joueur1.setMdp(scanPseudo1.nextLine());
-						joueurs.save(joueur1);
 
-						mapartie.getJoueurspartie().add(joueur1);
-						System.out.println("Joueur present pour le moment dans la prochaine partie :");
-						for (Joueur j : mapartie.getJoueurspartie()) {
-							System.out.println(j.getPseudo());
+						joueur1.setPseudo(scanPseudo1.nextLine());
+						toutJoueur = joueurs.findAll();
+						for (int i = 0; i < toutJoueur.size(); i++) {
+							if (joueur1.getPseudo().equalsIgnoreCase(toutJoueur.get(i).getPseudo()) == true) {
+								System.out.println("Le pseudo saisi existe deja");
+								booleen = false;
+							}
+						}
+
+						if (booleen == true) {
+							Scanner scanMDP1 = new Scanner(System.in);
+							System.out.println("mot de passe du nouveau joueur ?");
+							joueur1.setMdp(scanPseudo1.nextLine());
+							joueurs.save(joueur1);
+
+							if (joueurs.save(joueur1) != null) {
+
+								mapartie.getJoueurspartie().add(joueur1);
+								System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
+								for (Joueur j : mapartie.getJoueurspartie()) {
+									System.out.println(j.getPseudo());
+								}
+							}
 						}
 						break;
 
@@ -132,14 +181,8 @@ public class Application {
 						joueurs.save(joueur2);
 
 						break;
-					case 4:// supprimer joueur
-						Joueur joueursup = new Joueur();
-						Scanner scansup = new Scanner(System.in);
-//						System.out.println("Nom du joueur a supprimer ?");
-						System.out.println("ID du joueur a supprimer ?");
-						joueursup.setId(scansup.nextInt());
-//						joueursup.setPseudo(scansup.nextLine());
-						joueurs.delete(joueursup);
+					case 4:// supprimer joueur de la partie
+						
 
 						break;
 					case 0:
@@ -192,7 +235,8 @@ public class Application {
 					switch (histo) {
 
 					case 1:// find all
-//						listeJoueur = joueurs.findAll();
+
+						listeJoueur = joueurs.findAll();
 						for (Joueur j : listeJoueur) {
 							System.out.println(j.getPseudo());
 						}
@@ -209,6 +253,14 @@ public class Application {
 								+ joueur1.getNbrMaitreEspion() + " fois.");
 						break;
 
+					case 3://suppression de la bdd d'un joueur
+						Joueur joueursup = new Joueur();
+						Scanner scansup = new Scanner(System.in);
+//						System.out.println("Nom du joueur a supprimer ?");
+						System.out.println("ID du joueur a supprimer ?");
+						joueursup.setId(scansup.nextInt());
+//						joueursup.setPseudo(scansup.nextLine());
+						joueurs.delete(joueursup);
 					case 0:
 						menu();
 					}
@@ -243,9 +295,9 @@ public class Application {
 		System.out.println();
 		System.out.println("----------------------");
 		System.out.println("1- Se connecter");
-		System.out.println("2- Cr�er joueur");
-		System.out.println("3- Modifier joueur");
-		System.out.println("4- Supprimer joueur");
+		System.out.println("2- Creer un joueur");
+		System.out.println("3- Modifier un joueur");
+		System.out.println("4- Supprimer joueur de la partie");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
 		System.out.println("Votre choix : ");
@@ -269,6 +321,7 @@ public class Application {
 		System.out.println("----------------------");
 		System.out.println("1- Liste des joueurs");
 		System.out.println("2- Statistique d'un joueur");
+		System.out.println("3- Suppression d'un joueur");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
 		System.out.println("Votre choix : ");
