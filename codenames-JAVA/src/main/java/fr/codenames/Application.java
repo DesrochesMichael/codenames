@@ -31,14 +31,27 @@ public class Application {
 		int menu;
 		int histo;
 
-		Joueur test = new Joueur();
-
 		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
 
 		List<CartesNomDeCode> listeCarte = new ArrayList<CartesNomDeCode>();
-		List<Joueur> listeJoueur = new ArrayList<Joueur>();
+		Partie mapartie = new Partie();
 		List<Equipe> equipes = new ArrayList<Equipe>();
+
+		Joueur mika = new Joueur();
+		Joueur pl = new Joueur();
+		Joueur jerem = new Joueur();
+		Joueur jojo = new Joueur();
+
+		mika.setPseudo("mika");
+		pl.setPseudo("pl");
+		jerem.setPseudo("jerem");
+		jojo.setPseudo("jojo");
+
+		mapartie.getJoueurspartie().add(mika);
+		mapartie.getJoueurspartie().add(pl);
+		mapartie.getJoueurspartie().add(jerem);
+		mapartie.getJoueurspartie().add(jojo);
 
 		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
@@ -47,15 +60,22 @@ public class Application {
 			switch (menu) {
 			case 1:
 				// NOUVELLE PARTIE
-				Partie partie = new Partie();
-				listeCarte = partie.choixMots();
-				equipes = partie.affecterEquipe(listeJoueur);
+
+				listeCarte = mapartie.choixMots();
+
+				equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
+
+				System.out.println("composition des équipes :");
 
 				for (Equipe e : equipes) {
-						System.out.println(e.getNom() + e.getListeJoueur().get(0).getPseudo());
+					System.out.println("equipe "+e.getNom());
+
+					for (int i = 0; i < e.getListeJoueur().size(); i++) {
+						System.out.println(e.getListeJoueur().get(i).getPseudo());
+					}
+					System.out.println();
 				}
-					
-				
+
 				break;
 			case 2:
 				do {
@@ -71,13 +91,14 @@ public class Application {
 						System.out.println("mot de passe du joueur ?");
 						joueurconnect.setMdp(scanMDP.nextLine());
 						if (joueurs.connect(joueurconnect) != null) {
-							listeJoueur.add(joueurs.connect(joueurconnect));
+
+							mapartie.getJoueurspartie().add(joueurs.connect(joueurconnect));
 						} else {
 							System.out.println("La combinaison pseudo/mdp est incorrecte");
 						}
 
 						System.out.println("Joueur present pour le moment dans la prochaine partie :");
-						for (Joueur j : listeJoueur) {
+						for (Joueur j : mapartie.getJoueurspartie()) {
 							System.out.println(j.getPseudo());
 						}
 						break;
@@ -91,9 +112,10 @@ public class Application {
 						System.out.println("mot de passe du nouveau joueur ?");
 						joueur1.setMdp(scanPseudo1.nextLine());
 						joueurs.save(joueur1);
-						listeJoueur.add(joueur1);
+
+						mapartie.getJoueurspartie().add(joueur1);
 						System.out.println("Joueur present pour le moment dans la prochaine partie :");
-						for (Joueur j : listeJoueur) {
+						for (Joueur j : mapartie.getJoueurspartie()) {
 							System.out.println(j.getPseudo());
 						}
 						break;
@@ -131,7 +153,7 @@ public class Application {
 					switch (carte) {
 
 					case 1:// find all
-//						listeCarte = cartes.findAll();
+						listeCarte = cartes.findAll();
 						for (CartesNomDeCode c : listeCarte) {
 							System.out.println(c.getNom());
 						}
@@ -168,10 +190,8 @@ public class Application {
 					switch (histo) {
 
 					case 1:// find all
-//						listeJoueur = joueurs.findAll();
-						for (Joueur j : listeJoueur) {
-							System.out.println(j.getPseudo());
-						}
+						joueurs.findAll();
+
 						break;
 
 					case 2:// statitique joueur
@@ -198,6 +218,7 @@ public class Application {
 				break;
 			}
 		} while (menu != 0);
+
 		// FIN DU PROGRAMME PRINCIPAL
 	}
 
@@ -259,15 +280,4 @@ public class Application {
 		}
 
 	}
-
-	// Demander nombre de joueur
-	// affecter dans equipe au hasard avec le meme nombre
-
-	// vote dans les equipes pour maitre espion
-
-	// affecter carte cles a mots
-
-	// tour de partie : indice du maitre espion + nombre de reponse
-	// reponse de l'equipe
-	// condition de victoire a verifier pour chaque mot donne
 }

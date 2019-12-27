@@ -9,31 +9,39 @@ import fr.codenames.model.Joueur;
 public class test {
 
 	public static void main(String[] args) {
+		Partie mapartie = new Partie();
+		List<Equipe> equipes = new ArrayList<Equipe>();
 
 		Joueur mika = new Joueur();
 		Joueur pl = new Joueur();
 		Joueur jerem = new Joueur();
 		Joueur jojo = new Joueur();
-		
+		Joueur tib = new Joueur();
+
 		mika.setPseudo("mika");
 		pl.setPseudo("pl");
 		jerem.setPseudo("jerem");
 		jojo.setPseudo("jojo");
+		tib.setPseudo("tib");
+
 		
-		List<Joueur> listeJoueur = new ArrayList<Joueur>();
-		List<Equipe> equipes = new ArrayList<Equipe>();
-		
-		listeJoueur.add(jerem);
-		listeJoueur.add(pl);
-		listeJoueur.add(mika);
-		listeJoueur.add(jojo);
-		
-		Partie test = new Partie();
-		
-		equipes = test.affecterEquipe(listeJoueur);
-		
-		for (Equipe e : equipes ) {
-			System.out.println(e.getNom()+e.getListeJoueur().get(0).getPseudo());
+		mapartie.getJoueurspartie().add(pl);
+		mapartie.getJoueurspartie().add(jerem);
+		mapartie.getJoueurspartie().add(jojo);
+		mapartie.getJoueurspartie().add(tib);
+		mapartie.getJoueurspartie().add(mika);
+
+		equipes=mapartie.affecterEquipe(mapartie.getJoueurspartie());
+
+		System.out.println("composition des équipes :");
+		System.out.println();
+		for (Equipe e : equipes) {
+			System.out.println(e.getNom());
+
+			for (int i = 0; i < e.getListeJoueur().size(); i++) {
+				System.out.println(e.getListeJoueur().get(i).getPseudo());
+			}
+			System.out.println();
 		}
 	}
 }

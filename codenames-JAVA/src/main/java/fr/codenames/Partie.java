@@ -10,18 +10,16 @@ import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
 
 public class Partie {
-	private List<CartesNomDeCode> cartescodepartie = new ArrayList<CartesNomDeCode>();
+	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 
 	public List<CartesNomDeCode> choixMots() {
-
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
 
-		List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 		List<CartesNomDeCode> liste = new ArrayList<CartesNomDeCode>();
 
-//		liste = cartes.findAll();
+		liste = cartes.findAll();
 		Collections.shuffle(liste);
 
 		for (int i = 0; i < 25; i++) {
@@ -49,37 +47,63 @@ public class Partie {
 			int rand = (int) (Math.random() * range) + min;
 
 			if (rand == 0) {
-				rouge.choixEquipe(joueurs.remove(0));
+				rouge.getListeJoueur().add(joueurs.remove(0));
 			}
 			if (rand == 1) {
-				bleu.choixEquipe(joueurs.remove(0));
+				bleu.getListeJoueur().add(joueurs.remove(0));
 			}
 		}
-		// on attribut une equipe aux autres joeurs.
-		for (int i = 0; i < joueurs.size() / 2; i++) {
-			rouge.choixEquipe(joueurs.remove(0));
-			bleu.choixEquipe(joueurs.remove(0));
+
+		// on attribut une equipe aux autres joueurs.
+		for (int i = 0; i < joueurs.size() / 2+1; i++) {
+
+			rouge.getListeJoueur().add(joueurs.remove(0));
+			bleu.getListeJoueur().add(joueurs.remove(0));
+
 		}
 		// choix des maitres espions dans chaque equipe
-		for (Joueur j : bleu.getListeJoueur()) {
-			int max = bleu.getListeJoueur().size() - 1;
-			int min = 0;
-			int range = max - min + 1;
-			int rand = (int) (Math.random() * range) + min;
-			bleu.getListeJoueur().get(rand).setRole("MaitreEspion");
-		}
 
-		for (Joueur j : rouge.getListeJoueur()) {
-			int max = rouge.getListeJoueur().size() - 1;
-			int min = 0;
-			int range = max - min + 1;
-			int rand = (int) (Math.random() * range) + min;
-			rouge.getListeJoueur().get(rand).setRole("MaitreEspion");
-		}
+		int max = bleu.getListeJoueur().size() - 1;
+		int min = 0;
+		int range = max - min + 1;
+		int rand = (int) (Math.random() * range) + min;
 
+		bleu.getListeJoueur().get(rand).setRole("MaitreEspion");
+
+		int max1 = rouge.getListeJoueur().size() - 1;
+		int min1 = 0;
+		int range1 = max1 - min1 + 1;
+		int rand1 = (int) (Math.random() * range1) + min1;
+
+		rouge.getListeJoueur().get(rand1).setRole("MaitreEspion");
+		
 		equipes.add(bleu);
 		equipes.add(rouge);
+		
 		return equipes;
 	}
 
+	public List<Joueur> getJoueurspartie() {
+		return joueurspartie;
+	}
+
+	public List<CartesNomDeCode> getListe25() {
+		return liste25;
+	}
+
+	public void setListe25(List<CartesNomDeCode> liste25) {
+		this.liste25 = liste25;
+	}
+
+	public List<Equipe> getEquippartie() {
+		return equippartie;
+	}
+
+	public void setEquippartie(List<Equipe> equippartie) {
+		this.equippartie = equippartie;
+	}
+
+	public void setJoueurspartie(List<Joueur> joueurspartie) {
+		this.joueurspartie = joueurspartie;
+	}
 }

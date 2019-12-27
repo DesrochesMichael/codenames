@@ -1,5 +1,6 @@
 package fr.codenames.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "equipe")
 public class Equipe {
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,20 +33,21 @@ public class Equipe {
 	@OneToMany(mappedBy = "equipe")
 	private List<Tour> listeTour;
 
-	public void choixEquipe(Joueur j) {
-		this.listeJoueur.add(j);
+	
+	//constructeur
+	public Equipe(String nom) {
+		this.listeJoueur=new ArrayList<Joueur>();
+		this.nom=nom;
 	}
-
+	
+	
+	
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Equipe(String nom) {
-		this.nom = nom;
 	}
 
 	public String getNom() {
@@ -53,13 +57,22 @@ public class Equipe {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	
 	public List<Joueur> getListeJoueur() {
 		return listeJoueur;
+	}
+
+	public List<Tour> getListeTour() {
+		return listeTour;
+	}
+
+	public void setListeTour(List<Tour> listeTour) {
+		this.listeTour = listeTour;
 	}
 
 	public void setListeJoueur(List<Joueur> listeJoueur) {
 		this.listeJoueur = listeJoueur;
 	}
+	
 
 }
