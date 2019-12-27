@@ -31,11 +31,30 @@ public class Application {
 		Partie mapartie = new Partie();
 		Tour tour = new Tour();
 		CartesCles cartescles = new CartesCles();
+		String couleur = null;
+		String reponse = null;
+		int nbrReponse=0;
+		
 
 		List<Equipe> equipes = new ArrayList<Equipe>();
 		List<Joueur> listeJoueur = new ArrayList<Joueur>();
 		List<CartesNomDeCode> listeCartes = new ArrayList<CartesNomDeCode>();
 		List<Cases> listeCases = new ArrayList<Cases>();
+
+		// j'aime utiliser tout un bordel pour test et alors ?
+
+		Joueur pl = new Joueur();
+		Joueur jerem = new Joueur();
+		Joueur jojo = new Joueur();
+		Joueur tib = new Joueur();
+		pl.setPseudo("pl");
+		jerem.setPseudo("jerem");
+		jojo.setPseudo("jojo");
+		tib.setPseudo("tib");
+		mapartie.getJoueurspartie().add(pl);
+		mapartie.getJoueurspartie().add(jerem);
+		mapartie.getJoueurspartie().add(jojo);
+		mapartie.getJoueurspartie().add(tib);
 
 		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
@@ -77,8 +96,19 @@ public class Application {
 				}
 				System.out.println("Voici les mots utilisez pour cette partie : ");
 				mapartie.affichageAgent(listeCases);
-				tour.motMaitreEspion();
-				tour.nbrMotMaitreEspion();
+
+				// savoir qui commence ? possible check du nbr de rouge et bleu pour la liste et faire commencer le plus gros. a mettre dans une fn
+				
+				System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+				nbrReponse=tour.nbrMotMaitreEspion();
+				System.out.println("Celui-ci est relié à "+nbrReponse+" mots");
+				while (reponse == null) {
+					reponse = tour.reponseAgent(listeCases);
+				}
+				couleur = mapartie.couleurReponse(listeCases, reponse);
+				System.out.println("Le mot " + reponse + " est " + couleur);
+				
+			
 
 				break;
 			case 2:

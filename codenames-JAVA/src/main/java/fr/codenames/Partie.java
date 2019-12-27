@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
-import fr.codenames.model.CartesCles;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
@@ -16,20 +15,36 @@ public class Partie {
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 
+	
+
+	
+	public String couleurReponse(List<Cases> liste, String mot) {
+
+		String couleur = null;
+		for (Cases c : liste) {
+			if (c.getCartenomdecode().getNom().equalsIgnoreCase(mot)) {
+				couleur = c.getCouleur();
+			}
+		}
+		return couleur;
+
+	}
+
 	public void affichageAgent(List<Cases> list) {
-		int min =0;
+		int min = 0;
 		int max = 5;
 		for (int i = 0; i < 5; i++) {
 			for (int j = min; j < max; j++) {
-				System.out.print(list.get(j).getCartenomdecode().getNom()+"   ");
+				System.out.print(list.get(j).getCartenomdecode().getNom() + "   ");
 			}
-			min=min+5;
-			max=max+5;
+			min = min + 5;
+			max = max + 5;
 			System.out.println();
 		}
 	}
 
 	public void affichageMaitreEspion(List<Cases> list) {
+// a faire avec du html par exemple ? 
 
 	}
 
