@@ -19,14 +19,14 @@ public class Joueur {
 	@Column(name = "JOUEUR_ID")
 	private int id;
 	
-	@Column(name = "JOUEUR_PSEUDO", length = 25, nullable = false)
+	@Column(name = "JOUEUR_PSEUDO", length = 25)//, nullable = false)
 	@Size(max=25)
-	@NotNull
+//	@NotNull
 	private String pseudo;
 	
-	@Column(name = "JOUEUR_MDP",length = 25, nullable = false)
+	@Column(name = "JOUEUR_MDP",length = 25)//, nullable = false)
 	@Size(max=25)
-	@NotNull
+//	@NotNull
 	private String mdp;
 	
 	@Column(name = "JOUEUR_NB_PARTIE")

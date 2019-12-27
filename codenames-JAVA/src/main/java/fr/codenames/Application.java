@@ -62,7 +62,7 @@ public class Application {
 					joueur = menuJoueurs();
 					switch (joueur) {
 
-					case 1:// conenxion
+					case 1:// connexion
 						Joueur joueurconnect = new Joueur();
 						Scanner scanPseudo = new Scanner(System.in);
 						System.out.println("nom du joueur ?");
@@ -76,7 +76,7 @@ public class Application {
 							System.out.println("La combinaison pseudo/mdp est incorrecte");
 						}
 
-						System.out.println("Joueur present pour le moment dans la prochaine partie :");
+						System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
 						for (Joueur j : listeJoueur) {
 							System.out.println(j.getPseudo());
 						}
@@ -105,7 +105,7 @@ public class Application {
 						System.out.println("Nouveau nom du joueur ?");
 						joueur2.setPseudo(scanPseudo2.nextLine());
 						Scanner scanPseudo3 = new Scanner(System.in);
-						System.out.println("Nom du joueur Ã  modifier ?");
+						System.out.println("ID du joueur à modifier ?");
 						joueur2.setId(scanPseudo3.nextInt());
 						joueurs.save(joueur2);
 
@@ -113,8 +113,10 @@ public class Application {
 					case 4:// supprimer joueur
 						Joueur joueursup = new Joueur();
 						Scanner scansup = new Scanner(System.in);
-						System.out.println("nom du nouveau joueur a supprimer ?");
-						joueursup.setPseudo(scansup.nextLine());
+//						System.out.println("Nom du joueur a supprimer ?");
+						System.out.println("ID du joueur a supprimer ?");
+						joueursup.setId(scansup.nextInt());
+//						joueursup.setPseudo(scansup.nextLine());
 						joueurs.delete(joueursup);
 
 						break;
@@ -131,7 +133,7 @@ public class Application {
 					switch (carte) {
 
 					case 1:// find all
-//						listeCarte = cartes.findAll();
+						listeCarte = cartes.findAll();
 						for (CartesNomDeCode c : listeCarte) {
 							System.out.println(c.getNom());
 						}
@@ -142,7 +144,7 @@ public class Application {
 						Scanner scanCreer = new Scanner(System.in);
 						System.out.println("Nom de la nouvelle carte nom de code ? ");
 						cartecreer.setNom(scanCreer.nextLine());
-//						cartes.save(cartecreer);
+						cartes.save(cartecreer);
 						break;
 
 					case 3:
@@ -151,7 +153,7 @@ public class Application {
 						Scanner scanSupprimer = new Scanner(System.in);
 						System.out.println("Nom de la carte nom de code a supprimer ? ");
 						cartesup.setNom(scanSupprimer.nextLine());
-//						cartes.delete(cartesup);
+						cartes.delete(cartesup);
 						break;
 
 					case 0:
@@ -168,20 +170,20 @@ public class Application {
 					switch (histo) {
 
 					case 1:// find all
-//						listeJoueur = joueurs.findAll();
+						listeJoueur = joueurs.findAll();
 						for (Joueur j : listeJoueur) {
 							System.out.println(j.getPseudo());
 						}
 						break;
 
-					case 2:// statitique joueur
+					case 2:// statistique joueur
 						Joueur joueur1 = new Joueur();
 						System.out.println("Saisir le nom du joueur :");
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
-//						joueur1 = joueurs.findByNom(nom);
-						System.out.println("Le jouer " + joueur1.getPseudo() + " a jouÃ© " + joueur1.getNbrPartie()
-								+ " parties et en a gagnÃ© " + joueur1.getNbrVictoire() + ". Il a jouÃ© MaitreEspion "
+						joueur1 = joueurs.findByNom(nom);
+						System.out.println("Le joueur " + joueur1.getPseudo() + " a joué " + joueur1.getNbrPartie()
+								+ " parties et en a gagné " + joueur1.getNbrVictoire() + ". Il a joué MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");
 						break;
 
@@ -218,7 +220,7 @@ public class Application {
 		System.out.println();
 		System.out.println("----------------------");
 		System.out.println("1- Se connecter");
-		System.out.println("2- CrÃ©er joueur");
+		System.out.println("2- Créer joueur");
 		System.out.println("3- Modifier joueur");
 		System.out.println("4- Supprimer joueur");
 		System.out.println("0- Retour ");
@@ -231,7 +233,7 @@ public class Application {
 		System.out.println();
 		System.out.println("----------------------");
 		System.out.println("1- Liste des Cartes");
-		System.out.println("2- CrÃ©er Carte");
+		System.out.println("2- Créer Carte");
 		System.out.println("3- Supprimer Carte");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
