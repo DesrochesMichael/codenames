@@ -114,13 +114,49 @@ public class Application {
 				System.out.println();
 				mapartie.affichageAgent(listeCases);
 
-				// savoir qui commence ? possible check du nbr de rouge et bleu pour la liste et faire commencer le plus gros. a mettre dans une fn
-				
-				System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
-				nbrReponse=tour.nbrMotMaitreEspion();
-				System.out.println("Celui-ci est reli� � "+nbrReponse+" mots");
-				while (reponse == null) {
-					reponse = tour.reponseAgent(listeCases);
+					System.out.println();
+
+					mapartie.affichageMaitreEspion(listeCases);
+
+					System.out.println();
+
+					// savoir qui commence ?
+					index = mapartie.quiCommence(listeCases);
+					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
+
+					// boucle condition de victoire/defaite
+					while (mapartie.conditionVictoire(repRestante) != true
+							|| mapartie.conditionDefaite(repRestante) != true) {
+
+						System.out.println("Tour de l'équipe " + equipes.get(index).getNom());
+						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+						nbrReponse = tour.nbrMotMaitreEspion();
+						System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
+						while (reponse == null) {
+							reponse = tour.reponseAgent(repRestante);
+							reponsePrec=reponse;
+						}
+						while (mapartie.conditionVictoire(repRestante) != true
+								|| mapartie.conditionDefaite(repRestante) != true || nbrReponse != 0) {
+							while (reponse == reponsePrec) {
+								reponse = tour.reponseAgent(repRestante);
+							}
+							reponsePrec=reponse;
+							
+							rep = mapartie.reussiteReponse(equipes.get(index),
+									mapartie.couleurReponse(repRestante, reponse));
+							mapartie.eneleverRep(repRestante, reponse);
+							nbrReponse--;
+							System.out.println(nbrReponse + " reponse(s) restante(s)");
+						}
+						if (index == 1)
+							index = 0;
+						if (index == 0)
+							index = 1;
+					}
+					
+					//savoir qui gagne une fois qu'on est sortie de la 
+					
 				}
 				break;
 			case 2:
