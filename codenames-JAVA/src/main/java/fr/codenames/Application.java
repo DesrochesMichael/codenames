@@ -141,6 +141,7 @@ public class Application {
 									mapartie.couleurReponse(repRestante, reponse));
 							mapartie.eneleverRep(repRestante, reponse);
 							nbrReponse--;
+							System.out.println(nbrReponse + " reponse(s) restante(s)");
 						}
 						if (index == 1)
 							index = 0;
