@@ -73,8 +73,12 @@ public class Application {
 					listeCartes = mapartie.choixMots();
 					listeCases = cartescles.attributionCases(listeCartes);
 					repRestante = listeCases;
+
 					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
 					System.out.println("composition des �quipes :");
+
+					System.out.println("composition des équipes :");
+
 					// montre les equipes
 					for (Equipe e : equipes) {
 						System.out.println("equipe " + e.getNom());
@@ -93,6 +97,7 @@ public class Application {
 						}
 					}
 					System.out.println();
+
 					System.out.println("Voici les mots utilisez pour cette partie : ");
 					mapartie.affichageAgent(listeCases);
 					System.out.println();
@@ -102,58 +107,74 @@ public class Application {
 					index = mapartie.quiCommence(listeCases);
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
 
-					// boucle condition de victoire/defaite pour le tour
-
-					while (mapartie.conditionVictoire(repRestante) != true
-							&& mapartie.conditionDefaite(repRestante) != true) {
-
-						System.out.println("je passe la ");
-
-						// boucle pour une equipe
-						while (mapartie.conditionVictoire(repRestante) != true
-								&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
-
-							System.out.println("Tour de l'équipe " + equipes.get(index).getNom());
-							System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
-							nbrReponse = tour.nbrMotMaitreEspion();
-							System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
-							// boucle pour chaque reponse possible vis a vis du mot donné
-							while (nbrReponse > 0 && rep == true) {
-								System.out.println(nbrReponse + " reponse(s) restante(s)");
-								while (reponse == null) {
-									reponse = tour.reponseAgent(repRestante);
-								}
-								couleur = mapartie.couleurReponse(repRestante, reponse);
-								rep = mapartie.reussiteReponse(equipes.get(index), couleur);
-								mapartie.eneleverRep(repRestante, reponse);
-								nbrReponse--;
-								reponse = null;
-							}
-						}
-						if (index == 1) {
-							index = 0;
-						} else {
-							index = 1;
-						}
-						rep = true;
-						reponse = null;
-						nbrReponse = 1;
-					}
-
-					if (mapartie.conditionDefaite(repRestante) == true) {
-						System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
-					}
-
-					else if (mapartie.conditionVictoire(repRestante) == true) {
-						if (index == 1) {
-							index = 0;
-						} else {
-							index = 1;
-						}
-						System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
-					}
-
 				}
+				System.out.println("Voici les mots utilisez pour cette partie : ");
+				System.out.println();
+				mapartie.affichageAgent(listeCases);
+
+				System.out.println();
+
+				mapartie.affichageMaitreEspion(listeCases);
+
+				System.out.println();
+
+				// savoir qui commence ?
+				index = mapartie.quiCommence(listeCases);
+				System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
+
+				// boucle condition de victoire/defaite pour le tour
+
+				while (mapartie.conditionVictoire(repRestante) != true
+						&& mapartie.conditionDefaite(repRestante) != true) {
+
+					// boucle pour une equipe
+					while (mapartie.conditionVictoire(repRestante) != true
+							&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
+
+						System.out.println("Tour de l'équipe " + equipes.get(index).getNom() + ".");
+						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+						nbrReponse = tour.nbrMotMaitreEspion();
+						System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
+
+						// boucle pour chaque reponse possible vis a vis du mot donné
+						while (nbrReponse > 0 && rep == true) {
+							System.out.println(nbrReponse + " reponse(s) restante(s)");
+							while (reponse == null) {
+								reponse = tour.reponseAgent(repRestante);
+							}
+							couleur = mapartie.couleurReponse(repRestante, reponse);
+							rep = mapartie.reussiteReponse(equipes.get(index), couleur);
+							mapartie.eneleverRep(repRestante, reponse);
+							nbrReponse--;
+							reponse = null;
+						}
+					}
+					if (index == 1) {
+						index = 0;
+					} else {
+						index = 1;
+					}
+					rep = true;
+					reponse = null;
+					nbrReponse = 1;
+				}
+
+				// affichage de l'équipe victorieuse
+				if (mapartie.conditionDefaite(repRestante) == true) {
+					System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+				}
+
+				else if (mapartie.conditionVictoire(repRestante) == true) {
+					if (index == 1) {
+						index = 0;
+					} else {
+						index = 1;
+					}
+					System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+				}
+
+				// enregistrement des résultats des joueurs
+
 				break;
 			case 2:
 				do {
@@ -300,16 +321,15 @@ public class Application {
 
 						booleen = true;
 						break;
-						
+
 					case 5:
-						//Vote Maitres espions
+						// Vote Maitres espions
 						listeJoueur = joueurs.findAll();
 						for (Joueur j : listeJoueur) {
 							System.out.println(j.getPseudo());
 						}
 						System.out.println("Veuillez voter pour une personne de la liste");
-						
-						
+
 						break;
 					case 0:
 						menu();
