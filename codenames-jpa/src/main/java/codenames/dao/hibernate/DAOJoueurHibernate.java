@@ -16,7 +16,6 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 	}
 
 	public Joueur connect(Joueur j) {
-
 		try {
 			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.pseudo = :nom and j.mdp=:mdp",
 					Joueur.class);

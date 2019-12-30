@@ -34,6 +34,7 @@ public class Application {
 		CartesCles cartescles = new CartesCles();
 		String couleur = null;
 		String reponse = null;
+		int gagnant = 0;
 		int nbrReponse = 1;
 		int index = 0;
 
@@ -45,18 +46,18 @@ public class Application {
 
 		// j'aime utiliser tout un bordel pour test et alors ?
 
-		Joueur pl = new Joueur();
-		Joueur jerem = new Joueur();
-		Joueur jojo = new Joueur();
-		Joueur tib = new Joueur();
-		pl.setPseudo("pl");
-		jerem.setPseudo("jerem");
-		jojo.setPseudo("jojo");
-		tib.setPseudo("tib");
-		mapartie.getJoueurspartie().add(pl);
-		mapartie.getJoueurspartie().add(jerem);
-		mapartie.getJoueurspartie().add(jojo);
-		mapartie.getJoueurspartie().add(tib);
+//		Joueur pl = new Joueur();
+//		Joueur jerem = new Joueur();
+//		Joueur jojo = new Joueur();
+//		Joueur tib = new Joueur();
+//		pl.setPseudo("pl");
+//		jerem.setPseudo("jerem");
+//		jojo.setPseudo("jojo");
+//		tib.setPseudo("tib");
+//		mapartie.getJoueurspartie().add(pl);
+//		mapartie.getJoueurspartie().add(jerem);
+//		mapartie.getJoueurspartie().add(jojo);
+//		mapartie.getJoueurspartie().add(tib);
 
 		// R�P�TITION DU MENU (0 pour en sortir)
 		do {
@@ -75,11 +76,9 @@ public class Application {
 					repRestante = listeCases;
 
 					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
-					System.out.println("composition des �quipes :");
-
-					System.out.println("composition des équipes :");
 
 					// montre les equipes
+					System.out.println("composition des �quipes :");
 					for (Equipe e : equipes) {
 						System.out.println("equipe " + e.getNom());
 						for (int i = 0; i < e.getListeJoueur().size(); i++) {
@@ -103,7 +102,7 @@ public class Application {
 					System.out.println();
 					mapartie.affichageMaitreEspion(listeCases);
 					System.out.println();
-					// savoir qui commence ?
+					// savoir qui commence
 					index = mapartie.quiCommence(listeCases);
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
 
@@ -149,11 +148,13 @@ public class Application {
 							reponse = null;
 						}
 					}
+					// changement index equipe
 					if (index == 1) {
 						index = 0;
 					} else {
 						index = 1;
 					}
+					// raz des conditions
 					rep = true;
 					reponse = null;
 					nbrReponse = 1;
@@ -162,6 +163,7 @@ public class Application {
 				// affichage de l'équipe victorieuse
 				if (mapartie.conditionDefaite(repRestante) == true) {
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+					gagnant = index;
 				}
 
 				else if (mapartie.conditionVictoire(repRestante) == true) {
@@ -171,9 +173,53 @@ public class Application {
 						index = 1;
 					}
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+					gagnant = index;
 				}
 
 				// enregistrement des résultats des joueurs
+
+				for (int i = 0; i < 2; i++) {
+					for (Joueur j : equipes.get(i).getListeJoueur()) {
+						int a = j.getNbrPartie();
+						a++;
+						j.setNbrPartie(a);
+
+						if (j.getRole().equalsIgnoreCase("MaitreEspion")) {
+							int b = j.getNbrMaitreEspion();
+							b++;
+							j.setNbrMaitreEspion(b);
+							j.setRole("Agent");
+						}
+
+						if (i == gagnant) {
+							int c = j.getNbrVictoire();
+							c++;
+							j.setNbrVictoire(c);
+						}
+
+						joueurs.save(j);
+
+					}
+
+				}
+				// reset et choix de conserver les joueurs
+				mapartie = new Partie();
+				System.out.println("Souhaitez vous conserver les joueurs actuels ? oui/non");
+				Scanner choix = new Scanner(System.in);
+				String choice = choix.nextLine();
+
+				if (choice.equalsIgnoreCase("oui")) {
+					for (int i = 0; i < 2; i++) {
+						for (Joueur j : equipes.get(i).getListeJoueur()) {
+							mapartie.getJoueurspartie().add(j);
+						}
+					}
+				}
+
+				System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
+				for (Joueur j : mapartie.getJoueurspartie()) {
+					System.out.println(j.getPseudo());
+				}
 
 				break;
 			case 2:
@@ -187,6 +233,7 @@ public class Application {
 						System.out.println("nom du joueur ?");
 						joueurconnect.setPseudo(scanPseudo.nextLine());
 
+						// check si joueur dans partie
 						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
 							if (joueurconnect.getPseudo()
 									.equalsIgnoreCase(mapartie.getJoueurspartie().get(i).getPseudo()) == true) {
@@ -322,15 +369,6 @@ public class Application {
 						booleen = true;
 						break;
 
-					case 5:
-						// Vote Maitres espions
-						listeJoueur = joueurs.findAll();
-						for (Joueur j : listeJoueur) {
-							System.out.println(j.getPseudo());
-						}
-						System.out.println("Veuillez voter pour une personne de la liste");
-
-						break;
 					case 0:
 						menu();
 					}
@@ -444,7 +482,7 @@ public class Application {
 			}
 		} while (menu != 0);
 
-		// FIN DU PROGRAMME PRINCIPAL
+		
 	}
 
 	public static int menu() {
@@ -467,7 +505,6 @@ public class Application {
 		System.out.println("2- Creer un joueur");
 		System.out.println("3- Modifier un joueur");
 		System.out.println("4- Supprimer joueur de la partie");
-		System.out.println("5- Vote pour le maitre espion");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
 		System.out.println("Votre choix : ");
