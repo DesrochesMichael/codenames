@@ -46,18 +46,18 @@ public class Application {
 
 		// j'aime utiliser tout un bordel pour test et alors ?
 
-		Joueur pl = new Joueur();
-		Joueur jerem = new Joueur();
-		Joueur jojo = new Joueur();
-		Joueur tib = new Joueur();
-		pl.setPseudo("pl");
-		jerem.setPseudo("jerem");
-		jojo.setPseudo("jojo");
-		tib.setPseudo("tib");
-		mapartie.getJoueurspartie().add(pl);
-		mapartie.getJoueurspartie().add(jerem);
-		mapartie.getJoueurspartie().add(jojo);
-		mapartie.getJoueurspartie().add(tib);
+//		Joueur pl = new Joueur();
+//		Joueur jerem = new Joueur();
+//		Joueur jojo = new Joueur();
+//		Joueur tib = new Joueur();
+//		pl.setPseudo("pl");
+//		jerem.setPseudo("jerem");
+//		jojo.setPseudo("jojo");
+//		tib.setPseudo("tib");
+//		mapartie.getJoueurspartie().add(pl);
+//		mapartie.getJoueurspartie().add(jerem);
+//		mapartie.getJoueurspartie().add(jojo);
+//		mapartie.getJoueurspartie().add(tib);
 
 		// R�P�TITION DU MENU (0 pour en sortir)
 		do {
@@ -79,7 +79,10 @@ public class Application {
 
 					repRestante = listeCases;
 
-					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
+				System.out.println("composition des �quipes :");
+				// montre les equipes
+				for (Equipe e : equipes) {
+					System.out.println("equipe " + e.getNom());
 
 					System.out.println("composition des équipes :");
 					// montre les equipes
@@ -92,64 +95,32 @@ public class Application {
 						}
 						System.out.println();
 					}
-					// montre le maitre espion
-					for (Equipe e : equipes) {
-						for (int i = 0; i < e.getListeJoueur().size(); i++) {
-							if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
-								System.out.println(e.getListeJoueur().get(i).getPseudo()
-										+ " est maitre espion de l'equipe " + e.getNom());
-							}
-
+					System.out.println();
+				}
+				// montre le maitre espion
+				for (Equipe e : equipes) {
+					for (int i = 0; i < e.getListeJoueur().size(); i++) {
+						if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
+							System.out.println(e.getListeJoueur().get(i).getPseudo() + " est maitre espion de l'equipe "
+									+ e.getNom());
+							System.out.println();
 						}
 
 					}
 					System.out.println();
 
-					System.out.println("Voici les mots utilisez pour cette partie : ");
-					mapartie.affichageAgent(listeCases);
+				}
+				System.out.println("Voici les mots utilisez pour cette partie : ");
+				System.out.println();
+				mapartie.affichageAgent(listeCases);
 
-					System.out.println();
-
-					mapartie.affichageMaitreEspion(listeCases);
-
-					System.out.println();
-
-					// savoir qui commence ?
-					index = mapartie.quiCommence(listeCases);
-					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
-
-					// boucle condition de victoire/defaite
-					while (mapartie.conditionVictoire(repRestante) != true
-							|| mapartie.conditionDefaite(repRestante) != true) {
-
-						System.out.println("Tour de l'équipe " + equipes.get(index).getNom());
-						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
-						nbrReponse = tour.nbrMotMaitreEspion();
-						System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
-						while (reponse == null) {
-							reponse = tour.reponseAgent(repRestante);
-							reponsePrec=reponse;
-						}
-						while (mapartie.conditionVictoire(repRestante) != true
-								|| mapartie.conditionDefaite(repRestante) != true || nbrReponse != 0) {
-							while (reponse == reponsePrec) {
-								reponse = tour.reponseAgent(repRestante);
-							}
-							reponsePrec=reponse;
-							
-							rep = mapartie.reussiteReponse(equipes.get(index),
-									mapartie.couleurReponse(repRestante, reponse));
-							mapartie.eneleverRep(repRestante, reponse);
-							nbrReponse--;
-						}
-						if (index == 1)
-							index = 0;
-						if (index == 0)
-							index = 1;
-					}
-					
-					//savoir qui gagne une fois qu'on est sortie de la 
-					
+				// savoir qui commence ? possible check du nbr de rouge et bleu pour la liste et faire commencer le plus gros. a mettre dans une fn
+				
+				System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+				nbrReponse=tour.nbrMotMaitreEspion();
+				System.out.println("Celui-ci est reli� � "+nbrReponse+" mots");
+				while (reponse == null) {
+					reponse = tour.reponseAgent(listeCases);
 				}
 				break;
 			case 2:
