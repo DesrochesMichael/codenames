@@ -56,7 +56,7 @@ public class Application {
 		mapartie.getJoueurspartie().add(jojo);
 		mapartie.getJoueurspartie().add(tib);
 
-		// RÃ‰PÃ‰TITION DU MENU (0 pour en sortir)
+		// RÉPÉTITION DU MENU (0 pour en sortir)
 		do {
 
 			menu = menu();
@@ -200,9 +200,6 @@ public class Application {
 								Scanner scanPseudo2 = new Scanner(System.in);
 								String nom = scanPseudo2.nextLine();
 								joueur2 = joueurs.findByNom(nom);
-	//							System.out.println("test .. " + joueur2.getPseudo() + " .. test .." + joueur2.getNbrPartie()
-	//									+ " .. test .. " + joueur2.getNbrVictoire() + ". ..test .."
-	//									+ joueur2.getNbrMaitreEspion() + " .. test." + joueur2.getMdp());
 	
 								Joueur joueur3 = new Joueur();
 								Scanner scanPseudo3 = new Scanner(System.in);
@@ -214,21 +211,17 @@ public class Application {
 							
 							case 2 :
 								
-								//A REVOIR POUR MODIFIER LE MDP EN FONCTION DU JOUEUR ET PAS JUSTE N'IMPORTE QUEL MDP
-								
 								// modifier mdp du joueur
 								Joueur joueur4 = new Joueur();
-								System.out.println("Mot de passe du joueur à modifier ?");
-								Scanner scanMdp = new Scanner(System.in);
-								String mdp = scanMdp.nextLine();
-								joueur4 = joueurs.findByMdp(mdp);
+								System.out.println("Nom du joueur ?");
+								Scanner scanNom = new Scanner(System.in);
+								String nomMdp = scanNom.nextLine();
+								joueur4 = joueurs.findByNom(nomMdp);
 
-								Joueur joueur5 = new Joueur();
-								Scanner scanMdp2 = new Scanner(System.in);
-								System.out.println("Nouveau mot de passe du joueur ?");
-								joueur5=joueur4;
-								joueur5.setMdp(scanMdp2.nextLine());
-								joueurs.save(joueur5);
+								System.out.println("Nouveau mot de passe ?");
+								Scanner scanMdp = new Scanner(System.in);
+								joueur4.setMdp(scanMdp.nextLine());
+								joueurs.save(joueur4);
 								
 							break;
 							
@@ -300,8 +293,23 @@ public class Application {
 							cartes.save(cartecreer);
 						}
 						break;
-
+					
 					case 3:
+						// Modifier carte
+						CartesNomDeCode cartemod = new CartesNomDeCode();
+						Scanner scanModifier = new Scanner(System.in);
+						System.out.println("Nom de la carte nom de code a modifier ? ");
+						String nom = scanModifier.nextLine();
+						cartemod = cartes.findByNom(nom);
+								
+						System.out.println("Nouveau mot ? ");
+						Scanner scanNew = new Scanner(System.in);
+						cartemod.setNom(scanNew.nextLine());
+						cartes.save(cartemod);
+	
+						break;
+						
+					case 4:
 						// supprimer carte
 						CartesNomDeCode cartesup = new CartesNomDeCode();
 						Scanner scanSupprimer = new Scanner(System.in);
@@ -396,7 +404,8 @@ public class Application {
 		System.out.println("----------------------");
 		System.out.println("1- Liste des Cartes");
 		System.out.println("2- Creer Carte");
-		System.out.println("3- Supprimer Carte");
+		System.out.println("3- Modifier Carte");
+		System.out.println("4- Supprimer Carte");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
 		System.out.println("Votre choix : ");
