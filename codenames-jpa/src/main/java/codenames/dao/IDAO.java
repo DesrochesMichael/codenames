@@ -15,4 +15,5 @@ public interface IDAO<T, Id> {
 	public void deleteByID(Id id);
 
 
+
 }

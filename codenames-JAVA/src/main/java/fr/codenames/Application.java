@@ -46,18 +46,18 @@ public class Application {
 
 		// j'aime utiliser tout un bordel pour test et alors ?
 
-//		Joueur pl = new Joueur();
-//		Joueur jerem = new Joueur();
-//		Joueur jojo = new Joueur();
-//		Joueur tib = new Joueur();
-//		pl.setPseudo("pl");
-//		jerem.setPseudo("jerem");
-//		jojo.setPseudo("jojo");
-//		tib.setPseudo("tib");
-//		mapartie.getJoueurspartie().add(pl);
-//		mapartie.getJoueurspartie().add(jerem);
-//		mapartie.getJoueurspartie().add(jojo);
-//		mapartie.getJoueurspartie().add(tib);
+		Joueur pl = new Joueur();
+		Joueur jerem = new Joueur();
+		Joueur jojo = new Joueur();
+		Joueur tib = new Joueur();
+		pl.setPseudo("pl");
+		jerem.setPseudo("jerem");
+		jojo.setPseudo("jojo");
+		tib.setPseudo("tib");
+		mapartie.getJoueurspartie().add(pl);
+		mapartie.getJoueurspartie().add(jerem);
+		mapartie.getJoueurspartie().add(jojo);
+		mapartie.getJoueurspartie().add(tib);
 
 		// Rï¿½Pï¿½TITION DU MENU (0 pour en sortir)
 		do {
@@ -70,93 +70,68 @@ public class Application {
 					System.out.println(
 							"Le nombre de joueur est insuffisant. Merci de passser par le menu joueur afin d'avoir au moins 4 joueurs.");
 					menu();
-
 				} else {
-
 					listeCartes = mapartie.choixMots();
-
 					listeCases = cartescles.attributionCases(listeCartes);
-
 					repRestante = listeCases;
-
-				System.out.println("composition des ï¿½quipes :");
-				// montre les equipes
-				for (Equipe e : equipes) {
-					System.out.println("equipe " + e.getNom());
-
-					System.out.println("composition des Ã©quipes :");
+					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
+					System.out.println("composition des équipes :");
 					// montre les equipes
 					for (Equipe e : equipes) {
 						System.out.println("equipe " + e.getNom());
-
 						for (int i = 0; i < e.getListeJoueur().size(); i++) {
 							System.out.println(e.getListeJoueur().get(i).getPseudo());
-
 						}
 						System.out.println();
 					}
-					System.out.println();
-				}
-				// montre le maitre espion
-				for (Equipe e : equipes) {
-					for (int i = 0; i < e.getListeJoueur().size(); i++) {
-						if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
-							System.out.println(e.getListeJoueur().get(i).getPseudo() + " est maitre espion de l'equipe "
-									+ e.getNom());
-							System.out.println();
+					// montre le maitre espion
+					for (Equipe e : equipes) {
+						for (int i = 0; i < e.getListeJoueur().size(); i++) {
+							if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
+								System.out.println(e.getListeJoueur().get(i).getPseudo()
+										+ " est maitre espion de l'equipe " + e.getNom());
+							}
 						}
-
 					}
 					System.out.println();
-
-				}
-				System.out.println("Voici les mots utilisez pour cette partie : ");
-				System.out.println();
-				mapartie.affichageAgent(listeCases);
-
+					System.out.println("Voici les mots utilisez pour cette partie : ");
+					mapartie.affichageAgent(listeCases);
 					System.out.println();
-
 					mapartie.affichageMaitreEspion(listeCases);
-
 					System.out.println();
-
 					// savoir qui commence ?
 					index = mapartie.quiCommence(listeCases);
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
-
 					// boucle condition de victoire/defaite
 					while (mapartie.conditionVictoire(repRestante) != true
 							|| mapartie.conditionDefaite(repRestante) != true) {
-
-						System.out.println("Tour de l'Ã©quipe " + equipes.get(index).getNom());
-						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
-						nbrReponse = tour.nbrMotMaitreEspion();
-						System.out.println("Celui-ci est reliÃ© Ã  " + nbrReponse + " mots");
-						while (reponse == null) {
-							reponse = tour.reponseAgent(repRestante);
-							reponsePrec=reponse;
-						}
 						while (mapartie.conditionVictoire(repRestante) != true
-								|| mapartie.conditionDefaite(repRestante) != true || nbrReponse != 0) {
-							while (reponse == reponsePrec) {
-								reponse = tour.reponseAgent(repRestante);
+								|| mapartie.conditionDefaite(repRestante) != true || nbrReponse != 0 || rep != false) {
+							System.out.println("Tour de l'équipe " + equipes.get(index).getNom());
+							System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+							nbrReponse = tour.nbrMotMaitreEspion();
+							System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
+							while (nbrReponse > 0 || rep != false) {
+								System.out.println(nbrReponse + " reponse(s) restante(s)");
+								while (reponse == null) {
+									reponse = tour.reponseAgent(repRestante);
+								}
+								rep = mapartie.reussiteReponse(equipes.get(index),
+										mapartie.couleurReponse(repRestante, reponse));
+								mapartie.eneleverRep(repRestante, reponse);
+								nbrReponse--;
 							}
-							reponsePrec=reponse;
-							
-							rep = mapartie.reussiteReponse(equipes.get(index),
-									mapartie.couleurReponse(repRestante, reponse));
-							mapartie.eneleverRep(repRestante, reponse);
-							nbrReponse--;
-							System.out.println(nbrReponse + " reponse(s) restante(s)");
 						}
-						if (index == 1)
+						if (index == 1) {
 							index = 0;
-						if (index == 0)
+						}
+						if (index == 0) {
 							index = 1;
+						}
+						rep = true;
+						reponse = null;
 					}
-					
-					//savoir qui gagne une fois qu'on est sortie de la 
-					
+					// savoir qui gagne une fois qu'on est sortie de là
 				}
 				break;
 			case 2:
@@ -173,7 +148,7 @@ public class Application {
 						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
 							if (joueurconnect.getPseudo()
 									.equalsIgnoreCase(mapartie.getJoueurspartie().get(i).getPseudo()) == true) {
-								System.out.println("Le joueur est dÃ©jÃ  connecte a la partie");
+								System.out.println("Le joueur est deja  connecte a la partie");
 								booleen = false;
 							}
 						}
@@ -303,6 +278,17 @@ public class Application {
 						}
 
 						booleen = true;
+						break;
+						
+					case 5:
+						//Vote Maitres espions
+						listeJoueur = joueurs.findAll();
+						for (Joueur j : listeJoueur) {
+							System.out.println(j.getPseudo());
+						}
+						System.out.println("Veuillez voter pour une personne de la liste");
+						
+						
 						break;
 					case 0:
 						menu();
@@ -440,6 +426,7 @@ public class Application {
 		System.out.println("2- Creer un joueur");
 		System.out.println("3- Modifier un joueur");
 		System.out.println("4- Supprimer joueur de la partie");
+		System.out.println("5- Vote pour le maitre espion");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
 		System.out.println("Votre choix : ");

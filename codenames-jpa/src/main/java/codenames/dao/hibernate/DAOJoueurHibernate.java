@@ -31,6 +31,7 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 
 	}
 
+	
 	public Joueur findByNom(String nom) {
 		try {
 			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.pseudo = :nom", Joueur.class);
@@ -44,19 +45,6 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 		return null;
 	}
 
-	public Joueur findByMdp(String mdp) {
-		try {
-			TypedQuery<Joueur> myQuery = em.createQuery("select j from Joueur j where j.mdp = :mdp", Joueur.class);
-			myQuery.setParameter("mdp", mdp);
-			return myQuery.getSingleResult();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Pas de joueur avec ce mot de passe");
-			;
-		}
-		return null;
-	}
 	
 	@Override
 	public List<Joueur> findAll() {
@@ -101,5 +89,7 @@ public class DAOJoueurHibernate extends DAOHibernate<Joueur> implements IDAO<Jou
 		delete(sup);
 
 	}
+	
+	
 
 }
