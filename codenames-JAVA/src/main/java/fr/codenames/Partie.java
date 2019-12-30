@@ -16,17 +16,13 @@ public class Partie {
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 
 	public boolean conditionDefaite(List<Cases> list) {
-		boolean defaite = false;
-		boolean testNoir = true;
+		boolean defaite = true;
 
 		for (Cases c : list) {
-			if (c.getCartenomdecode().getNom().equalsIgnoreCase("noir")) {
-				testNoir = false;
+			if (c.getCouleur().equalsIgnoreCase("noir")) {
+				defaite = false;
 			}
-		}
 
-		if (testNoir == false) {
-			defaite = true;
 		}
 
 		return defaite;
@@ -34,19 +30,19 @@ public class Partie {
 
 	public boolean conditionVictoire(List<Cases> list) {
 		boolean victoire = false;
-		boolean testRouge = false;
-		boolean testBleu = false;
+		boolean testRouge = true;
+		boolean testBleu = true;
 
 		for (Cases c : list) {
-			if (c.getCartenomdecode().getNom().equalsIgnoreCase("rouge")) {
-				testRouge = true;
+			if (c.getCouleur().equalsIgnoreCase("rouge")) {
+				testRouge = false;
 			}
-			if (c.getCartenomdecode().getNom().equalsIgnoreCase("bleu")) {
-				testBleu = true;
+			if (c.getCouleur().equalsIgnoreCase("rouge")) {
+				testBleu = false;
 			}
 		}
 
-		if (testRouge == false || testRouge == false) {
+		if (testRouge == true || testBleu == true) {
 			victoire = true;
 		}
 
@@ -66,7 +62,7 @@ public class Partie {
 
 	public boolean reussiteReponse(Equipe e, String s) {
 		if (e.getNom().equalsIgnoreCase(s)) {
-			System.out.println("Le mot est bien de la couleur" + s);
+			System.out.println("Le mot est bien de la couleur " + s + ".");
 			return true;
 		} else {
 			System.out.println("Le mot ne correspond pas à votre couleur. Le mot est " + s + ".");

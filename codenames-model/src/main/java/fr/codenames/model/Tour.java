@@ -70,7 +70,7 @@ public class Tour {
 		System.out.println("Quel nombre de mots les agents doivent ils deviner ?");
 		Scanner sc = new Scanner(System.in);
 		a=sc.nextInt();
-//		sc.nextLine();
+		sc.nextLine();
 		
 		return a;
 	}

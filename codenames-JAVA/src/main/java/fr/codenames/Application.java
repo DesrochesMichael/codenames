@@ -34,8 +34,7 @@ public class Application {
 		CartesCles cartescles = new CartesCles();
 		String couleur = null;
 		String reponse = null;
-		String reponsePrec=null;
-		int nbrReponse = 0;
+		int nbrReponse = 1;
 		int index = 0;
 
 		List<Equipe> equipes = new ArrayList<Equipe>();
@@ -75,7 +74,7 @@ public class Application {
 					listeCases = cartescles.attributionCases(listeCartes);
 					repRestante = listeCases;
 					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
-					System.out.println("composition des équipes :");
+					System.out.println("composition des ï¿½quipes :");
 					// montre les equipes
 					for (Equipe e : equipes) {
 						System.out.println("equipe " + e.getNom());
@@ -102,36 +101,58 @@ public class Application {
 					// savoir qui commence ?
 					index = mapartie.quiCommence(listeCases);
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
-					// boucle condition de victoire/defaite
+
+					// boucle condition de victoire/defaite pour le tour
+
 					while (mapartie.conditionVictoire(repRestante) != true
-							|| mapartie.conditionDefaite(repRestante) != true) {
+							&& mapartie.conditionDefaite(repRestante) != true) {
+
+						System.out.println("je passe la ");
+
+						// boucle pour une equipe
 						while (mapartie.conditionVictoire(repRestante) != true
-								|| mapartie.conditionDefaite(repRestante) != true || nbrReponse != 0 || rep != false) {
-							System.out.println("Tour de l'équipe " + equipes.get(index).getNom());
+								&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
+
+							System.out.println("Tour de l'Ã©quipe " + equipes.get(index).getNom());
 							System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
 							nbrReponse = tour.nbrMotMaitreEspion();
-							System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
-							while (nbrReponse > 0 || rep != false) {
+							System.out.println("Celui-ci est reliÃ© Ã  " + nbrReponse + " mots");
+							// boucle pour chaque reponse possible vis a vis du mot donnÃ©
+							while (nbrReponse > 0 && rep == true) {
 								System.out.println(nbrReponse + " reponse(s) restante(s)");
 								while (reponse == null) {
 									reponse = tour.reponseAgent(repRestante);
 								}
-								rep = mapartie.reussiteReponse(equipes.get(index),
-										mapartie.couleurReponse(repRestante, reponse));
+								couleur = mapartie.couleurReponse(repRestante, reponse);
+								rep = mapartie.reussiteReponse(equipes.get(index), couleur);
 								mapartie.eneleverRep(repRestante, reponse);
 								nbrReponse--;
+								reponse = null;
 							}
 						}
 						if (index == 1) {
 							index = 0;
-						}
-						if (index == 0) {
+						} else {
 							index = 1;
 						}
 						rep = true;
 						reponse = null;
+						nbrReponse = 1;
 					}
-					// savoir qui gagne une fois qu'on est sortie de là
+
+					if (mapartie.conditionDefaite(repRestante) == true) {
+						System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+					}
+
+					else if (mapartie.conditionVictoire(repRestante) == true) {
+						if (index == 1) {
+							index = 0;
+						} else {
+							index = 1;
+						}
+						System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+					}
+
 				}
 				break;
 			case 2:
@@ -148,7 +169,7 @@ public class Application {
 						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
 							if (joueurconnect.getPseudo()
 									.equalsIgnoreCase(mapartie.getJoueurspartie().get(i).getPseudo()) == true) {
-								System.out.println("Le joueur est deja  connecte a la partie");
+								System.out.println("Le joueur est dejaï¿½ connecte a la partie");
 								booleen = false;
 							}
 						}
@@ -223,17 +244,17 @@ public class Application {
 								Scanner scanPseudo2 = new Scanner(System.in);
 								String nom = scanPseudo2.nextLine();
 								joueur2 = joueurs.findByNom(nom);
-	
+
 								Joueur joueur3 = new Joueur();
 								Scanner scanPseudo3 = new Scanner(System.in);
 								System.out.println("Nouveau nom du joueur ?");
 								joueur3 = joueur2;
 								joueur3.setPseudo(scanPseudo3.nextLine());
 								joueurs.save(joueur3);
-							break;
-							
-							case 2 :
-								
+								break;
+
+							case 2:
+
 								// modifier mdp du joueur
 								Joueur joueur4 = new Joueur();
 								System.out.println("Nom du joueur ?");
@@ -245,9 +266,9 @@ public class Application {
 								Scanner scanMdp = new Scanner(System.in);
 								joueur4.setMdp(scanMdp.nextLine());
 								joueurs.save(joueur4);
-								
-							break;
-							
+
+								break;
+
 							case 0:
 								menu();
 							}
@@ -326,7 +347,7 @@ public class Application {
 							cartes.save(cartecreer);
 						}
 						break;
-					
+
 					case 3:
 						// Modifier carte
 						CartesNomDeCode cartemod = new CartesNomDeCode();
@@ -334,14 +355,14 @@ public class Application {
 						System.out.println("Nom de la carte nom de code a modifier ? ");
 						String nom = scanModifier.nextLine();
 						cartemod = cartes.findByNom(nom);
-								
+
 						System.out.println("Nouveau mot ? ");
 						Scanner scanNew = new Scanner(System.in);
 						cartemod.setNom(scanNew.nextLine());
 						cartes.save(cartemod);
-	
+
 						break;
-						
+
 					case 4:
 						// supprimer carte
 						CartesNomDeCode cartesup = new CartesNomDeCode();
