@@ -45,18 +45,18 @@ public class Application {
 
 		// j'aime utiliser tout un bordel pour test et alors ?
 
-		Joueur pl = new Joueur();
-		Joueur jerem = new Joueur();
-		Joueur jojo = new Joueur();
-		Joueur tib = new Joueur();
-		pl.setPseudo("pl");
-		jerem.setPseudo("jerem");
-		jojo.setPseudo("jojo");
-		tib.setPseudo("tib");
-		mapartie.getJoueurspartie().add(pl);
-		mapartie.getJoueurspartie().add(jerem);
-		mapartie.getJoueurspartie().add(jojo);
-		mapartie.getJoueurspartie().add(tib);
+//		Joueur pl = new Joueur();
+//		Joueur jerem = new Joueur();
+//		Joueur jojo = new Joueur();
+//		Joueur tib = new Joueur();
+//		pl.setPseudo("pl");
+//		jerem.setPseudo("jerem");
+//		jojo.setPseudo("jojo");
+//		tib.setPseudo("tib");
+//		mapartie.getJoueurspartie().add(pl);
+//		mapartie.getJoueurspartie().add(jerem);
+//		mapartie.getJoueurspartie().add(jojo);
+//		mapartie.getJoueurspartie().add(tib);
 
 		// R�P�TITION DU MENU (0 pour en sortir)
 		do {
@@ -78,7 +78,10 @@ public class Application {
 
 					repRestante = listeCases;
 
-					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
+				System.out.println("composition des �quipes :");
+				// montre les equipes
+				for (Equipe e : equipes) {
+					System.out.println("equipe " + e.getNom());
 
 					System.out.println("composition des équipes :");
 					// montre les equipes
@@ -91,21 +94,24 @@ public class Application {
 						}
 						System.out.println();
 					}
-					// montre le maitre espion
-					for (Equipe e : equipes) {
-						for (int i = 0; i < e.getListeJoueur().size(); i++) {
-							if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
-								System.out.println(e.getListeJoueur().get(i).getPseudo()
-										+ " est maitre espion de l'equipe " + e.getNom());
-							}
-
+					System.out.println();
+				}
+				// montre le maitre espion
+				for (Equipe e : equipes) {
+					for (int i = 0; i < e.getListeJoueur().size(); i++) {
+						if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
+							System.out.println(e.getListeJoueur().get(i).getPseudo() + " est maitre espion de l'equipe "
+									+ e.getNom());
+							System.out.println();
 						}
 
 					}
 					System.out.println();
 
-					System.out.println("Voici les mots utilisez pour cette partie : ");
-					mapartie.affichageAgent(listeCases);
+				}
+				System.out.println("Voici les mots utilisez pour cette partie : ");
+				System.out.println();
+				mapartie.affichageAgent(listeCases);
 
 					System.out.println();
 
