@@ -15,9 +15,84 @@ public class Partie {
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 
-	
+	public boolean conditionDefaite(List<Cases> list) {
+		boolean defaite = false;
+		boolean testNoir = true;
 
-	
+		for (Cases c : list) {
+			if (c.getCartenomdecode().getNom().equalsIgnoreCase("noir")) {
+				testNoir = false;
+			}
+		}
+
+		if (testNoir == false) {
+			defaite = true;
+		}
+
+		return defaite;
+	}
+
+	public boolean conditionVictoire(List<Cases> list) {
+		boolean victoire = false;
+		boolean testRouge = false;
+		boolean testBleu = false;
+
+		for (Cases c : list) {
+			if (c.getCartenomdecode().getNom().equalsIgnoreCase("rouge")) {
+				testRouge = true;
+			}
+			if (c.getCartenomdecode().getNom().equalsIgnoreCase("bleu")) {
+				testBleu = true;
+			}
+		}
+
+		if (testRouge == false || testRouge == false) {
+			victoire = true;
+		}
+
+		return victoire;
+	}
+
+	public List<Cases> eneleverRep(List<Cases> list, String s) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getCartenomdecode().getNom().equalsIgnoreCase(s)) {
+				list.remove(i);
+			}
+		}
+
+		return list;
+
+	}
+
+	public boolean reussiteReponse(Equipe e, String s) {
+		if (e.getNom().equalsIgnoreCase(s)) {
+			System.out.println("Le mot est bien de la couleur" + s);
+			return true;
+		} else {
+			System.out.println("Le mot ne correspond pas à votre couleur. Le mot est " + s + ".");
+			return false;
+		}
+	}
+
+	public int quiCommence(List<Cases> list) {
+		int a = 0;
+		int b = 0;
+
+		for (Cases c : list) {
+			if (c.getCouleur().equalsIgnoreCase("rouge")) {
+				a++;
+			}
+			if (c.getCouleur().equalsIgnoreCase("bleu")) {
+				b++;
+			}
+
+		}
+		if (a > b)
+			return 1;
+		else
+			return 0;
+	}
+
 	public String couleurReponse(List<Cases> liste, String mot) {
 
 		String couleur = null;
@@ -27,7 +102,6 @@ public class Partie {
 			}
 		}
 		return couleur;
-
 	}
 
 	public void affichageAgent(List<Cases> list) {
@@ -44,7 +118,17 @@ public class Partie {
 	}
 
 	public void affichageMaitreEspion(List<Cases> list) {
-// a faire avec du html par exemple ? 
+		int min = 0;
+		int max = 5;
+		for (int i = 0; i < 5; i++) {
+			for (int j = min; j < max; j++) {
+				System.out.print(list.get(j).getCartenomdecode().getNom() + "   ");
+				System.out.print(list.get(j).getCouleur() + "   ");
+			}
+			min = min + 5;
+			max = max + 5;
+			System.out.println();
+		}
 
 	}
 

@@ -25,6 +25,7 @@ public class Application {
 		int modif;
 
 		boolean booleen = true;
+		boolean rep = true;
 
 		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
 		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
@@ -33,13 +34,15 @@ public class Application {
 		CartesCles cartescles = new CartesCles();
 		String couleur = null;
 		String reponse = null;
-		int nbrReponse=0;
-		
+		String reponsePrec=null;
+		int nbrReponse = 0;
+		int index = 0;
 
 		List<Equipe> equipes = new ArrayList<Equipe>();
 		List<Joueur> listeJoueur = new ArrayList<Joueur>();
 		List<CartesNomDeCode> listeCartes = new ArrayList<CartesNomDeCode>();
 		List<Cases> listeCases = new ArrayList<Cases>();
+		List<Cases> repRestante = new ArrayList<Cases>();
 
 		// j'aime utiliser tout un bordel pour test et alors ?
 
@@ -63,53 +66,91 @@ public class Application {
 			switch (menu) {
 			case 1:
 				// NOUVELLE PARTIE
+				if (mapartie.getJoueurspartie().size() < 4) {
+					System.out.println(
+							"Le nombre de joueur est insuffisant. Merci de passser par le menu joueur afin d'avoir au moins 4 joueurs.");
+					menu();
 
-				listeCartes = mapartie.choixMots();
+				} else {
 
-				listeCases = cartescles.attributionCases(listeCartes);
+					listeCartes = mapartie.choixMots();
 
-				mapartie.affichageAgent(listeCases);
+					listeCases = cartescles.attributionCases(listeCartes);
 
-				equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
+					repRestante = listeCases;
 
-				System.out.println("composition des Ã©quipes :");
-				// montre les equipes
-				for (Equipe e : equipes) {
-					System.out.println("equipe " + e.getNom());
+					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
 
-					for (int i = 0; i < e.getListeJoueur().size(); i++) {
-						System.out.println(e.getListeJoueur().get(i).getPseudo());
+					System.out.println("composition des Ã©quipes :");
+					// montre les equipes
+					for (Equipe e : equipes) {
+						System.out.println("equipe " + e.getNom());
 
+						for (int i = 0; i < e.getListeJoueur().size(); i++) {
+							System.out.println(e.getListeJoueur().get(i).getPseudo());
+
+						}
+						System.out.println();
 					}
-					System.out.println();
-				}
-				// montre le maitre espion
-				for (Equipe e : equipes) {
-					for (int i = 0; i < e.getListeJoueur().size(); i++) {
-						if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
-							System.out.println(e.getListeJoueur().get(i).getPseudo() + " est maitre espion de l'equipe "
-									+ e.getNom());
+					// montre le maitre espion
+					for (Equipe e : equipes) {
+						for (int i = 0; i < e.getListeJoueur().size(); i++) {
+							if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
+								System.out.println(e.getListeJoueur().get(i).getPseudo()
+										+ " est maitre espion de l'equipe " + e.getNom());
+							}
+
 						}
 
 					}
+					System.out.println();
 
+					System.out.println("Voici les mots utilisez pour cette partie : ");
+					mapartie.affichageAgent(listeCases);
+
+					System.out.println();
+
+					mapartie.affichageMaitreEspion(listeCases);
+
+					System.out.println();
+
+					// savoir qui commence ?
+					index = mapartie.quiCommence(listeCases);
+					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
+
+					// boucle condition de victoire/defaite
+					while (mapartie.conditionVictoire(repRestante) != true
+							|| mapartie.conditionDefaite(repRestante) != true) {
+
+						System.out.println("Tour de l'Ã©quipe " + equipes.get(index).getNom());
+						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+						nbrReponse = tour.nbrMotMaitreEspion();
+						System.out.println("Celui-ci est reliÃ© Ã  " + nbrReponse + " mots");
+						while (reponse == null) {
+							reponse = tour.reponseAgent(repRestante);
+							reponsePrec=reponse;
+						}
+						while (mapartie.conditionVictoire(repRestante) != true
+								|| mapartie.conditionDefaite(repRestante) != true || nbrReponse != 0) {
+							while (reponse == reponsePrec) {
+								reponse = tour.reponseAgent(repRestante);
+							}
+							reponsePrec=reponse;
+							
+							rep = mapartie.reussiteReponse(equipes.get(index),
+									mapartie.couleurReponse(repRestante, reponse));
+							mapartie.eneleverRep(repRestante, reponse);
+							nbrReponse--;
+						}
+						if (index == 1)
+							index = 0;
+						if (index == 0)
+							index = 1;
+					}
+					
+					//savoir qui gagne une fois qu'on est sortie de la 
+					
 				}
-				System.out.println("Voici les mots utilisez pour cette partie : ");
-				mapartie.affichageAgent(listeCases);
-
-				// savoir qui commence ? possible check du nbr de rouge et bleu pour la liste et faire commencer le plus gros. a mettre dans une fn
-				
-				System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
-				nbrReponse=tour.nbrMotMaitreEspion();
-				System.out.println("Celui-ci est reliÃ© Ã  "+nbrReponse+" mots");
-				while (reponse == null) {
-					reponse = tour.reponseAgent(listeCases);
-				}
-				couleur = mapartie.couleurReponse(listeCases, reponse);
-				System.out.println("Le mot " + reponse + " est " + couleur);
-				
-			
-
 				break;
 			case 2:
 				do {
@@ -196,29 +237,31 @@ public class Application {
 							case 1:
 								// modifier pseudo du joueur
 								Joueur joueur2 = new Joueur();
-								System.out.println("Nom du joueur à modifier ?");
+								System.out.println("Nom du joueur ï¿½ modifier ?");
 								Scanner scanPseudo2 = new Scanner(System.in);
 								String nom = scanPseudo2.nextLine();
 								joueur2 = joueurs.findByNom(nom);
-	//							System.out.println("test .. " + joueur2.getPseudo() + " .. test .." + joueur2.getNbrPartie()
-	//									+ " .. test .. " + joueur2.getNbrVictoire() + ". ..test .."
-	//									+ joueur2.getNbrMaitreEspion() + " .. test." + joueur2.getMdp());
-	
+								// System.out.println("test .. " + joueur2.getPseudo() + " .. test .." +
+								// joueur2.getNbrPartie()
+								// + " .. test .. " + joueur2.getNbrVictoire() + ". ..test .."
+								// + joueur2.getNbrMaitreEspion() + " .. test." + joueur2.getMdp());
+
 								Joueur joueur3 = new Joueur();
 								Scanner scanPseudo3 = new Scanner(System.in);
 								System.out.println("Nouveau nom du joueur ?");
-								joueur3=joueur2;
+								joueur3 = joueur2;
 								joueur3.setPseudo(scanPseudo3.nextLine());
 								joueurs.save(joueur3);
-							break;
-							
-							case 2 :
-								
-								//A REVOIR POUR MODIFIER LE MDP EN FONCTION DU JOUEUR ET PAS JUSTE N'IMPORTE QUEL MDP
-								
+								break;
+
+							case 2:
+
+								// A REVOIR POUR MODIFIER LE MDP EN FONCTION DU JOUEUR ET PAS JUSTE N'IMPORTE
+								// QUEL MDP
+
 								// modifier mdp du joueur
 								Joueur joueur4 = new Joueur();
-								System.out.println("Mot de passe du joueur à modifier ?");
+								System.out.println("Mot de passe du joueur ï¿½ modifier ?");
 								Scanner scanMdp = new Scanner(System.in);
 								String mdp = scanMdp.nextLine();
 								joueur4 = joueurs.findByMdp(mdp);
@@ -226,18 +269,17 @@ public class Application {
 								Joueur joueur5 = new Joueur();
 								Scanner scanMdp2 = new Scanner(System.in);
 								System.out.println("Nouveau mot de passe du joueur ?");
-								joueur5=joueur4;
+								joueur5 = joueur4;
 								joueur5.setMdp(scanMdp2.nextLine());
 								joueurs.save(joueur5);
-								
-							break;
-							
+
+								break;
+
 							case 0:
 								menu();
 							}
-						}while (modif != 0);
-						
-			
+						} while (modif != 0);
+
 						break;
 					case 4:// supprimer joueur de la partie
 						Scanner scanPseudo21 = new Scanner(System.in);
@@ -337,8 +379,8 @@ public class Application {
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
 						joueur1 = joueurs.findByNom(nom);
-						System.out.println("Le joueur " + joueur1.getPseudo() + " a joué " + joueur1.getNbrPartie()
-								+ " parties et en a gagné " + joueur1.getNbrVictoire() + ". Il a joué MaitreEspion "
+						System.out.println("Le joueur " + joueur1.getPseudo() + " a jouï¿½ " + joueur1.getNbrPartie()
+								+ " parties et en a gagnï¿½ " + joueur1.getNbrVictoire() + ". Il a jouï¿½ MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");
 						break;
 
@@ -425,7 +467,7 @@ public class Application {
 		System.out.println("Votre choix : ");
 		return lireEntier();
 	}
-	
+
 	static int lireEntier() {
 		Scanner myScanner = new Scanner(System.in);
 		try {

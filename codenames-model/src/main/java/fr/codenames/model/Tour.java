@@ -54,7 +54,7 @@ public class Tour {
 		if (test == true) {
 			return rep;
 		} else {
-			System.out.println("La case ne correspond a aucun mot. Veuillez recommencer");
+			System.out.println("La case ne correspond a aucun mot ou a déjà été donné. Veuillez recommencer");
 			return null;
 		}
 	}
@@ -66,9 +66,13 @@ public class Tour {
 	}
 
 	public int nbrMotMaitreEspion() {
+		int a =0;
 		System.out.println("Quel nombre de mots les agents doivent ils deviner ?");
 		Scanner sc = new Scanner(System.in);
-		return sc.nextInt();
+		a=sc.nextInt();
+//		sc.nextLine();
+		
+		return a;
 	}
 
 	public int getId() {
