@@ -27,7 +27,7 @@ public class Joueur {
 	
 	@Column(name = "JOUEUR_MDP",length = 25, nullable = false)
 	@Size(max=25)
-	@NotEmpty
+	@NotEmpty 
 	private String mdp;
 	
 	@Column(name = "JOUEUR_NB_PARTIE")
