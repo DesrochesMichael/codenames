@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import fr.codenames.dao.IDAOCartesNomDeCode;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
@@ -15,8 +17,6 @@ public class Partie {
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 
-	
-	
 	public boolean conditionDefaite(List<Cases> list) {
 		boolean defaite = true;
 
@@ -130,12 +130,14 @@ public class Partie {
 
 	}
 
+	@Autowired
+	private IDAOCartesNomDeCode idaocartes;
+
 	public List<CartesNomDeCode> choixMots() {
-		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
 
 		List<CartesNomDeCode> liste = new ArrayList<CartesNomDeCode>();
 
-		liste = cartes.findAll();
+		liste = idaocartes.findAll();
 		Collections.shuffle(liste);
 
 		for (int i = 0; i < 25; i++) {

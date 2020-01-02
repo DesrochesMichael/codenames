@@ -272,13 +272,13 @@ public class Application {
 							Scanner scanMDP = new Scanner(System.in);
 							System.out.println("mot de passe du joueur ?");
 							joueurconnect.setMdp(scanMDP.nextLine());
-							joueurconnect = joueurs.connect(joueurconnect);
+							joueurconnect = idaojoueur.connect(joueurconnect);
 
 							if (joueurconnect != null) {
-								System.out.println("Le joueur " + joueurs.connect(joueurconnect).getPseudo()
+								System.out.println("Le joueur " + idaojoueur.connect(joueurconnect).getPseudo()
 										+ " rejoint la partie");
 
-								mapartie.getJoueurspartie().add(joueurs.connect(joueurconnect));
+								mapartie.getJoueurspartie().add(idaojoueur.connect(joueurconnect));
 							}
 
 							else {
