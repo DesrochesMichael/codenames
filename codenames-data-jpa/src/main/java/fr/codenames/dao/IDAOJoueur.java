@@ -1,13 +1,21 @@
 package fr.codenames.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import fr.codenames.model.Joueur;
 
 public interface IDAOJoueur extends JpaRepository<Joueur, Integer> {
 
-	public Joueur findByNom(String nom);
-	public Joueur deleteByNom(String Nom);
+	public Joueur findByPseudo(String pseudo);
+	public Joueur deleteByPseudo(String Nom);
 	
+//	@Query("select j from Joueur j where j.pseudo = :nom and j.mdp=:mdp")
+//	public Optional<Joueur> connect(@Param("nom") String pseudo, @Param("mdp")String mdp);
 	
+	@Query("select j from Joueur j where j.pseudo = :#{#j.pseudo} and j.mdp=:#{#j.mdp}")
+	public Joueur connect(@Param("j") Joueur j);
+	
+
 }

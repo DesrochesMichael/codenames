@@ -17,7 +17,6 @@ import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
 import fr.codenames.model.Tour;
-import fr.formation.Application;
 
 @Configuration
 @ComponentScan("fr.codenames")
@@ -336,7 +335,7 @@ public class Application {
 								System.out.println("Nom du joueur � modifier ?");
 								Scanner scanPseudo2 = new Scanner(System.in);
 								String nom = scanPseudo2.nextLine();
-								joueur2 = idaojoueur.findByNom(nom);
+								joueur2 = idaojoueur.findByPseudo(nom);
 
 								Joueur joueur3 = new Joueur();
 								Scanner scanPseudo3 = new Scanner(System.in);
@@ -353,7 +352,7 @@ public class Application {
 								Joueur joueur4 = new Joueur();
 								System.out.println("Nom du joueur ?");
 								Scanner scanNom = new Scanner(System.in);
-								joueur4 = idaojoueur.findByNom(scanNom.nextLine());
+								joueur4 = idaojoueur.findByPseudo(scanNom.nextLine());
 
 								System.out.println("Nouveau mot de passe ?");
 								Scanner scanMdp = new Scanner(System.in);
@@ -489,7 +488,7 @@ public class Application {
 						System.out.println("Saisir le nom du joueur :");
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
-						joueur1 = idaojoueur.findByNom(nom);
+						joueur1 = idaojoueur.findByPseudo(nom);
 						System.out.println("Le joueur " + joueur1.getPseudo() + " a jou� " + joueur1.getNbrPartie()
 								+ " parties et en a gagn� " + joueur1.getNbrVictoire() + ". Il a jou� MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");
