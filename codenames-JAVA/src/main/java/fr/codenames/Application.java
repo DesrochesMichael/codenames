@@ -1,12 +1,17 @@
 package fr.codenames;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
 import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
 import codenames.dao.hibernate.DAOJoueurHibernate;
+import fr.codenames.dao.IDAOCartesNomDeCode;
+import fr.codenames.dao.IDAOJoueur;
 import fr.codenames.model.CartesCles;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Cases;
@@ -14,7 +19,18 @@ import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
 import fr.codenames.model.Tour;
 
+@Configuration
+@ComponentScan("fr.codenames")
+
 public class Application {
+	
+	@Autowired
+	private IDAOJoueur idaojoueur;
+
+	
+	@Autowired
+	private IDAOCartesNomDeCode idaocartesnomdecode;
+	
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -29,8 +45,7 @@ public class Application {
 		boolean booleen = true;
 		boolean rep = true;
 
-		DAOJoueurHibernate joueurs = new DAOJoueurHibernate();
-		DAOCarteNomDeCodeHibernate cartes = new DAOCarteNomDeCodeHibernate();
+		
 		Partie mapartie = new Partie();
 		Tour tour = new Tour();
 		CartesCles cartescles = new CartesCles();
