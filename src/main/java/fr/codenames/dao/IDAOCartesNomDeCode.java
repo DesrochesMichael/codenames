@@ -1,4 +1,6 @@
-package fr.codenames.datajpa;
+package fr.codenames.dao;
+
+
 
 public interface IDAOCartesNomDeCode {
 
