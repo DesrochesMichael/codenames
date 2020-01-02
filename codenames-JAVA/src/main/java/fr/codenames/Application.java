@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import codenames.dao.hibernate.DAOCarteNomDeCodeHibernate;
-import codenames.dao.hibernate.DAOJoueurHibernate;
 import fr.codenames.dao.IDAOCartesNomDeCode;
 import fr.codenames.dao.IDAOJoueur;
 import fr.codenames.model.CartesCles;
