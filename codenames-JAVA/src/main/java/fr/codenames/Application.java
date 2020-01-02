@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,10 +17,10 @@ import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
 import fr.codenames.model.Tour;
+import fr.formation.Application;
 
 @Configuration
 @ComponentScan("fr.codenames")
-
 public class Application {
 	
 	@Autowired
@@ -27,12 +28,21 @@ public class Application {
 
 	
 	@Autowired
-	private IDAOCartesNomDeCode idaocartesnomdecode;
+	private IDAOCartesNomDeCode idaocartes;
 	
 	static Scanner sc = new Scanner(System.in);
-
+	
 	public static void main(String[] args) {
+		AnnotationConfigApplicationContext heySpring = new AnnotationConfigApplicationContext(Application.class);
+		Application app = heySpring.getBean("application", Application.class);
 
+		app.run(args);
+		heySpring.close();
+	}
+	
+	
+	
+	public  void run(String[] args) {
 		
 		int carte;
 		int joueur;
@@ -212,7 +222,7 @@ public class Application {
 							j.setNbrVictoire(c);
 						}
 
-						joueurs.save(j);
+						idaojoueur.save(j);
 
 					}
 
@@ -290,7 +300,7 @@ public class Application {
 						Scanner scanPseudo1 = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur ?");
 						joueur1.setPseudo(scanPseudo1.nextLine());
-						toutJoueur = joueurs.findAll();
+						toutJoueur = idaojoueur.findAll();
 						for (int i = 0; i < toutJoueur.size(); i++) {
 							if (joueur1.getPseudo().equalsIgnoreCase(toutJoueur.get(i).getPseudo()) == true) {
 								System.out.println("Le pseudo saisi existe deja");
@@ -302,9 +312,9 @@ public class Application {
 							Scanner scanMDP1 = new Scanner(System.in);
 							System.out.println("mot de passe du nouveau joueur ?");
 							joueur1.setMdp(scanPseudo1.nextLine());
-							joueurs.save(joueur1);
+							idaojoueur.save(joueur1);
 
-							if (joueurs.save(joueur1) != null) {
+							if (idaojoueur.save(joueur1) != null) {
 
 								mapartie.getJoueurspartie().add(joueur1);
 								System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
@@ -326,14 +336,14 @@ public class Application {
 								System.out.println("Nom du joueur � modifier ?");
 								Scanner scanPseudo2 = new Scanner(System.in);
 								String nom = scanPseudo2.nextLine();
-								joueur2 = joueurs.findByNom(nom);
+								joueur2 = idaojoueur.findByNom(nom);
 
 								Joueur joueur3 = new Joueur();
 								Scanner scanPseudo3 = new Scanner(System.in);
 								System.out.println("Nouveau nom du joueur ?");
 								joueur3 = joueur2;
 								joueur3.setPseudo(scanPseudo3.nextLine());
-								joueurs.save(joueur3);
+								idaojoueur.save(joueur3);
 
 								break;
 
@@ -343,7 +353,7 @@ public class Application {
 								Joueur joueur4 = new Joueur();
 								System.out.println("Nom du joueur ?");
 								Scanner scanNom = new Scanner(System.in);
-								joueur4 = joueurs.findByNom(scanNom.nextLine());
+								joueur4 = idaojoueur.findByNom(scanNom.nextLine());
 
 								System.out.println("Nouveau mot de passe ?");
 								Scanner scanMdp = new Scanner(System.in);
@@ -353,7 +363,7 @@ public class Application {
 								Scanner scanValid = new Scanner(System.in);
 								String mdpValid = scanValid.nextLine();
 								if (joueur4.getMdp().equalsIgnoreCase(mdpValid)) {
-									joueurs.save(joueur4);
+									idaojoueur.save(joueur4);
 								} else {
 									System.out.println("ERREUR");
 								}
@@ -405,14 +415,14 @@ public class Application {
 					switch (carte) {
 
 					case 1:// find all
-						listeCartes = cartes.findAll();
+						listeCartes = idaocartes.findAll();
 						for (CartesNomDeCode c : listeCartes) {
 							System.out.println(c.getNom());
 						}
 						break;
 
 					case 2:// creer carte
-						listeCartes = cartes.findAll();
+						listeCartes = idaocartes.findAll();
 						CartesNomDeCode cartecreer = new CartesNomDeCode();
 						Scanner scanCreer = new Scanner(System.in);
 						System.out.println("Nom de la nouvelle carte nom de code ? ");
@@ -425,7 +435,7 @@ public class Application {
 							}
 						}
 						if (booleen == true) {
-							cartes.save(cartecreer);
+							idaocartes.save(cartecreer);
 						}
 						break;
 
@@ -435,12 +445,12 @@ public class Application {
 						Scanner scanModifier = new Scanner(System.in);
 						System.out.println("Nom de la carte nom de code a modifier ? ");
 						String nom = scanModifier.nextLine();
-						cartemod = cartes.findByNom(nom);
+						cartemod = idaocartes.findByNom(nom);
 
 						System.out.println("Nouveau mot ? ");
 						Scanner scanNew = new Scanner(System.in);
 						cartemod.setNom(scanNew.nextLine());
-						cartes.save(cartemod);
+						idaocartes.save(cartemod);
 
 						break;
 
@@ -450,7 +460,7 @@ public class Application {
 						Scanner scanSupprimer = new Scanner(System.in);
 						System.out.println("Nom de la carte nom de code a supprimer ? ");
 						cartesup.setNom(scanSupprimer.nextLine());
-						cartes.delete(cartesup);
+						idaocartes.delete(cartesup);
 						break;
 
 					case 0:
@@ -468,7 +478,7 @@ public class Application {
 
 					case 1:// find all
 
-						listeJoueur = joueurs.findAll();
+						listeJoueur = idaojoueur.findAll();
 						for (Joueur j : listeJoueur) {
 							System.out.println(j.getPseudo());
 						}
@@ -479,7 +489,7 @@ public class Application {
 						System.out.println("Saisir le nom du joueur :");
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
-						joueur1 = joueurs.findByNom(nom);
+						joueur1 = idaojoueur.findByNom(nom);
 						System.out.println("Le joueur " + joueur1.getPseudo() + " a jou� " + joueur1.getNbrPartie()
 								+ " parties et en a gagn� " + joueur1.getNbrVictoire() + ". Il a jou� MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");
@@ -490,7 +500,7 @@ public class Application {
 						Scanner scansup = new Scanner(System.in);
 						System.out.println("Nom du joueur a supprimer ?");
 						joueursup.setPseudo(scansup.nextLine());
-						joueurs.delete(joueursup);
+						idaojoueur.delete(joueursup);
 					case 0:
 						menu();
 					}
