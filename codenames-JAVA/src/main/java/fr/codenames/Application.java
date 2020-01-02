@@ -1,6 +1,7 @@
 package fr.codenames;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,6 +19,7 @@ public class Application {
 
 	public static void main(String[] args) {
 
+		
 		int carte;
 		int joueur;
 		int menu;
@@ -238,7 +240,7 @@ public class Application {
 							modif = menuModif();
 							switch (modif) {
 							case 1:
-								// modifier pseudo du joueur
+//								 modifier pseudo du joueur 
 								Joueur joueur2 = new Joueur();
 								System.out.println("Nom du joueur � modifier ?");
 								Scanner scanPseudo2 = new Scanner(System.in);
@@ -251,6 +253,7 @@ public class Application {
 								joueur3 = joueur2;
 								joueur3.setPseudo(scanPseudo3.nextLine());
 								joueurs.save(joueur3);
+
 								break;
 
 							case 2:
@@ -259,13 +262,20 @@ public class Application {
 								Joueur joueur4 = new Joueur();
 								System.out.println("Nom du joueur ?");
 								Scanner scanNom = new Scanner(System.in);
-								String nomMdp = scanNom.nextLine();
-								joueur4 = joueurs.findByNom(nomMdp);
+								joueur4 = joueurs.findByNom(scanNom.nextLine());
 
 								System.out.println("Nouveau mot de passe ?");
 								Scanner scanMdp = new Scanner(System.in);
 								joueur4.setMdp(scanMdp.nextLine());
-								joueurs.save(joueur4);
+
+								System.out.println("Validez le mdp : ");
+								Scanner scanValid = new Scanner(System.in);
+								String mdpValid = scanValid.nextLine();
+								if (joueur4.getMdp().equalsIgnoreCase(mdpValid)) {
+									joueurs.save(joueur4);
+								} else {
+									System.out.println("ERREUR");
+								}
 
 								break;
 
@@ -300,17 +310,7 @@ public class Application {
 
 						booleen = true;
 						break;
-						
-					case 5:
-						//Vote Maitres espions
-						listeJoueur = joueurs.findAll();
-						for (Joueur j : listeJoueur) {
-							System.out.println(j.getPseudo());
-						}
-						System.out.println("Veuillez voter pour une personne de la liste");
-						
-						
-						break;
+
 					case 0:
 						menu();
 					}
@@ -447,7 +447,6 @@ public class Application {
 		System.out.println("2- Creer un joueur");
 		System.out.println("3- Modifier un joueur");
 		System.out.println("4- Supprimer joueur de la partie");
-		System.out.println("5- Vote pour le maitre espion");
 		System.out.println("0- Retour ");
 		System.out.println("----------------------");
 		System.out.println("Votre choix : ");
