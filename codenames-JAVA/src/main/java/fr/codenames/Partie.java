@@ -15,6 +15,8 @@ public class Partie {
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 
+	
+	
 	public boolean conditionDefaite(List<Cases> list) {
 		boolean defaite = true;
 
