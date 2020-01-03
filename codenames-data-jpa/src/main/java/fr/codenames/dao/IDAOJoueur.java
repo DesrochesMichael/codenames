@@ -2,10 +2,12 @@ package fr.codenames.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 
 import fr.codenames.model.Joueur;
 
+@EnableJpaRepositories
 public interface IDAOJoueur extends JpaRepository<Joueur, Integer> {
 
 	public Joueur findByPseudo(String pseudo);

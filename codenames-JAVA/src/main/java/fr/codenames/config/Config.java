@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories("fr.codenames.dao")
 @PropertySource("classpath:data-source.properties")
 public class Config {
+	
 	@Autowired
 	private Environment env;
 
@@ -45,7 +46,7 @@ public class Config {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("fr.formation.model");
+		emf.setPackagesToScan("fr.codenames.model");
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		return emf;
