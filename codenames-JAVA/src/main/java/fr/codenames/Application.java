@@ -433,7 +433,7 @@ public class Application {
 								System.out.println("Ce mot existe deja. Changement annule.");
 							} else {
 								idaocartes.save(carteCode);
-								System.out.println("Le nom a été change.");
+								System.out.println("Le nom a ï¿½tï¿½ change.");
 							}
 
 						}
