@@ -2,6 +2,7 @@ package fr.codenames.dao;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -28,15 +29,34 @@ public class IDAOJoueurTest {
 	@Transactional
 	@Rollback
 	@Test
-	public void testConnect() {
+	public void testConnectBon() {
 		try {
-			Joueur joueur2 = new Joueur();
-			joueur2.setId(18);
-			joueur2.setMdp("25");
-			joueur2.setPseudo("TEST");
-			daojoueur.save(joueur2);
-			Joueur joueurconnect = daojoueur.connect(joueur2);
-			assertNotNull(joueurconnect);
+			Joueur j = new Joueur();
+			j = daojoueur.findByPseudo("mika");
+			boolean b = true;
+			assertNotNull(daojoueur.connect(j));
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+	}
+
+	@Transactional
+	@Rollback
+	@Test
+	public void testConnectPasBon() {
+		try {
+			Joueur j = new Joueur();
+			boolean b = true;
+			if (daojoueur.findByPseudo("toto") == null) {
+				b = false;
+			}
+			assertFalse(b);
+
+			j.setPseudo("toto");
+			j.setMdp("test");
+			assertNull(daojoueur.connect(j));
+
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -50,7 +70,6 @@ public class IDAOJoueurTest {
 		List<Joueur> listeJoueur = new ArrayList<Joueur>();
 		boolean booleen = false;
 		try {
-
 			daojoueur.deleteByPseudo("mika");
 			listeJoueur = daojoueur.findAll();
 			for (Joueur j : listeJoueur) {
@@ -64,42 +83,4 @@ public class IDAOJoueurTest {
 		}
 	}
 
-//	@Transactional
-//	@Rollback
-//	@Test
-//	public void save() {
-//
-//		Joueur p = new Joueur();
-//		try {
-//			p.setPseudo("Flute");
-//
-//			assertEquals(0, p.getId()); // Vérifie
-//
-//			daojoueur.save(p);
-//
-//			assertNotEquals(0, p.getId());
-//
-//			assertTrue(daojoueur.findById(p.getId()).isPresent());
-//		} catch (Exception e) {
-//			fail(e.getMessage());
-//
-//		}
-//
-//	}
-//
-//	
-//	
-//	
-//	@Test
-//	public void testFindById() {
-//		try {
-//			Optional<Joueur> optionalProd = daojoueur.findById(4);
-//			assertNotNull(optionalProd);// Savoir si optionalProd est bien un produit ?
-//			assertTrue(optionalProd.isPresent()); // Est-ce que le produit est présent ?
-//			assertEquals(4, optionalProd.get().getId()); // Est-ce que l'ID du produit correspond au paramètre
-//		} catch (Exception e) {
-//			fail(e.getMessage());
-//
-//		}
-//	}
 }
