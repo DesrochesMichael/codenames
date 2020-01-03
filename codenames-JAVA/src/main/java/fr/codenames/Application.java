@@ -22,28 +22,26 @@ import fr.codenames.model.Tour;
 @Configuration
 @ComponentScan("fr.codenames")
 public class Application {
-	
+
 	@Autowired
 	private IDAOJoueur idaojoueur;
 
 	@Autowired
 	private IDAOCartesNomDeCode idaocartes;
-	
+
 	static Scanner sc = new Scanner(System.in);
-	
+
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext heySpring = new AnnotationConfigApplicationContext(Application.class);
 		Application app = heySpring.getBean("application", Application.class);
 
 		app.run(args);
 		heySpring.close();
-		
+
 	}
-	
-	
-	
-	public  void run(String[] args) {
-		
+
+	public void run(String[] args) {
+
 		int carte;
 		int joueur;
 		int menu;
@@ -53,7 +51,6 @@ public class Application {
 		boolean booleen = true;
 		boolean rep = true;
 
-		
 		Partie mapartie = new Partie();
 		Tour tour = new Tour();
 		CartesCles cartescles = new CartesCles();
@@ -84,7 +81,7 @@ public class Application {
 //		mapartie.getJoueurspartie().add(jojo);
 //		mapartie.getJoueurspartie().add(tib);
 
-		// R�P�TITION DU MENU (0 pour en sortir)
+		// repetition du menu (0 pour en sortir)
 		do {
 
 			menu = menu();
@@ -103,7 +100,7 @@ public class Application {
 					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
 
 					// montre les equipes
-					System.out.println("composition des �quipes :");
+					System.out.println("composition des equipes :");
 					for (Equipe e : equipes) {
 						System.out.println("equipe " + e.getNom());
 						for (int i = 0; i < e.getListeJoueur().size(); i++) {
@@ -155,12 +152,12 @@ public class Application {
 					while (mapartie.conditionVictoire(repRestante) != true
 							&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
 
-						System.out.println("Tour de l'équipe " + equipes.get(index).getNom() + ".");
+						System.out.println("Tour de l'equipe " + equipes.get(index).getNom() + ".");
 						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
 						nbrReponse = tour.nbrMotMaitreEspion();
-						System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
+						System.out.println("Celui-ci est relie a " + nbrReponse + " mots");
 
-						// boucle pour chaque reponse possible vis a vis du mot donné
+						// boucle pour chaque reponse possible vis a vis du mot donne
 						while (nbrReponse > 0 && rep == true) {
 							System.out.println(nbrReponse + " reponse(s) restante(s)");
 							while (reponse == null) {
@@ -185,7 +182,7 @@ public class Application {
 					nbrReponse = 1;
 				}
 
-				// affichage de l'équipe victorieuse
+				// affichage de l'equipe victorieuse
 				if (mapartie.conditionDefaite(repRestante) == true) {
 					System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
 					gagnant = index;
@@ -201,7 +198,7 @@ public class Application {
 					gagnant = index;
 				}
 
-				// enregistrement des résultats des joueurs
+				// enregistrement des resultats des joueurs
 
 				for (int i = 0; i < 2; i++) {
 					for (Joueur j : equipes.get(i).getListeJoueur()) {
@@ -230,8 +227,8 @@ public class Application {
 				// reset et choix de conserver les joueurs
 				mapartie = new Partie();
 				System.out.println("Souhaitez vous conserver les joueurs actuels ? oui/non");
-				Scanner choix = new Scanner(System.in);
-				String choice = choix.nextLine();
+
+				String choice = sc.nextLine();
 
 				if (choice.equalsIgnoreCase("oui")) {
 					for (int i = 0; i < 2; i++) {
@@ -254,9 +251,9 @@ public class Application {
 
 					case 1:// connexion
 						Joueur joueurconnect = new Joueur();
-						Scanner scanPseudo = new Scanner(System.in);
+
 						System.out.println("nom du joueur ?");
-						joueurconnect.setPseudo(scanPseudo.nextLine());
+						joueurconnect.setPseudo(sc.nextLine());
 
 						// check si joueur dans partie
 						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
@@ -269,9 +266,8 @@ public class Application {
 
 						if (booleen == true) {
 
-							Scanner scanMDP = new Scanner(System.in);
 							System.out.println("mot de passe du joueur ?");
-							joueurconnect.setMdp(scanMDP.nextLine());
+							joueurconnect.setMdp(sc.nextLine());
 							joueurconnect = idaojoueur.connect(joueurconnect);
 
 							if (joueurconnect != null) {
@@ -297,9 +293,8 @@ public class Application {
 					case 2:// creer joueur
 						List<Joueur> toutJoueur = new ArrayList<Joueur>();
 						Joueur joueur1 = new Joueur();
-						Scanner scanPseudo1 = new Scanner(System.in);
 						System.out.println("nom du nouveau joueur ?");
-						joueur1.setPseudo(scanPseudo1.nextLine());
+						joueur1.setPseudo(sc.nextLine());
 						toutJoueur = idaojoueur.findAll();
 						for (int i = 0; i < toutJoueur.size(); i++) {
 							if (joueur1.getPseudo().equalsIgnoreCase(toutJoueur.get(i).getPseudo()) == true) {
@@ -309,9 +304,9 @@ public class Application {
 						}
 
 						if (booleen == true) {
-							Scanner scanMDP1 = new Scanner(System.in);
+
 							System.out.println("mot de passe du nouveau joueur ?");
-							joueur1.setMdp(scanPseudo1.nextLine());
+							joueur1.setMdp(sc.nextLine());
 							idaojoueur.save(joueur1);
 
 							if (idaojoueur.save(joueur1) != null) {
@@ -333,16 +328,13 @@ public class Application {
 							case 1:
 //								modifier pseudo du joueur 
 								Joueur joueur2 = new Joueur();
-								System.out.println("Nom du joueur � modifier ?");
-								Scanner scanPseudo2 = new Scanner(System.in);
-								String nom = scanPseudo2.nextLine();
+								System.out.println("Nom du joueur a modifier ?");
+								String nom = sc.nextLine();
 								joueur2 = idaojoueur.findByPseudo(nom);
-
 								Joueur joueur3 = new Joueur();
-								Scanner scanPseudo3 = new Scanner(System.in);
 								System.out.println("Nouveau nom du joueur ?");
 								joueur3 = joueur2;
-								joueur3.setPseudo(scanPseudo3.nextLine());
+								joueur3.setPseudo(sc.nextLine());
 								idaojoueur.save(joueur3);
 
 								break;
@@ -352,16 +344,11 @@ public class Application {
 								// modifier mdp du joueur
 								Joueur joueur4 = new Joueur();
 								System.out.println("Nom du joueur ?");
-								Scanner scanNom = new Scanner(System.in);
-								joueur4 = idaojoueur.findByPseudo(scanNom.nextLine());
-
+								joueur4 = idaojoueur.findByPseudo(sc.nextLine());
 								System.out.println("Nouveau mot de passe ?");
-								Scanner scanMdp = new Scanner(System.in);
-								joueur4.setMdp(scanMdp.nextLine());
-
+								joueur4.setMdp(sc.nextLine());
 								System.out.println("Validez le mdp : ");
-								Scanner scanValid = new Scanner(System.in);
-								String mdpValid = scanValid.nextLine();
+								String mdpValid = sc.nextLine();
 								if (joueur4.getMdp().equalsIgnoreCase(mdpValid)) {
 									idaojoueur.save(joueur4);
 								} else {
@@ -490,8 +477,8 @@ public class Application {
 						Scanner scannom = new Scanner(System.in);
 						String nom = scannom.nextLine();
 						joueur1 = idaojoueur.findByPseudo(nom);
-						System.out.println("Le joueur " + joueur1.getPseudo() + " a jou� " + joueur1.getNbrPartie()
-								+ " parties et en a gagn� " + joueur1.getNbrVictoire() + ". Il a jou� MaitreEspion "
+						System.out.println("Le joueur " + joueur1.getPseudo() + " a joue " + joueur1.getNbrPartie()
+								+ " parties et en a gagne " + joueur1.getNbrVictoire() + ". Il a joue MaitreEspion "
 								+ joueur1.getNbrMaitreEspion() + " fois.");
 						break;
 
@@ -515,7 +502,6 @@ public class Application {
 			}
 		} while (menu != 0);
 
-		
 	}
 
 	public static int menu() {
