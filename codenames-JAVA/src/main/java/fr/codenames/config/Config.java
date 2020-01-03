@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories("fr.codenames.dao")
 @PropertySource("classpath:data-source.properties")
 public class Config {
+	
 	@Autowired
 	private Environment env;
 

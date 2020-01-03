@@ -25,7 +25,6 @@ public class Application {
 	@Autowired
 	private IDAOJoueur idaojoueur;
 
-	
 	@Autowired
 	private IDAOCartesNomDeCode idaocartes;
 	
