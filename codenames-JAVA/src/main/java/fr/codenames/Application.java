@@ -2,7 +2,6 @@ package fr.codenames;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
 import fr.codenames.model.Joueur;
+import fr.codenames.model.Partie;
 import fr.codenames.model.Tour;
 
 @Configuration

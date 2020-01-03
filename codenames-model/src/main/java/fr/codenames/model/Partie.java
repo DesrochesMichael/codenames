@@ -1,13 +1,8 @@
-package fr.codenames;
+package fr.codenames.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import fr.codenames.model.CartesNomDeCode;
-import fr.codenames.model.Cases;
-import fr.codenames.model.Equipe;
-import fr.codenames.model.Joueur;
 
 public class Partie {
 	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
@@ -15,7 +10,7 @@ public class Partie {
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 	private List<Cases> cases = new ArrayList<Cases>();
 
-	//rajouter la liste de cases
+	
 	
 	public boolean conditionDefaite(List<Cases> list) {
 		boolean defaite = true;
@@ -39,7 +34,7 @@ public class Partie {
 			if (c.getCouleur().equalsIgnoreCase("rouge")) {
 				testRouge = false;
 			}
-			if (c.getCouleur().equalsIgnoreCase("rouge")) {
+			if (c.getCouleur().equalsIgnoreCase("bleu")) {
 				testBleu = false;
 			}
 		}
