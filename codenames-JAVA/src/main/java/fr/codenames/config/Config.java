@@ -20,7 +20,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.codenames")
+@ComponentScan({"fr.codenames"})
 @EnableTransactionManagement
 @EnableJpaRepositories("fr.codenames.dao")
 @PropertySource("classpath:data-source.properties")
@@ -45,7 +45,7 @@ public class Config {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("fr.formation.model");
+		emf.setPackagesToScan("fr.codenames.model");
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		return emf;
