@@ -40,10 +40,9 @@ public class Application {
 	}
 
 	public void run(String[] args) {
-		Scanner sc = new Scanner(System.in);
 		Joueur j1 = new Joueur();
 		Joueur j2 = new Joueur();
-		CartesNomDeCode cartecode= new CartesNomDeCode();
+		CartesNomDeCode cartecode = new CartesNomDeCode();
 
 		int carte;
 		int joueur;
@@ -63,9 +62,9 @@ public class Application {
 		int nbrReponse = 1;
 		int index = 0;
 
-		List<Equipe> equipes = new ArrayList<Equipe>();
-		List<Joueur> listeJoueur = new ArrayList<Joueur>();
-		List<CartesNomDeCode> listeCartes = new ArrayList<CartesNomDeCode>();
+		
+		
+		
 		List<Cases> listeCases = new ArrayList<Cases>();
 		List<Cases> repRestante = new ArrayList<Cases>();
 
@@ -96,15 +95,15 @@ public class Application {
 							"Le nombre de joueur est insuffisant. Merci de passser par le menu joueur afin d'avoir au moins 4 joueurs.");
 					menu();
 				} else {
-					listeCartes = mapartie.choixMots();
-					listeCases = cartescles.attributionCases(listeCartes);
+					mapartie.setListe25(mapartie.choixMots(idaocartes.findAll())); 
+					listeCases = cartescles.attributionCases(mapartie.getListe25());
 					repRestante = listeCases;
 
-					equipes = mapartie.affecterEquipe(mapartie.getJoueurspartie());
+					mapartie.setEquippartie(mapartie.affecterEquipe(mapartie.getJoueurspartie())); 
 
 					// montre les equipes
 					System.out.println("composition des equipes :");
-					for (Equipe e : equipes) {
+					for (Equipe e : mapartie.getEquippartie()) {
 						System.out.println("equipe " + e.getNom());
 						for (int i = 0; i < e.getListeJoueur().size(); i++) {
 							System.out.println(e.getListeJoueur().get(i).getPseudo());
@@ -112,7 +111,7 @@ public class Application {
 						System.out.println();
 					}
 					// montre le maitre espion
-					for (Equipe e : equipes) {
+					for (Equipe e : mapartie.getEquippartie()) {
 						for (int i = 0; i < e.getListeJoueur().size(); i++) {
 							if (e.getListeJoueur().get(i).getRole() == "MaitreEspion") {
 								System.out.println(e.getListeJoueur().get(i).getPseudo()
@@ -129,7 +128,7 @@ public class Application {
 					System.out.println();
 					// savoir qui commence
 					index = mapartie.quiCommence(listeCases);
-					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
+					System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " commence");
 
 					System.out.println("Voici les mots utilisez pour cette partie : ");
 					System.out.println();
@@ -143,7 +142,7 @@ public class Application {
 
 					// savoir qui commence ?
 					index = mapartie.quiCommence(listeCases);
-					System.out.println("L'equipe " + equipes.get(index).getNom() + " commence");
+					System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " commence");
 
 					// boucle condition de victoire/defaite pour le tour
 
@@ -154,7 +153,7 @@ public class Application {
 						while (mapartie.conditionVictoire(repRestante) != true
 								&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
 
-							System.out.println("Tour de l'équipe " + equipes.get(index).getNom() + ".");
+							System.out.println("Tour de l'equipe " + mapartie.getEquippartie().get(index).getNom() + ".");
 							System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
 							nbrReponse = tour.nbrMotMaitreEspion();
 							System.out.println("Celui-ci est relié à " + nbrReponse + " mots");
@@ -166,7 +165,7 @@ public class Application {
 									reponse = tour.reponseAgent(repRestante);
 								}
 								couleur = mapartie.couleurReponse(repRestante, reponse);
-								rep = mapartie.reussiteReponse(equipes.get(index), couleur);
+								rep = mapartie.reussiteReponse(mapartie.getEquippartie().get(index), couleur);
 								mapartie.eneleverRep(repRestante, reponse);
 								nbrReponse--;
 								reponse = null;
@@ -186,7 +185,7 @@ public class Application {
 
 					// affichage de l'equipe victorieuse
 					if (mapartie.conditionDefaite(repRestante) == true) {
-						System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+						System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " a gagne");
 						gagnant = index;
 					}
 
@@ -196,14 +195,14 @@ public class Application {
 						} else {
 							index = 1;
 						}
-						System.out.println("L'equipe " + equipes.get(index).getNom() + " a gagne");
+						System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " a gagne");
 						gagnant = index;
 					}
 
 					// enregistrement des resultats des joueurs
 
 					for (int i = 0; i < 2; i++) {
-						for (Joueur j : equipes.get(i).getListeJoueur()) {
+						for (Joueur j : mapartie.getEquippartie().get(i).getListeJoueur()) {
 							int a = j.getNbrPartie();
 							a++;
 							j.setNbrPartie(a);
@@ -233,7 +232,7 @@ public class Application {
 
 					if (choice.equalsIgnoreCase("oui")) {
 						for (int i = 0; i < 2; i++) {
-							for (Joueur j : equipes.get(i).getListeJoueur()) {
+							for (Joueur j : mapartie.getEquippartie().get(i).getListeJoueur()) {
 								mapartie.getJoueurspartie().add(j);
 							}
 						}
@@ -428,20 +427,20 @@ public class Application {
 					switch (carte) {
 
 					case 1:// find all
-						listeCartes = idaocartes.findAll();
-						for (CartesNomDeCode c : listeCartes) {
+						 ;
+						for (CartesNomDeCode c : idaocartes.findAll()) {
 							System.out.println(c.getNom());
 						}
 						break;
 
 					case 2:// creer carte
-						listeCartes = idaocartes.findAll();
+						
 						CartesNomDeCode cartecreer = new CartesNomDeCode();
 
 						System.out.println("Nom de la nouvelle carte nom de code ? ");
 						cartecreer.setNom(sc.nextLine());
 
-						for (CartesNomDeCode c : listeCartes) {
+						for (CartesNomDeCode c : idaocartes.findAll()) {
 							if (c.getNom().equalsIgnoreCase(cartecreer.getNom())) {
 								System.out.println("Cette carte existe deja");
 								booleen = false;
@@ -455,7 +454,6 @@ public class Application {
 
 					case 3:
 						// Modifier carte
-						
 
 						System.out.println("Nom de la carte nom de code a modifier ? ");
 						String nom = sc.nextLine();
@@ -470,8 +468,8 @@ public class Application {
 								System.out.println("Ce nom de carte existe deja. Modification non applique.");
 							} else {
 								idaocartes.save(cartecode);
-								System.out
-										.println("La carte " + nom + " est devenu la carte " + cartecode.getNom() + ".");
+								System.out.println(
+										"La carte " + nom + " est devenu la carte " + cartecode.getNom() + ".");
 							}
 						}
 						break;
@@ -505,9 +503,7 @@ public class Application {
 					switch (histo) {
 
 					case 1:// find all
-
-						listeJoueur = idaojoueur.findAll();
-						for (Joueur j : listeJoueur) {
+						for (Joueur j : idaojoueur.findAll()) {
 							System.out.println(j.getPseudo());
 						}
 						break;
@@ -623,9 +619,9 @@ public class Application {
 	}
 
 	static int lireEntier() {
-		Scanner myScanner = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		try {
-			return myScanner.nextInt();
+			return scan.nextInt();
 		} catch (Exception e) {
 			return 0;
 		}

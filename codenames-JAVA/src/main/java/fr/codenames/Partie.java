@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import fr.codenames.dao.IDAOCartesNomDeCode;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Cases;
 import fr.codenames.model.Equipe;
@@ -16,7 +13,10 @@ public class Partie {
 	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
+	private List<Cases> cases = new ArrayList<Cases>();
 
+	//rajouter la liste de cases
+	
 	public boolean conditionDefaite(List<Cases> list) {
 		boolean defaite = true;
 
@@ -130,14 +130,8 @@ public class Partie {
 
 	}
 
-	@Autowired
-	private IDAOCartesNomDeCode idaocartes;
+	public List<CartesNomDeCode> choixMots(List<CartesNomDeCode> liste) {
 
-	public List<CartesNomDeCode> choixMots() {
-
-		List<CartesNomDeCode> liste = new ArrayList<CartesNomDeCode>();
-
-		liste = idaocartes.findAll();
 		Collections.shuffle(liste);
 
 		for (int i = 0; i < 25; i++) {
@@ -223,5 +217,13 @@ public class Partie {
 
 	public void setJoueurspartie(List<Joueur> joueurspartie) {
 		this.joueurspartie = joueurspartie;
+	}
+
+	public List<Cases> getCases() {
+		return cases;
+	}
+
+	public void setCases(List<Cases> cases) {
+		this.cases = cases;
 	}
 }
