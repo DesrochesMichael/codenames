@@ -2,6 +2,7 @@ package fr.codenames;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -259,7 +260,7 @@ public class Application {
 						for (int i = 0; i < mapartie.getJoueurspartie().size(); i++) {
 							if (j1.getPseudo()
 									.equalsIgnoreCase(mapartie.getJoueurspartie().get(i).getPseudo()) == true) {
-								System.out.println("Le joueur est dejaï¿½ connecte a la partie");
+								System.out.println("Le joueur est deja connecte a la partie");
 								booleen = false;
 							}
 						}
@@ -375,7 +376,7 @@ public class Application {
 											System.out.println("Le mdp a ete modifie");
 										} else {
 											System.out.println(
-													"Les deux mdp sont différents. Le changement n'a pas été effectué");
+													"Les deux mdp sont diffï¿½rents. Le changement n'a pas ï¿½tï¿½ effectuï¿½");
 										}
 									}
 								}
@@ -448,7 +449,7 @@ public class Application {
 						}
 						if (booleen == true) {
 							idaocartes.save(cartecreer);
-							System.out.println("Carte créé");
+							System.out.println("Carte crï¿½ï¿½");
 						}
 						break;
 
@@ -532,7 +533,7 @@ public class Application {
 							System.out.println("Mdp du joueur a supprimer ?");
 
 							if (j1.getMdp().equalsIgnoreCase(sc.nextLine()) == false) {
-								System.out.println("Mdp incorrecte. Suppression abandonné.");
+								System.out.println("Mdp incorrecte. Suppression abandonnï¿½.");
 							} else {
 								idaojoueur.delete(j1);
 								System.out.println("Joueur supprime de la bdd.");
