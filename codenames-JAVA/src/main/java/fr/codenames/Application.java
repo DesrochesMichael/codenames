@@ -76,6 +76,9 @@ public class Application {
 							"Le nombre de joueur est insuffisant. Merci de passser par le menu joueur afin d'avoir au moins 4 joueurs.");
 					menu();
 				} else {
+
+					// tout faire en utilisant les deux listes de partie ... bon courage bru !!! !
+
 					listeCases = cartescles.attributionCases(mapartie.choixMots(idaocartes.findAll()));
 					repRestante = listeCases;
 
@@ -110,123 +113,123 @@ public class Application {
 					index = mapartie.quiCommence(listeCases);
 					System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " commence");
 
-				}
-				System.out.println("Voici les mots utilisez pour cette partie : ");
-				System.out.println();
-				mapartie.affichageAgent(listeCases);
+					System.out.println("Voici les mots utilisez pour cette partie : ");
+					System.out.println();
+					mapartie.affichageAgent(listeCases);
 
-				System.out.println();
+					System.out.println();
 
-				mapartie.affichageMaitreEspion(listeCases);
+					mapartie.affichageMaitreEspion(listeCases);
 
-				System.out.println();
+					System.out.println();
 
-				// savoir qui commence ?
-				index = mapartie.quiCommence(listeCases);
-				System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " commence");
+					// savoir qui commence ?
+					index = mapartie.quiCommence(listeCases);
+					System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " commence");
 
-				// boucle condition de victoire/defaite pour le tour
+					// boucle condition de victoire/defaite pour le tour
 
-				while (mapartie.conditionVictoire(repRestante) != true
-						&& mapartie.conditionDefaite(repRestante) != true) {
-
-					// boucle pour une equipe
 					while (mapartie.conditionVictoire(repRestante) != true
-							&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
+							&& mapartie.conditionDefaite(repRestante) != true) {
 
-						System.out.println("Tour de l'equipe " + mapartie.getEquippartie().get(index).getNom() + ".");
-						System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
-						nbrReponse = tour.nbrMotMaitreEspion();
-						System.out.println("Celui-ci est relie a " + nbrReponse + " mots");
+						// boucle pour une equipe
+						while (mapartie.conditionVictoire(repRestante) != true
+								&& mapartie.conditionDefaite(repRestante) != true && nbrReponse > 0 && rep != false) {
 
-						// boucle pour chaque reponse possible vis a vis du mot donne
-						while (nbrReponse > 0 && rep == true) {
-							System.out.println(nbrReponse + " reponse(s) restante(s)");
-							while (reponse == null) {
-								reponse = tour.reponseAgent(repRestante);
+							System.out
+									.println("Tour de l'equipe " + mapartie.getEquippartie().get(index).getNom() + ".");
+							System.out.println(tour.motMaitreEspion() + " est le mot du maitre espion.");
+							nbrReponse = tour.nbrMotMaitreEspion();
+							System.out.println("Celui-ci est relie a " + nbrReponse + " mots");
+
+							// boucle pour chaque reponse possible vis a vis du mot donne
+							while (nbrReponse > 0 && rep == true) {
+								System.out.println(nbrReponse + " reponse(s) restante(s)");
+								while (reponse == null) {
+									reponse = tour.reponseAgent(repRestante);
+								}
+								couleur = mapartie.couleurReponse(repRestante, reponse);
+								rep = mapartie.reussiteReponse(mapartie.getEquippartie().get(index), couleur);
+								mapartie.eneleverRep(repRestante, reponse);
+								nbrReponse--;
+								reponse = null;
 							}
-							couleur = mapartie.couleurReponse(repRestante, reponse);
-							rep = mapartie.reussiteReponse(mapartie.getEquippartie().get(index), couleur);
-							mapartie.eneleverRep(repRestante, reponse);
-							nbrReponse--;
-							reponse = null;
 						}
-					}
-					// changement index equipe
-					if (index == 1) {
-						index = 0;
-					} else {
-						index = 1;
-					}
-					// raz des conditions
-					rep = true;
-					reponse = null;
-					nbrReponse = 1;
-				}
-
-				// affichage de l'equipe victorieuse
-				if (mapartie.conditionDefaite(repRestante) == true) {
-					System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " a gagne");
-					gagnant = index;
-				}
-
-				else if (mapartie.conditionVictoire(repRestante) == true) {
-					if (index == 1) {
-						index = 0;
-					} else {
-						index = 1;
-					}
-					System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " a gagne");
-					gagnant = index;
-				}
-
-				// enregistrement des resultats des joueurs
-				System.out.println("Les resultats sont enregistres.");
-				for (int i = 0; i < 2; i++) {
-					for (Joueur j : mapartie.getEquippartie().get(i).getListeJoueur()) {
-						int a = j.getNbrPartie();
-						a++;
-						j.setNbrPartie(a);
-
-						if (j.getRole().equalsIgnoreCase("MaitreEspion")) {
-							int b = j.getNbrMaitreEspion();
-							b++;
-							j.setNbrMaitreEspion(b);
-							j.setRole("Agent");
+						// changement index equipe
+						if (index == 1) {
+							index = 0;
+						} else {
+							index = 1;
 						}
-
-						if (i == gagnant) {
-							int c = j.getNbrVictoire();
-							c++;
-							j.setNbrVictoire(c);
-						}
-
-						idaojoueur.save(j);
-
+						// raz des conditions
+						rep = true;
+						reponse = null;
+						nbrReponse = 1;
 					}
 
-				}
-				// reset et choix de conserver les joueurs
+					// affichage de l'equipe victorieuse
+					if (mapartie.conditionDefaite(repRestante) == true) {
+						System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " a gagne");
+						gagnant = index;
+					}
 
-				List<Equipe> equipes = mapartie.getEquippartie();
-				mapartie = new Partie();
-				System.out.println("Souhaitez vous conserver les joueurs actuels ? oui/non");
+					else if (mapartie.conditionVictoire(repRestante) == true) {
+						if (index == 1) {
+							index = 0;
+						} else {
+							index = 1;
+						}
+						System.out.println("L'equipe " + mapartie.getEquippartie().get(index).getNom() + " a gagne");
+						gagnant = index;
+					}
 
-				String choice = sc.nextLine();
-
-				if (choice.equalsIgnoreCase("oui")) {
+					// enregistrement des resultats des joueurs
+					System.out.println("Les resultats sont enregistres.");
 					for (int i = 0; i < 2; i++) {
-						for (Joueur j : equipes.get(i).getListeJoueur()) {
-							mapartie.getJoueurspartie().add(j);
+						for (Joueur j : mapartie.getEquippartie().get(i).getListeJoueur()) {
+							int a = j.getNbrPartie();
+							a++;
+							j.setNbrPartie(a);
+
+							if (j.getRole().equalsIgnoreCase("MaitreEspion")) {
+								int b = j.getNbrMaitreEspion();
+								b++;
+								j.setNbrMaitreEspion(b);
+								j.setRole("Agent");
+							}
+
+							if (i == gagnant) {
+								int c = j.getNbrVictoire();
+								c++;
+								j.setNbrVictoire(c);
+							}
+
+							idaojoueur.save(j);
+
+						}
+
+					}
+					// reset et choix de conserver les joueurs
+
+					List<Equipe> equipes = mapartie.getEquippartie();
+					mapartie = new Partie();
+					System.out.println("Souhaitez vous conserver les joueurs actuels ? oui/non");
+
+					String choice = sc.nextLine();
+
+					if (choice.equalsIgnoreCase("oui")) {
+						for (int i = 0; i < 2; i++) {
+							for (Joueur j : equipes.get(i).getListeJoueur()) {
+								mapartie.getJoueurspartie().add(j);
+							}
 						}
 					}
-				}
 
-				System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
-				for (Joueur j : mapartie.getJoueurspartie()) {
-					System.out.println(j.getPseudo());
+					System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
+					for (Joueur j : mapartie.getJoueurspartie()) {
+						System.out.println(j.getPseudo());
+					}
 				}
-
 				break;
 			case 2:
 				do {

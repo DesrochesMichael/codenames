@@ -28,9 +28,6 @@ public class Tour {
 	@OneToMany(mappedBy = "tour")
 	private List<CartesNomDeCode> listeCartesNomDeCode;
 
-	
-	
-	
 	public boolean bonnereponse(String couleur, Equipe e) {
 		if (couleur.equalsIgnoreCase(e.getNom()))
 			return true;
@@ -66,13 +63,20 @@ public class Tour {
 	}
 
 	public int nbrMotMaitreEspion() {
-		int a =0;
+		//a gerer le cas ou on met une string et pas un entier 
 		System.out.println("Quel nombre de mots les agents doivent ils deviner ?");
 		Scanner sc = new Scanner(System.in);
-		a=sc.nextInt();
-		sc.nextLine();
-		
-		return a;
+		Integer a = sc.nextInt();
+		if (a instanceof Integer) {
+			int b = a;
+			return b;
+		}
+
+		else {
+			System.out.println("Ceci n'est pas un entier.");
+			Tour test = new Tour();
+			return test.nbrMotMaitreEspion();
+		}
 	}
 
 	public int getId() {

@@ -9,7 +9,7 @@ public class Partie {
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equippartie = new ArrayList<Equipe>();
 	private List<Cases> cases = new ArrayList<Cases>();
-
+	private List<Cases> casesRestantes = new ArrayList<Cases>();
 	
 	
 	public boolean conditionDefaite(List<Cases> list) {
