@@ -41,7 +41,7 @@ public class Application {
 	}
 
 	public void run(String[] args) {
-
+		
 		int carte;
 		int joueur;
 		int menu;
@@ -287,11 +287,12 @@ public class Application {
 							System.out.println("mot de passe du nouveau joueur ?");
 							j1.setMdp(sc.nextLine());
 							idaojoueur.save(j1);
-
+							
 							if (idaojoueur.save(j1) != null) {
 								mapartie.getJoueurspartie().add(j1);
-
+								
 							}
+							System.out.println("Le joueur a ete cree.");
 						}
 						System.out.println("Joueur(s) present(s) pour le moment dans la prochaine partie :");
 						for (Joueur j : mapartie.getJoueurspartie()) {
@@ -588,12 +589,16 @@ public class Application {
 	}
 
 	static int lireEntier() {
-		Scanner myScanner = new Scanner(System.in);
+		System.out.println("Choix de l'option :");
+		Scanner scan = new Scanner(System.in);
+		String a = scan.nextLine();
 		try {
-			return myScanner.nextInt();
+			int b = Integer.parseInt(a);
+			return b;
 		} catch (Exception e) {
-			return 0;
+			System.out.println("Un chiffre est demande.");
+			lireEntier();
 		}
-
+		return 10;
 	}
 }

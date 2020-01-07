@@ -63,16 +63,16 @@ public class Tour {
 	}
 
 	public int nbrMotMaitreEspion() {
-		//a gerer le cas ou on met une string et pas un entier 
+		// a gerer le cas ou on met une string et pas un entier
 		System.out.println("Quel nombre de mots les agents doivent ils deviner ?");
 		Scanner sc = new Scanner(System.in);
-		Integer a = sc.nextInt();
-		if (a instanceof Integer) {
-			int b = a;
+		String a = sc.nextLine();
+		try {
+			int b = Integer.parseInt(a);
 			return b;
 		}
 
-		else {
+		catch (Exception e) {
 			System.out.println("Ceci n'est pas un entier.");
 			Tour test = new Tour();
 			return test.nbrMotMaitreEspion();
