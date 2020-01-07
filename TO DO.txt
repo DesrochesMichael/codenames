@@ -1,5 +1,0 @@
--toutes les exceptions a la con
-
-
-
-mysql -h172.16.44.110 -uroot -p
