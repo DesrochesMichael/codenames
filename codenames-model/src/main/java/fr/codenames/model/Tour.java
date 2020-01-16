@@ -27,6 +27,8 @@ public class Tour {
 
 	@OneToMany(mappedBy = "tour")
 	private List<CartesNomDeCode> listeCartesNomDeCode;
+	
+	
 
 	public boolean bonnereponse(String couleur, Equipe e) {
 		if (couleur.equalsIgnoreCase(e.getNom()))

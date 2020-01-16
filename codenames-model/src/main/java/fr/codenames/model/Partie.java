@@ -7,7 +7,7 @@ import java.util.List;
 public class Partie {
 	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
-	private List<Equipe> equippartie = new ArrayList<Equipe>();
+	private List<Equipe> equipes = new ArrayList<Equipe>();
 	private List<Cases> cases = new ArrayList<Cases>();
 	private List<Cases> casesRestantes = new ArrayList<Cases>();
 	
@@ -202,12 +202,22 @@ public class Partie {
 		this.liste25 = liste25;
 	}
 
-	public List<Equipe> getEquippartie() {
-		return equippartie;
+	
+
+	public List<Equipe> getEquipes() {
+		return equipes;
 	}
 
-	public void setEquippartie(List<Equipe> equippartie) {
-		this.equippartie = equippartie;
+	public void setEquipes(List<Equipe> equipes) {
+		this.equipes = equipes;
+	}
+
+	public List<Cases> getCasesRestantes() {
+		return casesRestantes;
+	}
+
+	public void setCasesRestantes(List<Cases> casesRestantes) {
+		this.casesRestantes = casesRestantes;
 	}
 
 	public void setJoueurspartie(List<Joueur> joueurspartie) {
