@@ -1,10 +1,231 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Codenames</title>
+<link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="animate.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta charset="UTF-8">
+<script defer type="module" src="mon-script.js"></script>
 </head>
-<body>
+
+
+<body class="fluid-container">
+
+	<h1>Bienvenue sur Codenames</h1>
+	<h2>Developpé par PL Mairet et M Desroches</h2>
+
+	<div class="row ">
+		<div class="col-2 p-0" name="principal">
+			<nav>
+				<UL>
+					<li><button type="button" href="#connect">Se
+							connecter</button></li>
+					<li><button type="button" href="boardgame.html">Nouvelle
+							partie</button></li>
+					<li><button type="button" href="#joueurs">Joueurs</button></li>
+					<li><button type="button" href="#cartes">Cartes</button></li>
+					<li><button type="button" href="#historique">Historiques</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="connect" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Pseudo :<input type="text" name="pseudo" /></li>
+					<li>Password :<input type="password" name="password"></li>
+					<li><a  href="connection">Se connecter</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<!--partie joueurs  -->
+
+		<div id="joueurs" class="col-2 submenu p-0">
+			<nav>
+				<UL class="p-0">
+					<li><button type="button" href="#creerjoueur">Créer</button></li>
+					<li><button type="button" href="#modifierjoueur">Modifier</button></li>
+					<li><button type="button" href="#supjoueurpartie">Supprimer
+							de la partie</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="creerjoueur" class="col-2 submenu">
+			<nav>
+				<UL p-0>
+					<li>Pseudo :<input type="text" name="pseudocreer" /></li>
+					<li>Password :<input type="password" name="passwordcreer"></li>
+					<li>Confirmation :<input type="password" name="confirmpasswordcreer"></li>
+					<li><a  href="creerjoueur">Créer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifierjoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+
+					<li><button type="button" href="#modifjoueur">Modifier
+							pseudo</button></li>
+					<li><button type="button" href="#modifpassword">Modifier
+							le password</button></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifjoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+
+					<li>Pseudo du joueur a modifier :<input type="text"
+						name="pseudojoueurmodifpseudo" /></li>
+					<li>Password :<input type="password" name="passwordmodifpseudo"></li>
+					<li>Nouveau pseudo :<input type="text"
+						name="pseudonouveaupseudo" /></li>
+					<li><a href="modifpseudo">Modifier</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifpassword" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Pseudo du joueur a modifier :<input type="text"
+						name="pseudojoueurmodifpassword" /></li>
+					<li>Password actuel :<input type="password"
+						name="passwordmodifpassword"></li>
+					<li>Nouveau password :<input type="password"
+						name="newpasswordmodifpassword" /></li>
+					<li>Confirmation du nouveau password :<input type="password"
+						name="confirmnouveaupassword" /></li>
+					<li><a  href="modifpassword">Modifier</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="supjoueurpartie" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Pseudo du joueur a supprimer de la partie :<input
+						type="text" name="pseudojoueursuppartie" /></li>
+					<li><a  href="supjoueurpartie">Supprimer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<!--partie cartes  -->
+
+		<div id="cartes" class="col-2 submenu p-0">
+			<nav>
+				<UL class="p-0">
+					<li><button type="button" href="#listecartes">Liste
+							des cartes</button></li>
+					<li><button type="button" href="#creercarte">Créer</button></li>
+					<li><button type="button" href="#modifiercarte">Modifier</button></li>
+					<li><button type="button" href="#supcarte">Supprimer</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="creercarte" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Cartes nom de code a créer :<input type="text"
+						href="creercarte" /></li>
+					<li><button type="button" href="creercarte">Créer</button></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifiercarte" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Cartes nom de code a modifier :<input type="text"
+						href="carteamodifier" /></li>
+					<li>Nouveau nom de la carte :<input type="text"
+						href="carteamodifier" /></li>
+					<li><button type="button" href="modifiercarte">Modifier</button></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="supcarte" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Cartes nom de code a supprimer :<input type="text"
+						href="carteasup" /></li>
+					<li><button type="button" href="supcarte">Supprimer</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<!--partie historiques  -->
+
+		<div id="historique" class="col-2 submenu p-0">
+			<nav>
+				<UL class="p-0">
+
+					<li><button type="button" href="#listejoueurs">Liste
+							des joueurs</button></li>
+					<li><button type="button" href="#statistiquejoueur">Statistique
+							d'un joueur</button></li>
+					<li><button type="button" href="#supjoueur">Supprimer
+							joueur</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="statistiquejoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Joueur :<input type="text" href="joueurhisto" /></li>
+					<li><button type="button" href="supjoueur">Consulter</button></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="supjoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Joueur a supprimer :<input type="text" href="joueursupp" /></li>
+					<li>Password :<input type="text" href="passwordjoueursup" /></li>
+					<li><button type="button" href="supjoueur">Supprimer</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+
+
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+
 
 </body>
+
 </html>
