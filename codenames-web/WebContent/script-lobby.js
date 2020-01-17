@@ -1,58 +1,120 @@
-//gestion des différents menus
+//gestion des différents menus avec la couleur
 function hideSections(){
 		document.querySelectorAll('.submenu').forEach((section)=>{section.style.display='none';
 		});
 	}
+function reset(){
+	document.querySelectorAll('li').forEach((li)=>{li.style.background='none';});
+}
 
 	document.querySelectorAll('button').forEach(lien=>
 	{lien.addEventListener('click', (event) =>
 	{event.preventDefault();
 	hideSections();
+	reset();
+	
 		let id =event.target.getAttribute('href');
 		
-		if (id=="#creerjoueur"){
-			document.querySelector('div[id="joueurs"]').style.display='block';
-		}
-		if (id=="#modifierjoueur"){
-			document.querySelector('div[id="joueurs"]').style.display='block';
+		//menu principal
+		if (id=="#connect"){
+			document.querySelector('li[id="co"]').style.backgroundColor='brown';	
 		}
 		
-		if (id=="#modifjoueur"){
+		else if (id=="#joueurs"){
+			event.preventDefault();
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+		}
+		
+		else if (id=="#cartes"){
+			event.preventDefault();
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+		}
+		else if (id=="#historique"){
+			event.preventDefault();
+			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
+		}
+		
+		//menu joueurs
+		else if (id=="#creerjoueur"){
+			document.querySelector('div[id="joueurs"]').style.display='block';
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="creaj"]').style.backgroundColor='brown';	
+		}
+		else if (id=="#modifierjoueur"){
+			document.querySelector('div[id="joueurs"]').style.display='block';
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
+		}
+		
+		
+		else if (id=="#modifjoueur"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('div[id="modifierjoueur"]').style.display='block';
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="modpseudo"]').style.backgroundColor='brown';
 		}
-		
-		if (id=="#modifpassword"){
+		//menu modif joeuur
+		else if (id=="#modifpassword"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('div[id="modifierjoueur"]').style.display='block';
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="modpassword"]').style.backgroundColor='brown';
 		}
 		
-		if (id=="#modifierjoueur"){
+		else if (id=="#modifierjoueur"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 		}
 		
-		if (id=="#supjoueurpartie"){
+		else if (id=="#supjoueurpartie"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="supj"]').style.backgroundColor='brown';	
 		}
 		
-		if (id=="#creercarte"){
-			document.querySelector('div[id="cartes"]').style.display='block';
+		//menu cartes
+		else if(id=="#listecartes"){
+			event.preventDefault();
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="lc"]').style.backgroundColor='brown';	
 		}
 		
-		if (id=="#modifiercarte"){
+		else if (id=="#creercarte"){
 			document.querySelector('div[id="cartes"]').style.display='block';
-		}
-		if (id=="#supcarte"){
-			document.querySelector('div[id="cartes"]').style.display='block';
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="creac"]').style.backgroundColor='brown';	
 		}
 		
-		if (id=="#statistiquejoueur"){
+		else if (id=="#modifiercarte"){
+			document.querySelector('div[id="cartes"]').style.display='block';
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="modifc"]').style.backgroundColor='brown';
+		}
+		else if (id=="#supcarte"){
+			document.querySelector('div[id="cartes"]').style.display='block';
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="supc"]').style.backgroundColor='brown';	
+		}
+		//menu historique
+		else if(id=="#listejoueurs"){
+			event.preventDefault();
+			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="lj"]').style.backgroundColor='brown';	
+		}
+		
+		else if (id=="#statistiquejoueur"){
 			document.querySelector('div[id="historique"]').style.display='block';
+			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="statj"]').style.backgroundColor='brown';	
 		}
 		
-		if (id=="#supjoueur"){
+		else if (id=="#supjoueur"){
 			document.querySelector('div[id="historique"]').style.display='block';
+			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="supbddj"]').style.backgroundColor='brown';
 		}
+		
 		document.querySelector(id).style.display='block';
 		
 	});
@@ -61,101 +123,42 @@ function hideSections(){
 	
 	
 	
-	// gestion des couleurs menus
+// au survol de la souris
 	
+	
+//pour les a 
 document.querySelectorAll('a').forEach(button=>{
 		
 		button.addEventListener("mouseover", ( event ) => {   
-	    event.target.style.background = "grey";
+	    event.target.style.background = "brown";
 	  });
 	});
 
 document.querySelectorAll('a').forEach(button=>{
 	
 	button.addEventListener("mouseout", ( event ) => {   
-    event.target.style.background = "brown";
+    event.target.style.background = "grey";
   });
 });
 
 
-
+//pour les button
 document.querySelectorAll('button').forEach(button=>{
 	
 	button.addEventListener("mouseover", ( event ) => {   
-    event.target.style.background = "grey";
+    event.target.style.background = "brown";
   });
 });
 
 document.querySelectorAll('button').forEach(button=>{
 	
 	button.addEventListener("mouseout", ( event ) => {   
-    event.target.style.background = "brown";
+    event.target.style.background = "grey";
   });
 });
 	
-	
-	
-	function couleurMenu(loc){
-		document.querySelectorAll(loc).forEach((bouton)=>{bouton.style.background='brown';
-		});
-	}
-	
-	function couleurPersistante(){
 
-	document.querySelectorAll('div[name="principal"] button').forEach(bouton=>
-	{bouton.addEventListener('click', (event) =>
-	{event.preventDefault();
-	couleurMenu('div[id="joueurs"] button');
-	couleurMenu('div[id="cartes"] button');
-	couleurMenu('div[name="principal"] button');
-	couleurMenu('div[id="historique"] button');
-	couleurMenu('div[id="modifjoueur"] button');
-		event.target.style.background='grey';
-		
-	});
-	});
-	
-	
-	document.querySelectorAll('div[id="joueurs"] button').forEach(bouton=>
-	{bouton.addEventListener('click', (event) =>
-	{event.preventDefault();
-	
-	couleurMenu('div[id="joueurs"] button');
-	couleurMenu('div[id="modifierjoueur"] button');
-		event.target.style.background='grey';
-		
-	});
-	});
-	
-	document.querySelectorAll('div[id="modifierjoueur"] button').forEach(bouton=>
-	{bouton.addEventListener('click', (event) =>
-	{event.preventDefault();
-	couleurMenu('div[id="modifierjoueur"] button');
-		event.target.style.background='grey';
-		
-	});
-	});
-	
-	document.querySelectorAll('div[id="cartes"] button').forEach(bouton=>
-	{bouton.addEventListener('click', (event) =>
-	{event.preventDefault();
-	couleurMenu('div[id="cartes"] button');
-		event.target.style.background='grey';
-		
-	});
-	});
-	
-	document.querySelectorAll('div[id="historique"] button').forEach(bouton=>
-	{bouton.addEventListener('click', (event) =>
-	{event.preventDefault();
-	couleurMenu('div[id="historique"] button');
-		event.target.style.background='grey';
-		
-	});
-	});
-	}
-
-	//Recuperation des inputs
+	// Recuperation des inputs
 	
 	document.querySelectorAll('a').forEach(bouton=>
 	{bouton.addEventListener('click', (event) =>
@@ -212,7 +215,3 @@ document.querySelectorAll('button').forEach(button=>{
 
 	});
 	});
-	
-	
-	
-	
