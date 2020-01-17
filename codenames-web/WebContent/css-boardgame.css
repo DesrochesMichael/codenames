@@ -1,0 +1,71 @@
+@charset "ISO-8859-1";
+
+h1{
+	text-align: center;
+}
+
+header{ 
+	background: #f7f7f8;
+	box-shadow: 0px 1px 8px grey;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom:5px;
+}
+
+div[name="tableau"]{
+	width : 1193px;
+	height : 780px;
+}
+
+div[name="tchat"]{
+	background-color : #f7f7f8;
+	border-top : 1px solid darkgrey;
+	border-right : 1px solid darkgrey;
+	border-bottom : 1px solid darkgrey;
+	border-radius:5px;
+	box-shadow: 0px 1px 8px grey;
+	
+}
+
+div[name="indice"]{
+	padding-top: 100px;
+	padding-left: 15px;
+	text-align : center;
+}
+
+label[name="indice"]{
+	margin-top:40px;
+}
+
+input[name="indice"],input[name="nombre"],input[name="bouton"]{
+	margin-bottom: 40px;
+}
+
+input[name="tchat"]{
+	position : absolute;
+	width:275px;
+	bottom : 5px;
+	left: 5px;
+}
+
+div>div>div{
+	display: inline-block;
+	width:230px;
+	height:150px;
+	margin-bottom:5px;
+	margin-left :5px;
+	background: url("images/CarteNomDeCode.jpg");
+	text-align: center;
+	padding-top: 92px;
+	border: 4px solid OrangeRed;/*RoyalBlue ou OrangeRed ou WhiteSmoke ou Black*/
+	border-radius:20px;
+	padding-right:0px;
+}
+
+div>span{
+	font-family: "Microsoft YaHei UI";
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 15px;
+	color: Black;
+}

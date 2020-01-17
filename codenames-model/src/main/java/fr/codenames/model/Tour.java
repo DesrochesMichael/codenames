@@ -59,7 +59,7 @@ public class Tour {
 	}
 
 	public String motMaitreEspion() {
-		System.out.println("Quel mot donnez vous aux agent ?");
+		System.out.println("Quel mot donnez vous aux agents ?");
 		Scanner sc = new Scanner(System.in);
 		return sc.nextLine();
 	}
