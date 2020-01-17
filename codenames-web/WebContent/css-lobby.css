@@ -7,10 +7,20 @@ body {
 	background-size:100%;
 }
 
-h1 {
-	color: red;
-	background: red;
+header{ 
+	background: #f7f7f8;	
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom:5px;
+	border-left : 1px solid darkgrey;
+	border-right : 1px solid darkgrey;
+	border-bottom : 1px solid darkgrey;
+	border-radius:5px;
+	box-shadow: 0px 1px 8px grey;
+	text-align:center;
 }
+
+
 
 li {
 	list-style: none;

@@ -19,8 +19,10 @@
 
 <body class="fluid-container">
 
-	<h1>Bienvenue sur Codenames</h1>
-	
+	<header>
+		<h1>Bienvenue sur Codenames !</h1>
+	</header>
+
 
 	<div class="row ">
 		<div class="col-2 p-0" name="principal">
@@ -44,10 +46,10 @@
 		<div id="connect" class="col-2 submenu">
 			<nav>
 				<UL class="p-0">
-					<li>Pseudo :<input type="text" name="pseudo"
-						placeholder="Votre pseudo" /></li>
-					<li>Password :<input type="password" name="password"
-						placeholder="Votre mot de passe"></li>
+					<li>Pseudo :<input type="text" class="form-control"
+						name="pseudo" placeholder="Votre pseudo" /></li>
+					<li>Password :<input type="password" class="form-control"
+						name="password" placeholder="Votre mot de passe"></li>
 					<li><a href="connection">Se connecter</a></li>
 				</UL>
 			</nav>
@@ -72,11 +74,11 @@
 		<div id="creerjoueur" class="col-2 submenu">
 			<nav>
 				<UL p-0>
-					<li>Pseudo :<input type="text" name="pseudocreer"
-						placeholder="Votre pseudo" /></li>
-					<li>Password :<input type="password" name="passwordcreer"
-						placeholder="Votre mot de passe"></li>
-					<li>Confirmation :<input type="password"
+					<li>Pseudo :<input type="text" class="form-control"
+						name="pseudocreer" placeholder="Votre pseudo" /></li>
+					<li>Password :<input type="password" class="form-control"
+						name="passwordcreer" placeholder="Votre mot de passe"></li>
+					<li>Confirmation :<input type="password" class="form-control"
 						name="confirmpasswordcreer" placeholder="Confirmation du mdp"></li>
 					<li><a href="creerjoueur">Créer</a></li>
 				</UL>
@@ -101,10 +103,11 @@
 				<UL class="p-0">
 
 					<li>Pseudo du joueur a modifier :<input type="text"
-						name="pseudojoueurmodifpseudo" placeholder="Votre pseudo" /></li>
-					<li>Password :<input type="password"
+						class="form-control" name="pseudojoueurmodifpseudo"
+						placeholder="Votre pseudo" /></li>
+					<li>Password :<input type="password" class="form-control"
 						name="passwordmodifpseudo" placeholder="Votre mot de passe"></li>
-					<li>Nouveau pseudo :<input type="text"
+					<li>Nouveau pseudo :<input type="text" class="form-control"
 						name="pseudonouveaupseudo" placeholder="Votre nouveau pseudo" /></li>
 					<li><a href="modifpseudo">Modifier</a></li>
 				</UL>
@@ -115,15 +118,16 @@
 			<nav>
 				<UL class="p-0">
 					<li>Pseudo du joueur a modifier :<input type="text"
-						name="pseudojoueurmodifpassword" placeholder="Votre pseudo" /></li>
+						class="form-control" name="pseudojoueurmodifpassword"
+						placeholder="Votre pseudo" /></li>
 					<li>Password actuel :<input type="password"
-						name="passwordmodifpassword"
+						class="form-control" name="passwordmodifpassword"
 						placeholder="Votre mot de passe actuel"></li>
 					<li>Nouveau password :<input type="password"
-						name="newpasswordmodifpassword"
+						class="form-control" name="newpasswordmodifpassword"
 						placeholder="Votre nouveau mot de passe" /></li>
 					<li>Confirmation du nouveau password :<input type="password"
-						name="confirmnouveaupassword"
+						class="form-control" name="confirmnouveaupassword"
 						placeholder="Confirmation du nouveau mdp" /></li>
 					<li><a href="modifpassword">Modifier</a></li>
 				</UL>
@@ -134,7 +138,7 @@
 			<nav>
 				<UL class="p-0">
 					<li>Pseudo du joueur a supprimer de la partie :<input
-						type="text" name="pseudojoueursuppartie"
+						type="text" class="form-control" name="pseudojoueursuppartie"
 						placeholder="Pseudo du joueur" /></li>
 					<li><a href="supjoueurpartie">Supprimer</a></li>
 				</UL>
@@ -162,7 +166,7 @@
 		<div id="creercarte" class="col-2 submenu">
 			<nav>
 				<UL class="p-0">
-					<li>Cartes nom de code a créer :<input type="text"
+					<li>Cartes nom de code a créer :<input type="text" class="form-control" 
 						name="creercarte" placeholder="Nom de la carte a créer" /></li>
 					<li><a href="creercarte">Créer</a></li>
 				</UL>
@@ -172,9 +176,9 @@
 		<div id="modifiercarte" class="col-2 submenu">
 			<nav>
 				<UL class="p-0">
-					<li>Cartes nom de code a modifier :<input type="text"
+					<li>Cartes nom de code a modifier :<input type="text" class="form-control" 
 						name="carteamodifier" placeholder="Nom de la carte" /></li>
-					<li>Nouveau nom de la carte :<input type="text"
+					<li>Nouveau nom de la carte :<input type="text" class="form-control" 
 						name="carteamodifiernouveau" placeholder="Nouveau nom de la carte" /></li>
 					<li><a href="modifiercarte">Modifier</a></li>
 				</UL>
@@ -184,7 +188,7 @@
 		<div id="supcarte" class="col-2 submenu">
 			<nav>
 				<UL class="p-0">
-					<li>Cartes nom de code a supprimer :<input type="text"
+					<li>Cartes nom de code a supprimer :<input type="text" class="form-control" 
 						name="carteasup" placeholder="Nom de la carte a supprimer" /></li>
 					<li><a href="supcarte">Supprimer</a></li>
 				</UL>
@@ -212,7 +216,7 @@
 		<div id="statistiquejoueur" class="col-2 submenu">
 			<nav>
 				<UL class="p-0">
-					<li>Joueur :<input type="text" href="joueurhisto"
+					<li>Joueur :<input type="text" href="joueurhisto" class="form-control" 
 						placeholder="Pseudo du joueur" /></li>
 					<li><a href="supjoueur">Consulter</a></li>
 				</UL>
@@ -222,26 +226,22 @@
 		<div id="supjoueur" class="col-2 submenu">
 			<nav>
 				<UL class="p-0">
-					<li>Joueur a supprimer :<input type="text" href="joueursupp"
-						placeholder="Psuedo du joueur a supprimer" /></li>
-					<li>Password :<input type="text" href="passwordjoueursup"
+					<li>Joueur a supprimer :<input type="text" class="form-control" href="joueursupp"
+						placeholder="Pseudo du joueur a supprimer" /></li>
+					<li>Password :<input type="password" class="form-control" href="passwordjoueursup"
 						placeholder="Password du joueur" /></li>
 					<li><a href="supjoueur">Supprimer</a></li>
 				</UL>
 			</nav>
 		</div>
 
-		<section class="col-4">
-			<img src="images/CarteNomDeCode.jpg">
-		</section>
+
 
 
 
 
 	</div>
-	<footer>
-		Developpé par PL Mairet et M Desroches
-	</footer>
+	<footer> Developpé par PL Mairet et M Desroches </footer>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
