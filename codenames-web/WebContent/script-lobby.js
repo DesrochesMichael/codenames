@@ -213,6 +213,3 @@ document.querySelectorAll('button').forEach(button=>{
 	});
 	});
 	
-	
-	
-	

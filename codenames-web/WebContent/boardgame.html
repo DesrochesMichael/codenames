@@ -9,140 +9,154 @@
 <link rel="stylesheet" type="text/css" href="css-boardgame.css" />
 <meta charset="ISO-8859-1">
 <title>Codenames</title>
-<meta name="description" content="Let's Go !!">
+<meta name="description" content="width=device-width, initial-scale=1">
 <base href="/codenames-web/" />
-<!-- <script defer type="module" src="mon-script.js"></script> -->
+<script defer src="script-boardgame.js"></script>
 </head>
 <body class="fluid-container">
+	
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="Lobby.html">Menu principal</a> 
+		<a href="https://www.iello.fr/fr/ou-acheter">Acheter le jeu</a>
+		<a href="#"></a>
+		<a href="#"></a>
+	</div>
+	
+	<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+	<div id="main">
+
 	<header>
+		<!-- Use any element to open the sidenav -->
+		<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;Menu</span>
 		<h1>Codenames</h1>
-		<button type="button" class="close" aria-label="Close"
-			onclick="history.go(-1)">
-			<span aria-hidden="true">&times;</span>
-		</button>
 	</header>
 
-	<div name="parent" class="row">
-		<div name ="tchat" class="col-2">
-			<input type="text" class="form-control" name="tchat" placeholder="Message ..." /></br>
-			<input class="btn btn-secondary btn-sm" type="submit" value="Envoyer" name="envoyer" />
-			
-			
-			<div class="container">
-			<p>Hello</p>
-			<span class="time-right">11:00</span>
-		</div>
 
-		<div class="container darker">
-			<p>gl !!</p>
-			<span class="time-left">11:01</span>
-		</div>
+		<div name="parent" class="row">
+			<div name="tchat" class="col-2">
+				<input type="text" class="form-control" name="tchat" placeholder="Message ..." /></br>
+				<input class="btn btn-secondary btn-sm" type="submit" value="Envoyer" name="envoyer" />
 
-		<div class="container">
-			<p>GG Well play</p>
-			<span class="time-right">11:02</span>
-		</div>
 
-		<div class="container darker">
-			<p>Got get cancer xD</p>
-			<span class="time-left">11:05</span>
-		</div>
-			
-			
-		</div>
-		
+				<div class="container">
+					<p>Hello</p>
+					<span class="time-right">11:00</span>
+				</div>
 
-		<div name="tableau" class="col-8 pt-1 pr-0 mr-0">
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Ocï¿½an</button>
+				<div class="container darker">
+					<p>gl !!</p>
+					<span class="time-left">11:01</span>
+				</div>
+
+				<div class="container">
+					<p>GG Well play</p>
+					<span class="time-right">11:02</span>
+				</div>
+
+				<div class="container darker">
+					<p>Got get cancer xD</p>
+					<span class="time-left">11:05</span>
+				</div>
+
+
 			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Marteau</button>
+
+
+			<div name="tableau" class="col-8 pt-1 pr-0 mr-0">
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Chaise</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Marteau</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Console</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Voyelle</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">echarpe</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Bouteille</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Gateau</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">ceinture</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Chaussure</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Ordinateur</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">porte</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">table</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">crayon</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">alien</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">feu</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">menotte</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">chateau</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">Japon</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">serviette</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">France</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">ours</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">australie</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">ile</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">sac</button>
+				</div>
+				<div name="carte">
+					<button class="btn" name="cartes" type="button">dragon</button>
+				</div>
 			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Console</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Voyelle</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Tï¿½lï¿½vision</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Bouteille</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Gateau</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Tï¿½lï¿½phone</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Chaussure</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Ordinateur</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">porte</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">table</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">crayon</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">alien</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">feu</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">menotte</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">chateau</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">Japon</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">serviette</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">France</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">ours</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">australie</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">ile</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">mï¿½re</button>
-			</div>
-			<div name="carte">
-				<button class="btn" name="cartes" type="button">dragon</button>
+			<div name="indice" class="col-2 pr-0 pl-0">
+				<img name="tuile-r" src="images/tuile-rouge.png"> </br> <label
+					name="indice" for="formGroupExampleInput">Indice du
+					maitre-espion :</label><input type="text" class="form-control"
+					name="indice" placeholder="Donnez votre indice .." /> <label
+					for="formGroupExampleInput">Nombre de mots :</label><input
+					type="number" class="form-control" name="nombre" /> <input
+					id="illimite" type="radio" name="illimite" value="1" /><label
+					for="illimite"> Illimité</label></br> <input
+					class="btn btn-secondary btn-lg" type="submit"
+					value="Donner l'indice !" name="bouton" /></br> <img name="tuile-b"
+					src="images/tuile-bleu.png">
 			</div>
 		</div>
-		<div name="indice" class="col-2 pr-0 pl-0">
-			<img name="tuile-r" src="images/tuile-rouge.png"> </br>
-			<label name="indice" for="formGroupExampleInput">Indice du
-				maï¿½tre-espion :</label><input type="text" class="form-control" name="indice"
-				placeholder="Donnez votre indice .." /> <label
-				for="formGroupExampleInput">Nombre de mots :</label><input
-				type="number" class="form-control" name="nombre" /> <input
-				id="illimite" type="radio" name="illimite" value="1" /><label
-				for="illimite"> Illimitï¿½</label></br> <input
-				class="btn btn-secondary btn-lg" type="submit"
-				value="Donner l'indice !" name="bouton" /></br> <img name="tuile-b"
-				src="images/tuile-bleu.png">
-		</div>
+		<footer> Developpé par PL Mairet et M Desroches </footer>
 	</div>
+
 
 </body>
 </html>

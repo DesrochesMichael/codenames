@@ -68,3 +68,14 @@ input{
 	
 }
 
+
+
+footer{
+	font-size: 18px;
+	position: fixed;
+	right: 5px;
+	bottom: 0;
+	background: WHITE;
+}
+
+
