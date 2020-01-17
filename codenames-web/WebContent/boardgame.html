@@ -7,36 +7,40 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="animate.css" />
 <link rel="stylesheet" type="text/css" href="css-boardgame.css" />
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Codenames</title>
 <meta name="description" content="width=device-width, initial-scale=1">
 <base href="/codenames-web/" />
 <script defer src="script-boardgame.js"></script>
 </head>
 <body class="fluid-container">
-	
+
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<a href="Lobby.html">Menu principal</a> 
-		<a href="https://www.iello.fr/fr/ou-acheter">Acheter le jeu</a>
-		<a href="#"></a>
-		<a href="#"></a>
-	</div>
+		<a href="https://www.amazon.fr/iello-51285-CodeNames-Version-Fran%C3%A7aise/dp/B01FJRLCMI">Acheter le jeu</a> 
+		<a href="https://formations.ascadis.fr/ajc">Pour devenir intelligent</a> 
+		<a href="https://maximumwallhd.com/wp-content/uploads/2015/06/fonds-ecran-lapin-5.jpg">(づ｡◕‿‿◕｡)づ</a>
 	
+	</div>
+
 	<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 	<div id="main">
 
-	<header>
-		<!-- Use any element to open the sidenav -->
-		<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;Menu</span>
-		<h1>Codenames</h1>
-	</header>
+		<header>
+			<!-- Use any element to open the sidenav -->
+			<span name="test" style="font-size: 30px; cursor: pointer"
+				onclick="openNav()">&#9776;Menu</span>
+			<h1>Codenames</h1>
+		</header>
 
 
 		<div name="parent" class="row">
 			<div name="tchat" class="col-2">
-				<input type="text" class="form-control" name="tchat" placeholder="Message ..." /></br>
-				<input class="btn btn-secondary btn-sm" type="submit" value="Envoyer" name="envoyer" />
+				<input type="text" class="form-control" name="tchat"
+					placeholder="Message ..." /></br> <input
+					class="btn btn-secondary btn-sm" type="submit" value="Envoyer"
+					name="envoyer" />
 
 
 				<div class="container">
@@ -147,14 +151,14 @@
 					name="indice" placeholder="Donnez votre indice .." /> <label
 					for="formGroupExampleInput">Nombre de mots :</label><input
 					type="number" class="form-control" name="nombre" /> <input
-					id="illimite" type="radio" name="illimite" value="1" /><label
-					for="illimite"> Illimit�</label></br> <input
+					id="illimite" type="checkbox" name="illimite" value="1" /><label
+					for="illimite"> Illimité</label></br> <input
 					class="btn btn-secondary btn-lg" type="submit"
 					value="Donner l'indice !" name="bouton" /></br> <img name="tuile-b"
 					src="images/tuile-bleu.png">
 			</div>
 		</div>
-		<footer> Developp� par PL Mairet et M Desroches </footer>
+		<footer>Developpé par Pilou et M Desroches</footer>
 	</div>
 
 
