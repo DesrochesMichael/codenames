@@ -1,20 +1,29 @@
 @charset "ISO-8859-1";
 
+body{
+	font-family: "Microsoft YaHei UI";
+}
+
 h1{
 	text-align: center;
 }
 
 header{ 
-	background: #f7f7f8;
-	box-shadow: 0px 1px 8px grey;
+	background: #f7f7f8;	
 	padding-top: 5px;
 	padding-bottom: 5px;
 	margin-bottom:5px;
+	border-left : 1px solid darkgrey;
+	border-right : 1px solid darkgrey;
+	border-bottom : 1px solid darkgrey;
+	border-radius:5px;
+	box-shadow: 0px 1px 8px grey;
 }
 
 div[name="tableau"]{
-	width : 1193px;
-	height : 780px;
+	width : 1030px;
+	height : 700px;
+	
 }
 
 div[name="tchat"]{
@@ -24,48 +33,120 @@ div[name="tchat"]{
 	border-bottom : 1px solid darkgrey;
 	border-radius:5px;
 	box-shadow: 0px 1px 8px grey;
-	
+	height : 775px;
 }
 
 div[name="indice"]{
-	padding-top: 100px;
+	padding-top: 60px;
 	padding-left: 15px;
 	text-align : center;
 }
 
 label[name="indice"]{
-	margin-top:40px;
+	margin-top:30px;
 }
 
-input[name="indice"],input[name="nombre"],input[name="bouton"]{
-	margin-bottom: 40px;
+input[name="indice"],input[name="nombre"],input[name="bouton"],input[name="illimite"]{
+	margin-bottom: 30px;
 }
 
 input[name="tchat"]{
 	position : absolute;
-	width:275px;
+	width:95%;
+	bottom : 45px;
+	left: 5px;
+}
+
+input[name="envoyer"]{
+	position : absolute;
+	width:95%;
 	bottom : 5px;
 	left: 5px;
 }
 
-div>div>div{
+div>div>div[name="carte"]{
 	display: inline-block;
-	width:230px;
-	height:150px;
+	/* width:200px;
+	height:130px; */
+	width:18.5%;
+	height:20%;
 	margin-bottom:5px;
 	margin-left :5px;
 	background: url("images/CarteNomDeCode.jpg");
+	background-size : 100% 100%;
 	text-align: center;
-	padding-top: 92px;
-	border: 4px solid OrangeRed;/*RoyalBlue ou OrangeRed ou WhiteSmoke ou Black*/
+	padding-top: 75px;
+	border: 4px solid RoyalBlue;/*RoyalBlue ou OrangeRed ou WhiteSmoke ou Black*/
 	border-radius:20px;
 	padding-right:0px;
 }
 
-div>span{
+div>button[name="cartes"]{
 	font-family: "Microsoft YaHei UI";
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 100%;
 	color: Black;
+	background:none;
+	border : none;
+}
+
+div>div>div[name="carte"]:hover{
+	animation: pulse 0.8s infinite alternate ease-out;
+}
+
+img[name="tuile-r"],img[name="tuile-b"]{
+	box-shadow: 0px 1px 8px grey;
+	border-radius : 10px;
+}
+
+
+
+
+
+
+
+/*TCHAT MESSAGE*/
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* .container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+} */
+
+/* .container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+} */
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
 }
