@@ -1,10 +1,8 @@
-
 //gestion des différents menus
 function hideSections(){
 		document.querySelectorAll('.submenu').forEach((section)=>{section.style.display='none';
 		});
 	}
-hideSections();
 
 	document.querySelectorAll('button').forEach(lien=>
 	{lien.addEventListener('click', (event) =>
@@ -64,13 +62,45 @@ hideSections();
 	
 	
 	// gestion des couleurs menus
+	
+document.querySelectorAll('a').forEach(button=>{
+		
+		button.addEventListener("mouseover", ( event ) => {   
+	    event.target.style.background = "grey";
+	  });
+	});
+
+document.querySelectorAll('a').forEach(button=>{
+	
+	button.addEventListener("mouseout", ( event ) => {   
+    event.target.style.background = "brown";
+  });
+});
+
+
+
+document.querySelectorAll('button').forEach(button=>{
+	
+	button.addEventListener("mouseover", ( event ) => {   
+    event.target.style.background = "grey";
+  });
+});
+
+document.querySelectorAll('button').forEach(button=>{
+	
+	button.addEventListener("mouseout", ( event ) => {   
+    event.target.style.background = "brown";
+  });
+});
+	
+	
+	
 	function couleurMenu(loc){
 		document.querySelectorAll(loc).forEach((bouton)=>{bouton.style.background='brown';
 		});
 	}
-
 	
-	
+	function couleurPersistante(){
 
 	document.querySelectorAll('div[name="principal"] button').forEach(bouton=>
 	{bouton.addEventListener('click', (event) =>
@@ -123,32 +153,36 @@ hideSections();
 		
 	});
 	});
-	
+	}
 
 	//Recuperation des inputs
 	
 	document.querySelectorAll('a').forEach(bouton=>
 	{bouton.addEventListener('click', (event) =>
-	{event.preventDefault();
+	{
 	let href =event.target.getAttribute('href');
 		if (href=="connection"){
+			event.preventDefault();
 			console.log(document.querySelector('input[name="pseudo"]').value);
 			console.log(document.querySelector('input[name="password"]').value);
 		}
 		
 		else if(href=="creerjoueur"){
+			event.preventDefault();
 			console.log(document.querySelector('input[name="pseudocreer"]').value);
 			console.log(document.querySelector('input[name="passwordcreer"]').value);
 			console.log(document.querySelector('input[name="confirmpasswordcreer"]').value);
 		}
 		
 		else if(href=="modifpseudo"){
+			event.preventDefault();
 			console.log(document.querySelector('input[name="pseudojoueurmodifpseudo"]').value);
 			console.log(document.querySelector('input[name="passwordmodifpseudo"]').value);
 			console.log(document.querySelector('input[name="pseudonouveaupseudo"]').value);
 		}
 		
 		else if(href=="modifpassword"){
+			event.preventDefault();
 			console.log(document.querySelector('input[name="pseudojoueurmodifpassword"]').value);
 			console.log(document.querySelector('input[name="passwordmodifpassword"]').value);
 			console.log(document.querySelector('input[name="newpasswordmodifpassword"]').value);
@@ -156,9 +190,26 @@ hideSections();
 		}
 		
 		else if(href=="supjoueurpartie"){
+			event.preventDefault();
 			console.log(document.querySelector('input[name="pseudojoueursuppartie"]').value);
 		}
 		
+		else if(href=="creercarte"){
+			event.preventDefault();
+			console.log(document.querySelector('input[name="creercarte"]').value);
+		}
+		
+		else if(href=="modifiercarte"){
+			event.preventDefault();
+			console.log(document.querySelector('input[name="carteamodifier"]').value);
+			console.log(document.querySelector('input[name="carteamodifiernouveau"]').value);
+		}
+		
+		else if(href=="supcarte"){
+			event.preventDefault();
+			console.log(document.querySelector('input[name="carteasup"]').value);
+		}
+
 	});
 	});
 	
