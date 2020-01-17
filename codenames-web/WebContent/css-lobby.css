@@ -75,6 +75,17 @@ li {
 	border-radius:5px;
 }
 
+
+footer{
+	font-size: 18px;
+	position: fixed;
+	right: 5px;
+	bottom: 0;
+	background: WHITE;
+}
+
+
+
 img {
 	float:right;
 	position:fixed;
