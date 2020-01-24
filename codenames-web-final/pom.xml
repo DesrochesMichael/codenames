@@ -20,12 +20,6 @@
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring5</artifactId>
 			<version>3.0.11.RELEASE</version>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.3.3.Final</version>
-		</dependency>
 		</dependency>
 
 		<dependency>
@@ -86,6 +80,7 @@
 
 
 	</dependencies>
+
 
 
 
