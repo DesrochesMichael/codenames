@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Codenames</title>
-<link rel="stylesheet"
-	href="css/css-lobby.css">
+<link rel="stylesheet" href="css/css-lobby.css">
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,7 +12,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <base href="/codenames-web-final/" />
 <meta charset="UTF-8">
-<script defer type="module" src="script-lobby.js"></script>
+<script defer type="module" src="js/script-lobby.js"></script>
 </head>
 
 
@@ -30,7 +29,7 @@
 				<UL>
 					<li id="co"><button type="button" href="#connect"
 							class="btn btn-lg">Se connecter</button></li>
-					<li id="new"><a href="boardgame.html">Nouvelle partie</a></li>
+					<li id="new"><a href="boardgame">Nouvelle partie</a></li>
 					<li id="j"><button type="button" href="#joueurs"
 							class="btn btn-lg">Joueurs</button></li>
 					<li id="c"><button type="button" href="#cartes"
@@ -161,16 +160,17 @@
 				</UL>
 			</nav>
 		</div>
-		<!-- 		<div>
+		
+		<div>
 			<nav>
 				<UL class="col-3 submenu">
 					<li>Liste des cartes nom de code :</li>
 					<li th:each="carte:${cartes}"></li>
 					<li th:text="${carte.nom}"></li>
-					
+
 				</UL>
 			</nav>
-		</div> -->
+		</div>
 
 
 		<div id="creercarte" class="col-2 submenu">
