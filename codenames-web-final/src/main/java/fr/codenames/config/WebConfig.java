@@ -12,35 +12,36 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/views/**").addResourceLocations("/views/");
+		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
 		registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
-		
+		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 	}
-	
+
 	@Bean
 	public SpringResourceTemplateResolver templateResolver() {
-	SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-	templateResolver.setPrefix("/WEB-INF/views/");
-	templateResolver.setSuffix(".html");
-	return templateResolver;
+		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		templateResolver.setPrefix("/WEB-INF/views/");
+		templateResolver.setSuffix(".html");
+		return templateResolver;
 	}
-	
+
 	@Bean
 	public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
-	SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-	templateEngine.setTemplateResolver(templateResolver);
-	templateEngine.setEnableSpringELCompiler(true);
-	return templateEngine;
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver);
+		templateEngine.setEnableSpringELCompiler(true);
+		return templateEngine;
 	}
-	
+
 	@Bean
 	public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine) {
-	ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-	viewResolver.setTemplateEngine(templateEngine);
-	return viewResolver;
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setTemplateEngine(templateEngine);
+		return viewResolver;
 	}
-	
 
 }
