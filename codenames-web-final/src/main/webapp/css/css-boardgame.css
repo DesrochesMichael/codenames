@@ -83,7 +83,7 @@ div>div>div[name="carte"]{
 	height:20%;
 	margin-bottom:5px;
 	margin-left :5px;
-	background: url("images/CarteNomDeCode.jpg");
+	background: url("assets/CarteNomDeCode.jpg");
 	background-size : 100% 100%;
 	text-align: center;
 	padding-top: 75px;

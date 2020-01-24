@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Codenames</title>
 <meta name="description" content="width=device-width, initial-scale=1">
-<base href="/codenames-web/" />
+<base href="/codenames-web-final/" />
 <script defer src="js/script-boardgame.js"></script>
 </head>
 <body class="fluid-container">
@@ -146,7 +146,7 @@
 				</div>
 			</div>
 			<div name="indice" class="col-2 pr-0 pl-0">
-				<img name="tuile-r" src="images/tuile-rouge.png"> </br> <label
+				<img name="tuile-r" src="assets/tuile-rouge.png"> </br> <label
 					name="indice" for="formGroupExampleInput">Indice du
 					maitre-espion :</label><input type="text" class="form-control"
 					name="indice" placeholder="Donnez votre indice .." /> <label
@@ -156,7 +156,7 @@
 					for="illimite"> Illimité</label></br> <input
 					class="btn btn-secondary btn-lg" type="submit"
 					value="Donner l'indice !" name="bouton" /></br> <img name="tuile-b"
-					src="images/tuile-bleu.png">
+					src="assets/tuile-bleu.png">
 			</div>
 		</div>
 		<footer>Developpé par Pilou et M Desroches</footer>
