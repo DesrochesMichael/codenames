@@ -15,32 +15,22 @@ function reset(){
 	
 		let id =event.target.getAttribute('href');
 		
-		//menu principal
+		// menu principal
 		if (id=="#connect"){
 			document.querySelector('li[id="co"]').style.backgroundColor='brown';	
 		}
 		
 		else if (id=="#joueurs"){
-			event.preventDefault();
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
 		}
-		
 		else if (id=="#cartes"){
-			event.preventDefault();
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 		}
 		else if (id=="#historique"){
-			event.preventDefault();
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
 		}
 		
-		//menu joueurs
-		else if (id=="#listecartes"){
-			document.querySelector('div[id="joueurs"]').style.display='block';
-			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
-			
-		}
-		
+		// menu joueurs
 		else if (id=="#creerjoueur"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
@@ -60,7 +50,7 @@ function reset(){
 			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modpseudo"]').style.backgroundColor='brown';
 		}
-		//menu modif joeuur
+		// menu modif joeuur
 		else if (id=="#modifpassword"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('div[id="modifierjoueur"]').style.display='block';
@@ -79,9 +69,9 @@ function reset(){
 			document.querySelector('li[id="supj"]').style.backgroundColor='brown';	
 		}
 		
-		//menu cartes
+		// menu cartes
 		else if(id=="#listecartes"){
-			event.preventDefault();
+			document.querySelector('div[id="cartes"]').style.display='block';
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="lc"]').style.backgroundColor='brown';	
 		}
@@ -102,7 +92,7 @@ function reset(){
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="supc"]').style.backgroundColor='brown';	
 		}
-		//menu historique
+		// menu historique
 		else if(id=="#listejoueurs"){
 			event.preventDefault();
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
@@ -132,7 +122,7 @@ function reset(){
 // au survol de la souris
 	
 	
-//pour les a 
+// pour les a
 document.querySelectorAll('a').forEach(button=>{
 		
 		button.addEventListener("mouseover", ( event ) => {   
@@ -148,7 +138,7 @@ document.querySelectorAll('a').forEach(button=>{
 });
 
 
-//pour les button
+// pour les button
 document.querySelectorAll('button').forEach(button=>{
 	
 	button.addEventListener("mouseover", ( event ) => {   

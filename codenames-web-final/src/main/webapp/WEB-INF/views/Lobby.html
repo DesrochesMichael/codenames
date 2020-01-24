@@ -152,7 +152,7 @@
 					<li id="lc"><button type="button" href="#listecartes"
 							class="btn btn-lg">Liste des cartes</button></li>
 					<li id="creac"><button type="button" href="#creercarte"
-							class="btn btn-lg">Créer</button></li>
+							class="btn btn-lg">Creer</button></li>
 					<li id="modifc"><button type="button" href="#modifiercarte"
 							class="btn btn-lg">Modifier</button></li>
 					<li id="supc"><button type="button" href="#supcarte"
@@ -160,17 +160,13 @@
 				</UL>
 			</nav>
 		</div>
-		
-		<div id="listecartes">
-			<nav>
-				<UL class="col-3 submenu">
-					<li>Liste des cartes nom de code :</li>
-					<li th:each="carte:${cartes}"></li>
-					<li th:text="${carte.nom}"></li>
 
+		<div id="listecartes" class="col 2 submenu">
+			<nav>
+				<UL>
+					<li> bravo !</li>
 				</UL>
 			</nav>
-		</div>
 
 
 		<div id="creercarte" class="col-2 submenu">
