@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Codenames</title>
+<link rel="stylesheet" href="css-lobby.css">
+<link rel="stylesheet" href="animate.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<base href="/codenames-web/" />
+<meta charset="UTF-8">
+<base href="/codenames-web/" />
+<script defer type="module" src="script-lobby.js"></script>
+</head>
+
+
+<body class="fluid-container">
+
+	<header>
+		<h1>Bienvenue sur Codenames !</h1>
+	</header>
+
+
+	<div class="row ">
+		<div class="col-2 p-0" name="principal">
+			<nav>
+				<UL>
+					<li id="co"><button type="button" href="#connect"
+							class="btn btn-lg">Se connecter</button></li>
+					<li id="new"><a href="boardgame.html">Nouvelle partie</a></li>
+					<li id="j"><button type="button" href="#joueurs"
+							class="btn btn-lg">Joueurs</button></li>
+					<li id="c"><button type="button" href="#cartes"
+							class="btn btn-lg">Cartes</button></li>
+					<li id="h"><button type="button" href="#historique"
+							class="btn btn-lg">Historiques</button></li>
+
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="connect" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Pseudo :<input type="text" class="form-control"
+						name="pseudo" placeholder="Votre pseudo" /></li>
+					<li>Password :<input type="password" class="form-control"
+						name="password" placeholder="Votre mot de passe"></li>
+					<li><a href="connection">Se connecter</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<!--partie joueurs  -->
+
+		<div id="joueurs" class="col-2 submenu p-0">
+			<nav>
+				<UL class="p-0">
+					<li id="creaj"><button type="button" href="#creerjoueur"
+							class="btn btn-lg">Créer</button></li>
+					<li id="modj"><button type="button" href="#modifierjoueur"
+							class="btn btn-lg">Modifier</button></li>
+					<li id="supj"><button type="button" href="#supjoueurpartie"
+							class="btn btn-lg">Supprimer de la partie</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="creerjoueur" class="col-2 submenu">
+			<nav>
+				<UL p-0>
+					<li>Pseudo :<input type="text" class="form-control"
+						name="pseudocreer" placeholder="Votre pseudo" /></li>
+					<li>Password :<input type="password" class="form-control"
+						name="passwordcreer" placeholder="Votre mot de passe"></li>
+					<li>Confirmation :<input type="password" class="form-control"
+						name="confirmpasswordcreer" placeholder="Confirmation du mdp"></li>
+					<li><a href="creerjoueur">Créer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifierjoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+
+					<li id="modpseudo"><button type="button" href="#modifjoueur"
+							class="btn btn-lg">Modifier pseudo</button></li>
+					<li id="modpassword"><button type="button"
+							href="#modifpassword" class="btn btn-lg">Modifier le
+							password</button></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifjoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+
+					<li>Pseudo du joueur a modifier :<input type="text"
+						class="form-control" name="pseudojoueurmodifpseudo"
+						placeholder="Votre pseudo" /></li>
+					<li>Password :<input type="password" class="form-control"
+						name="passwordmodifpseudo" placeholder="Votre mot de passe"></li>
+					<li>Nouveau pseudo :<input type="text" class="form-control"
+						name="pseudonouveaupseudo" placeholder="Votre nouveau pseudo" /></li>
+					<li><a href="modifpseudo">Modifier</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifpassword" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Pseudo du joueur a modifier :<input type="text"
+						class="form-control" name="pseudojoueurmodifpassword"
+						placeholder="Votre pseudo" /></li>
+					<li>Password actuel :<input type="password"
+						class="form-control" name="passwordmodifpassword"
+						placeholder="Votre mot de passe actuel"></li>
+					<li>Nouveau password :<input type="password"
+						class="form-control" name="newpasswordmodifpassword"
+						placeholder="Votre nouveau mot de passe" /></li>
+					<li>Confirmation du nouveau password :<input type="password"
+						class="form-control" name="confirmnouveaupassword"
+						placeholder="Confirmation du nouveau mdp" /></li>
+					<li><a href="modifpassword">Modifier</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="supjoueurpartie" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Pseudo du joueur a supprimer de la partie :<input
+						type="text" class="form-control" name="pseudojoueursuppartie"
+						placeholder="Pseudo du joueur" /></li>
+					<li><a href="supjoueurpartie">Supprimer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<!--partie cartes  -->
+
+		<div id="cartes" class="col-2 submenu p-0">
+			<nav>
+				<UL class="p-0">
+					<li id="lc"><button type="button" href="#listecartes"
+							class="btn btn-lg">Liste des cartes</button></li>
+					<li id="creac"><button type="button" href="#creercarte"
+							class="btn btn-lg">Créer</button></li>
+					<li id="modifc"><button type="button" href="#modifiercarte"
+							class="btn btn-lg">Modifier</button></li>
+					<li id="supc"><button type="button" href="#supcarte"
+							class="btn btn-lg">Supprimer</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="creercarte" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Cartes nom de code a créer :<input type="text" class="form-control" 
+						name="creercarte" placeholder="Nom de la carte a créer" /></li>
+					<li><a href="creercarte">Créer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="modifiercarte" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Cartes nom de code a modifier :<input type="text" class="form-control" 
+						name="carteamodifier" placeholder="Nom de la carte" /></li>
+					<li>Nouveau nom de la carte :<input type="text" class="form-control" 
+						name="carteamodifiernouveau" placeholder="Nouveau nom de la carte" /></li>
+					<li><a href="modifiercarte">Modifier</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="supcarte" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Cartes nom de code a supprimer :<input type="text" class="form-control" 
+						name="carteasup" placeholder="Nom de la carte a supprimer" /></li>
+					<li><a href="supcarte">Supprimer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<!--partie historiques  -->
+
+		<div id="historique" class="col-2 submenu p-0">
+			<nav>
+				<UL class="p-0">
+
+					<li id="lj"><button type="button" href="#listejoueurs"
+							class="btn btn-lg">Liste des joueurs</button></li>
+					<li id="statj"><button type="button" href="#statistiquejoueur"
+							class="btn btn-lg">Statistique d'un joueur</button></li>
+					<li id="supbddj"><button type="button" href="#supjoueur"
+							class="btn btn-lg">Supprimer joueur</button></li>
+				</UL>
+			</nav>
+		</div>
+
+
+		<div id="statistiquejoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Joueur :<input type="text" href="joueurhisto" class="form-control" 
+						placeholder="Pseudo du joueur" /></li>
+					<li><a href="supjoueur">Consulter</a></li>
+				</UL>
+			</nav>
+		</div>
+
+		<div id="supjoueur" class="col-2 submenu">
+			<nav>
+				<UL class="p-0">
+					<li>Joueur a supprimer :<input type="text" class="form-control" href="joueursupp"
+						placeholder="Pseudo du joueur a supprimer" /></li>
+					<li>Password :<input type="password" class="form-control" href="passwordjoueursup"
+						placeholder="Password du joueur" /></li>
+					<li><a href="supjoueur">Supprimer</a></li>
+				</UL>
+			</nav>
+		</div>
+
+
+
+
+
+
+	</div>
+	<footer> Developpé par PL Mairet et M Desroches </footer>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
