@@ -35,6 +35,12 @@ function reset(){
 		}
 		
 		//menu joueurs
+		else if (id=="#listecartes"){
+			document.querySelector('div[id="joueurs"]').style.display='block';
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			
+		}
+		
 		else if (id=="#creerjoueur"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
