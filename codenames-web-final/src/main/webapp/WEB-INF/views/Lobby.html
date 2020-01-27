@@ -161,24 +161,28 @@
 			</nav>
 		</div>
 
-		<div id="listecartes" class="col 2 submenu">
+		<div id="listecartes" class="submenu">
 			<nav>
-				<UL>
-					<li> bravo !</li>
-				</UL>
-			</nav>
-
-
-		<div id="creercarte" class="col-2 submenu">
-			<nav>
-				<UL class="p-0">
-					<li>Cartes nom de code a créer :<input type="text"
-						class="form-control" name="creercarte"
-						placeholder="Nom de la carte a créer" /></li>
-					<li><a href="creercarte">Créer</a></li>
-				</UL>
+				<table class="table table-striped">
+					<tr th:each="CartesNomDeCode : ${cartes}">
+						<td th:text="${CartesNomDeCode.nom}"></td>
+					</tr>
+				</table>
 			</nav>
 		</div>
+
+		<form method="post">
+			<div id="creercarte" class="col-2 submenu">
+
+				<UL class="p-0">
+					<li>Cartes nom de code a creer :<input type="text"
+						class="form-control" name="creercarte"
+						placeholder="Nom de la carte a creer" /></li>
+					<li><a href="creercarte">Creer</a></li>
+				</UL>
+			</div>
+		</form>
+
 
 		<div id="modifiercarte" class="col-2 submenu">
 			<nav>
@@ -251,6 +255,7 @@
 
 
 
+
 	</div>
 	<footer> Developpé par PL Mairet et M Desroches </footer>
 
@@ -265,7 +270,6 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
-
 
 </body>
 

@@ -3,24 +3,22 @@
 body {
 	font-family: "Microsoft YaHei UI";
 	font-weight: bold;
-	background:url("codenames-une.png");
-	background-size:100%;
+	background: url("codenames-une.png");
+	background-size: 100%;
 }
 
-header{ 
-	background: #f7f7f8;	
+header {
+	background: #f7f7f8;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	margin-bottom:5px;
-	border-left : 1px solid darkgrey;
-	border-right : 1px solid darkgrey;
-	border-bottom : 1px solid darkgrey;
-	border-radius:5px;
+	margin-bottom: 5px;
+	border-left: 1px solid darkgrey;
+	border-right: 1px solid darkgrey;
+	border-bottom: 1px solid darkgrey;
+	border-radius: 5px;
 	box-shadow: 0px 1px 8px grey;
-	text-align:center;
+	text-align: center;
 }
-
-
 
 li {
 	list-style: none;
@@ -28,11 +26,9 @@ li {
 	padding-right: 2.5%;;
 	padding-top: 2.5%;;
 	padding-bottom: 2.5%;
-	
 }
 
 button {
-
 	border-radius: 5%;
 	background: grey;
 	color: white;
@@ -40,53 +36,44 @@ button {
 	height: 100%;
 }
 
-
-
-
 li a {
-	display:block;
+	display: block;
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
-	text-align:center;
-	font-size:130%;
+	text-align: center;
+	font-size: 130%;
 	outline: none;
 	text-decoration: none;
 	border: black;
 	border-radius: 5%;
 	background: grey;
 	color: white;
-	
 }
 
 li a:hover {
 	text-decoration: none;
 	color: white;
-	
 }
 
-
-div{
-	display:none;
+div {
+	display: none;
 }
 
 div[name="principal"] {
-	display:block;
+	display: block;
 }
 
-input{
-	display:block;
+input {
+	display: block;
 	width: 100%;
-	
 }
 
 li {
-	
-	border-radius:5px;
+	border-radius: 5px;
 }
 
-
-footer{
+footer {
 	font-size: 18px;
 	position: fixed;
 	right: 5px;
@@ -94,10 +81,17 @@ footer{
 	background: WHITE;
 }
 
-
-
 img {
-	float:right;
-	position:fixed;
-	right:10px;
+	float: right;
+	position: fixed;
+	right: 10px;
 }
+
+div[id="listecartes"] {
+	width: 250px;
+}
+
+table>tr>td {
+	display: inline-block;
+}
+

@@ -4,7 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
 public class Partie {
+	
+	private int id;
 	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
 	private List<Equipe> equipes = new ArrayList<Equipe>();
