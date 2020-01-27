@@ -19,63 +19,112 @@ public class JoueurController {
 @Autowired
 private IDAOJoueur daoJoueur;
 	
-	@GetMapping("/listeJoueurs")
-	public String findAll(Model model) {
-		model.addAttribute("joueurs", daoJoueur.findAll());
+	
+	
+	@GetMapping("/connecter")
+	public String connect(Model model) {
+		model.addAttribute("joueur", new Joueur());
+		return "Lobby";
+	}
+
+	@PostMapping("/connecter")
+	public String connect(@Valid @ModelAttribute Joueur joueur, BindingResult result, Model model) {
+		
+		//S'IL Y A DES ERREURS, ON REAFFICHE LE FORMULAIRE
+		if(result.hasErrors()) {
+			return "Lobby";
+		}
+		daoJoueur.connect(joueur);
 		return "Lobby";
 	}
 	
 	
-	@GetMapping("/ajouterJoueur")
+	
+	@GetMapping("/creerjoueurbouton")
 	public String add(Model model) {
 		model.addAttribute("joueur", new Joueur());
-
-		return "ajouterJoueur";
+		return "redirect:Lobby";
 	}
 
-	@PostMapping("/ajouterJoueur")
-	public String add(@Valid @ModelAttribute Joueur joueur, BindingResult result, Model model) {
+	@PostMapping("/creerjoueurbouton")
+	public String add(@Valid @ModelAttribute Joueur joueur, BindingResult result, Model model, @RequestParam("confmdp")String mdp) {
 		
 		//S'IL Y A DES ERREURS, ON REAFFICHE LE FORMULAIRE
-		if(result.hasErrors()) {
-			return "ajouterJoueur";
+		if(result.hasErrors() || joueur.getMdp().equalsIgnoreCase(mdp) != true) {
+			System.out.println("Err");
+			return "redirect:Lobby";
 		}
 		daoJoueur.save(joueur);
-		return "redirect:/listeJoueur";
+		return "redirect:Lobby";
 	}
+	
+	
 	
 	
 	@GetMapping("/supprimerJoueur")
-	public String delete(
-			@RequestParam int id
-			) {
-		
-		daoJoueur.deleteById(id);
-		return "redirect:/listeJoueur";
+	public String delete(Model model) {
+		return "redirect:/Lobby";
+	}
+	
+	@PostMapping("/supprimerJoueur")
+	public String delete(@ModelAttribute Joueur joueur, @RequestParam String mdp) {
+		joueur = daoJoueur.findByPseudo(joueur.getPseudo());
+		if(joueur.getMdp().equalsIgnoreCase(mdp) != true) {
+			System.out.println("FAUX");
+		}else {
+			daoJoueur.delete(joueur);	
+		}
+		return "redirect:/Lobby";
 	}
 	
 	
-	@GetMapping("/modifierJoueur")
-	public String edit(Model model, @RequestParam int id) {
-		model.addAttribute("joueurs", daoJoueur.findAll());
-		Joueur j = daoJoueur.findById(id).orElse(new Joueur());
 
-		model.addAttribute("joueur", j);
-		return "ajouterJoueur";
+	
+	@GetMapping("/modifPseudo")
+	public String editPseudo(Model model, @RequestParam int id) {
+			return "redirect:/Lobby";
 	}
 	 
 	
-	@PostMapping("/modifierJoueur")
-	public String edit(@Valid @ModelAttribute Joueur joueur, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			return "ajouterJoueur";
-		}
-		daoJoueur.save(joueur);
-		return "redirect:/listeJoueur";
+	@PostMapping("/modifPseudo")
+	public String editPseudo(@Valid @ModelAttribute Joueur joueur, BindingResult result, Model model, @RequestParam String mdp, @RequestParam String newpseudo) {
+		joueur = daoJoueur.findByPseudo(joueur.getPseudo());
+		if(result.hasErrors() || joueur == null) {
+			System.out.println("Joueur inconnu");
+		}else if(joueur.getMdp().equalsIgnoreCase(mdp) != true){
+				System.out.println("Mdp incorrect");
+			}else {
+				joueur.setPseudo(newpseudo);
+				daoJoueur.save(joueur);
+			}
+		return "redirect:/Lobby";
 	}
 	
 	
 	
+	@GetMapping("/modifMdp")
+	public String editMdp(Model model, @RequestParam int id) {
+			return "redirect:/Lobby";
+	}
+	 
 	
-	
+	@PostMapping("/modifMdp")
+	public String editMdp(@Valid @ModelAttribute Joueur joueur, BindingResult result, Model model, @RequestParam String mdp,@RequestParam String newmdp, @RequestParam String confnewmdp) {
+		joueur = daoJoueur.findByPseudo(joueur.getPseudo());
+		if(result.hasErrors() || joueur == null) {
+			System.out.println("Joueur inconnu");
+		}else if(joueur.getMdp().equalsIgnoreCase(mdp) != true){
+				System.out.println("Mdp incorrect");
+			}else {
+				joueur.setMdp(newmdp);
+				if (joueur.getMdp().equalsIgnoreCase(confnewmdp)== true) {
+				daoJoueur.save(joueur);
+			}else {
+				System.out.println("Les mdp ne correspondent pas");
+			}
+			}
+	return "redirect:/Lobby";
+	}
+
+		
 }

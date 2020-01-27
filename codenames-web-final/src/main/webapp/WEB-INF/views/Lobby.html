@@ -42,25 +42,26 @@
 		</div>
 
 
-		<div id="connect" class="col-2 submenu">
-			<nav>
+		<div id="connect" class="submenu form-group">
+			<form method="post" action="connecter">
 				<UL class="p-0">
 					<li>Pseudo :<input type="text" class="form-control"
 						name="pseudo" placeholder="Votre pseudo" /></li>
 					<li>Password :<input type="password" class="form-control"
-						name="password" placeholder="Votre mot de passe"></li>
-					<li><a href="connection">Se connecter</a></li>
+						name="mdp" placeholder="Votre mot de passe" /></li>
+					<li><input type="submit" class="btn"
+							value="Se connecter"/></li>
 				</UL>
-			</nav>
+				
+			</form>
 		</div>
 
-		<!--partie joueurs  -->
 
 		<div id="joueurs" class="col-2 submenu p-0">
 			<nav>
 				<UL class="p-0">
 					<li id="creaj"><button type="button" href="#creerjoueur"
-							class="btn btn-lg">Créer</button></li>
+							class="btn btn-lg">Creer</button></li>
 					<li id="modj"><button type="button" href="#modifierjoueur"
 							class="btn btn-lg">Modifier</button></li>
 					<li id="supj"><button type="button" href="#supjoueurpartie"
@@ -71,17 +72,23 @@
 
 
 		<div id="creerjoueur" class="col-2 submenu">
+		<form method="post" action="creerjoueurbouton">
 			<nav>
 				<UL p-0>
 					<li>Pseudo :<input type="text" class="form-control"
-						name="pseudocreer" placeholder="Votre pseudo" /></li>
+						name="pseudo" placeholder="Votre pseudo" /></li>
 					<li>Password :<input type="password" class="form-control"
-						name="passwordcreer" placeholder="Votre mot de passe"></li>
+						name="mdp" placeholder="Votre mot de passe"></li>
 					<li>Confirmation :<input type="password" class="form-control"
-						name="confirmpasswordcreer" placeholder="Confirmation du mdp"></li>
-					<li><a href="creerjoueur">Créer</a></li>
+						name="confmdp" placeholder="Confirmation du mdp"></li>
+					<li><input type="submit" class="btn btn-lg" value="Creer"/></li>
 				</UL>
 			</nav>
+			<div th:errors="${joueur.pseudo}" class="alert alert-danger"
+			role="alert"></div>
+			<div th:errors="${joueur.mdp}" class="alert alert-danger"
+			role="alert"></div>
+			</form>
 		</div>
 
 		<div id="modifierjoueur" class="col-2 submenu">
@@ -98,39 +105,43 @@
 		</div>
 
 		<div id="modifjoueur" class="col-2 submenu">
+		<form method="post" action="modifPseudo">
 			<nav>
 				<UL class="p-0">
 
 					<li>Pseudo du joueur a modifier :<input type="text"
-						class="form-control" name="pseudojoueurmodifpseudo"
+						class="form-control" name="pseudo"
 						placeholder="Votre pseudo" /></li>
 					<li>Password :<input type="password" class="form-control"
-						name="passwordmodifpseudo" placeholder="Votre mot de passe"></li>
+						name="mdp" placeholder="Votre mot de passe"></li>
 					<li>Nouveau pseudo :<input type="text" class="form-control"
-						name="pseudonouveaupseudo" placeholder="Votre nouveau pseudo" /></li>
-					<li><a href="modifpseudo">Modifier</a></li>
+						name="newpseudo" placeholder="Votre nouveau pseudo" /></li>
+					<li><input type="submit" class="btn btn-lg" value="Modifier"/></li>
 				</UL>
 			</nav>
+			</form>
 		</div>
 
 		<div id="modifpassword" class="col-2 submenu">
+		<form method="post" action="modifMdp">
 			<nav>
 				<UL class="p-0">
 					<li>Pseudo du joueur a modifier :<input type="text"
-						class="form-control" name="pseudojoueurmodifpassword"
+						class="form-control" name="pseudo"
 						placeholder="Votre pseudo" /></li>
 					<li>Password actuel :<input type="password"
-						class="form-control" name="passwordmodifpassword"
+						class="form-control" name="mdp"
 						placeholder="Votre mot de passe actuel"></li>
 					<li>Nouveau password :<input type="password"
-						class="form-control" name="newpasswordmodifpassword"
+						class="form-control" name="newmdp"
 						placeholder="Votre nouveau mot de passe" /></li>
 					<li>Confirmation du nouveau password :<input type="password"
-						class="form-control" name="confirmnouveaupassword"
+						class="form-control" name="confnewmdp"
 						placeholder="Confirmation du nouveau mdp" /></li>
-					<li><a href="modifpassword">Modifier</a></li>
+					<li><input type="submit" class="btn btn-lg" value="Modifier"/></li>
 				</UL>
 			</nav>
+			</form>
 		</div>
 
 		<div id="supjoueurpartie" class="col-2 submenu">
@@ -240,16 +251,18 @@
 		</div>
 
 		<div id="supjoueur" class="col-2 submenu">
+		<form method="POST" action="supprimerJoueur">
 			<nav>
 				<UL class="p-0">
 					<li>Joueur a supprimer :<input type="text"
-						class="form-control" href="joueursupp"
+						class="form-control" name="pseudo"
 						placeholder="Pseudo du joueur a supprimer" /></li>
 					<li>Password :<input type="password" class="form-control"
-						href="passwordjoueursup" placeholder="Password du joueur" /></li>
-					<li><a href="supjoueur">Supprimer</a></li>
+						name="mdp" placeholder="Password du joueur" /></li>
+					<li><input type="submit" class="btn btn-lg" value="Supprimer"/></li>
 				</UL>
 			</nav>
+			</form>
 		</div>
 
 
