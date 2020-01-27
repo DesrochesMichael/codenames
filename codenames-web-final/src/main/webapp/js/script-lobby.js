@@ -17,17 +17,21 @@ function reset(){
 		
 		// menu principal
 		if (id=="#connect"){
-			document.querySelector('li[id="co"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="co"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		
 		else if (id=="#joueurs"){
-			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="j"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		else if (id=="#cartes"){
-			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		else if (id=="#historique"){
-			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="h"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		
 		// menu joueurs
@@ -35,11 +39,13 @@ function reset(){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="creaj"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
 		else if (id=="#modifierjoueur"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
 		
 		
@@ -49,6 +55,7 @@ function reset(){
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modpseudo"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		// menu modif joeuur
 		else if (id=="#modifpassword"){
@@ -57,16 +64,19 @@ function reset(){
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modj"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modpassword"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		
 		else if (id=="#modifierjoueur"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
+			document.querySelector(id).style.display='block';
 		}
 		
 		else if (id=="#supjoueurpartie"){
 			document.querySelector('div[id="joueurs"]').style.display='block';
 			document.querySelector('li[id="j"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="supj"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
 		
 		// menu cartes
@@ -74,10 +84,20 @@ function reset(){
 			document.querySelector('div[id="cartes"]').style.display='block';
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="lc"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
+		
 		
 		else if (id=="#creercarte"){
 			document.querySelector('div[id="cartes"]').style.display='block';
+			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
+			document.querySelector('li[id="creac"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
+		}
+		
+		else if(id=="creercartebouton"){
+			document.querySelector('div[id="cartes"]').style.display='block';
+			document.querySelector('div[id="creercarte"]').style.display='block';
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="creac"]').style.backgroundColor='brown';	
 		}
@@ -86,32 +106,37 @@ function reset(){
 			document.querySelector('div[id="cartes"]').style.display='block';
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="modifc"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		else if (id=="#supcarte"){
 			document.querySelector('div[id="cartes"]').style.display='block';
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="supc"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
 		// menu historique
 		else if(id=="#listejoueurs"){
 			event.preventDefault();
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="lj"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
 		
 		else if (id=="#statistiquejoueur"){
 			document.querySelector('div[id="historique"]').style.display='block';
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="statj"]').style.backgroundColor='brown';	
+			document.querySelector(id).style.display='block';
 		}
 		
 		else if (id=="#supjoueur"){
 			document.querySelector('div[id="historique"]').style.display='block';
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="supbddj"]').style.backgroundColor='brown';
+			document.querySelector(id).style.display='block';
 		}
 		
-		document.querySelector(id).style.display='block';
+		
 		
 	});
 	});
