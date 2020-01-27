@@ -184,13 +184,13 @@
 
 
 		<div id="creercarte" class="col-2 submenu">
-			<form method="post">
+			<form method="post" action="creercartebouton">
 				<UL class="p-0">
 
 					<li>Cartes nom de code a creer :<input type="text"
 						class="form-control" name="nom"
 						placeholder="Nom de la carte a creer" /></li>
-					<li><button href="creercartebouton" type="submit" class="btn btn-lg">Creer</button></li>
+					<li><input type="submit" class="btn btn-lg" value="Creer"></li>
 				</UL>
 			</form>
 		</div>
@@ -198,28 +198,27 @@
 
 
 		<div id="modifiercarte" class="col-2 submenu">
-			<nav>
+			<form method="post" action="modifiercartebouton">
 				<UL class="p-0">
 					<li>Cartes nom de code a modifier :<input type="text"
-						class="form-control" name="carteamodifier"
-						placeholder="Nom de la carte" /></li>
+						class="form-control" name="nom" placeholder="Nom de la carte" /></li>
 					<li>Nouveau nom de la carte :<input type="text"
-						class="form-control" name="carteamodifiernouveau"
+						class="form-control" name="nouveaunom"
 						placeholder="Nouveau nom de la carte" /></li>
-					<li><a href="modifiercarte">Modifier</a></li>
+					<li><input type="submit" class="btn btn-lg" value="Modifier" /></li>
 				</UL>
-			</nav>
+			</form>
 		</div>
 
 		<div id="supcarte" class="col-2 submenu">
-			<nav>
+			<form method="post" action="supcartebouton">
 				<UL class="p-0">
 					<li>Cartes nom de code a supprimer :<input type="text"
-						class="form-control" name="carteasup"
+						class="form-control" name="nom"
 						placeholder="Nom de la carte a supprimer" /></li>
-					<li><a href="supcarte">Supprimer</a></li>
+					<li><input type="submit" class="btn btn-lg" value="Supprimer"></li>
 				</UL>
-			</nav>
+			</form>
 		</div>
 
 
@@ -239,16 +238,32 @@
 			</nav>
 		</div>
 
+		<div id="listejoueurs" class="col-2 submenu">
+			<table class="table table-striped">
+				<tr th:each="joueur : ${joueurs}">
+					<td th:text="${joueur.pseudo}"></td>
+				</tr>
+			</table>
+		</div>
+
+
 
 		<div id="statistiquejoueur" class="col-2 submenu">
-			<nav>
+			<form method="post" action="statjoueurbouton">
 				<UL class="p-0">
-					<li>Joueur :<input type="text" href="joueurhisto"
+					<li>Joueur :<input type="text" id="pseudostats"
 						class="form-control" placeholder="Pseudo du joueur" /></li>
-					<li><a href="supjoueur">Consulter</a></li>
+					<li><input type="submit" class="btn btn-lg" value="Consulter"
+						id="statjoueurbouton"></li>
 				</UL>
-			</nav>
+			</form>
 		</div>
+
+		<div id="statjoueurbouton" class="col-2 submenu">
+			
+		</div>
+
+
 
 		<div id="supjoueur" class="col-2 submenu">
 		<form method="POST" action="supprimerJoueur">
@@ -272,7 +287,7 @@
 
 
 	</div>
-	<footer> Developpé par PL Mairet et M Desroches </footer>
+	<footer> Developpe par PL Mairet et M Desroches </footer>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

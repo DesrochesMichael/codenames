@@ -116,11 +116,13 @@ function reset(){
 		}
 		// menu historique
 		else if(id=="#listejoueurs"){
-			event.preventDefault();
+			document.querySelector('div[id="historique"]').style.display='block';
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="lj"]').style.backgroundColor='brown';	
 			document.querySelector(id).style.display='block';
 		}
+		
+		
 		
 		else if (id=="#statistiquejoueur"){
 			document.querySelector('div[id="historique"]').style.display='block';
@@ -140,6 +142,47 @@ function reset(){
 		
 	});
 	});
+	
+	// essaie avec le fetch pour garder la vue en js malgre le post
+	
+	document.querySelectorAll('input').forEach(lien=>
+	{lien.addEventListener('click', (event) =>
+	{event.preventDefault();
+	let id =event.target.getAttribute('id');
+	
+	 if(id=="statjoueurbouton"){
+		
+		document.querySelector('div[id="historique"]').style.display='block';
+		document.querySelector('div[id="statistiquejoueur"]').style.display='block';
+		document.querySelector('li[id="h"]').style.backgroundColor='brown';		
+		
+		var input = document.getElementById("pseudostats").value;
+				
+		
+		let params = {
+			pseudo : input
+		};
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/statjoueurbouton");
+		Object.entries(params).forEach(([k, v]) => url.searchParams.append(k, v));
+		
+		
+		fetch(url, {
+			method: 'POST'
+				
+			}).then(r => {
+				
+				let myElement = document.createElement("p");
+				myElement.innerHTML = r;
+				
+				document.querySelector('div[id="statjoueurbouton"]').append(myElement);
+			})
+	}
+	 
+	});
+	});
+	
+	
 	
 	
 	

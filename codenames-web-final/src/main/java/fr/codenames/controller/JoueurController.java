@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.codenames.dao.IDAOJoueur;
 import fr.codenames.model.Joueur;
 
 @Controller
 public class JoueurController {
-@Autowired
-private IDAOJoueur daoJoueur;
-	
-	
-	
-	@GetMapping("/connecter")
-	public String connect(Model model) {
-		model.addAttribute("joueur", new Joueur());
+
+	@Autowired
+	private IDAOJoueur daoJoueur;
+
+	@GetMapping("/listeJoueurs")
+	public String findAll(Model model) {
+		model.addAttribute("joueurs", daoJoueur.findAll());
 		return "Lobby";
 	}
 
@@ -57,10 +57,7 @@ private IDAOJoueur daoJoueur;
 		daoJoueur.save(joueur);
 		return "redirect:Lobby";
 	}
-	
-	
-	
-	
+
 	@GetMapping("/supprimerJoueur")
 	public String delete(Model model) {
 		return "redirect:/Lobby";
@@ -127,4 +124,15 @@ private IDAOJoueur daoJoueur;
 	}
 
 		
+
+	// histo joueur
+	@PostMapping("/statjoueurbouton")
+	@ResponseBody
+	public String statpost(@ModelAttribute Joueur joueur, Model model) {
+		joueur = daoJoueur.findByPseudo(joueur.getPseudo());
+		model.addAttribute("joueur", joueur);
+		return joueur.getPseudo();
+	}
+
+
 }
