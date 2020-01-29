@@ -13,6 +13,6 @@ public interface IDAOCartesNomDeCode extends JpaRepository<CartesNomDeCode, Inte
 	public List<CartesNomDeCode> findAll();
 	public CartesNomDeCode findByNom(String nom);
 	public CartesNomDeCode save(CartesNomDeCode c);
-	public CartesNomDeCode deleteByNom(String nom);
+	public void  deleteByNom(String nom);
 	
 }

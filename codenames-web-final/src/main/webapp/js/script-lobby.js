@@ -143,14 +143,298 @@ function reset(){
 	});
 	});
 	
-	// essaie avec le fetch pour garder la vue en js malgre le post
+	// query selector de tout els input avec fetch
 	
-	document.querySelectorAll('input').forEach(lien=>
+	document.querySelectorAll('input[type="submit"]').forEach(lien=>
 	{lien.addEventListener('click', (event) =>
 	{event.preventDefault();
-	let id =event.target.getAttribute('id');
+	let id =event.target.getAttribute('value');
 	
-	 if(id=="statjoueurbouton"){
+	 
+	if(id=="Se connecter"){
+		
+		let joueur = {
+				pseudo : document.querySelector('input[name="pseudoconnect"]').value,
+				mdp : document.querySelector('input[name="mdpconnect"]').value
+		};
+				
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/connect");
+		
+		fetch (url, {
+			method: 'POST',
+			headers : {
+				'content-Type' : 'application/json'
+			},
+			body: JSON.stringify(joueur)
+			
+		}).then(resp => resp.text())
+		.then(a => {
+			
+			if (a==0){
+				alert("Ce joueur n'existe pas en base de données");
+			}
+			
+			else if (a==1){
+				alert("Pas de correspondance avec le mdp");
+			}
+			
+			else if(a==2){
+				alert("Joueur connecté");
+			}
+		});
+	
+	}
+	else if(id=="Creer joueur"){
+		let joueur = {
+				pseudo : document.querySelector('input[name="pseudocreer"]').value,
+				mdp : document.querySelector('input[name="mdpcreer"]').value
+		};	
+		let mdp = document.querySelector('input[name="confmdpcreer"]').value
+		
+		if (joueur.mdp!=mdp){
+			alert("Les deux mdp sont différents.")
+		}
+		else {
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/creerjoueur");
+		
+		fetch (url, {
+			method: 'POST',
+			headers : {
+				'content-Type' : 'application/json'
+			},
+			body: JSON.stringify(joueur)
+			
+		}).then(resp => resp.text())
+		.then(a => {
+			if (a==0){
+				alert("Joueur créé.")
+			}
+		});
+		}
+	}
+	
+	else if(id=="Modifier pseudo"){
+		let passeur = {
+				pseudo1 : document.querySelector('input[name="pseudomodifpseudo"]').value,
+				mdp1 : document.querySelector('input[name="mdpmodifpseudo"]').value,
+				pseudo2 : document.querySelector('input[name="newpseudo"]').value    
+				
+		};	
+		
+		
+		if (passeur.pseudo1==passeur.pseudo2){
+			alert("Les deux pseudo sont identiques. Veuillez choisir un pseudo différent");
+		}
+		else {
+		
+			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/modifpseudo");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.text())
+			.then(a => {
+				if(a==-1){
+					alert("Ce joueur n'existe pas.");
+				}
+				else if (a==0){
+					alert("Un joueur de ce nom existe déjà. Veuillez saisir un autre pseudo.");
+				}
+				else if (a==1){
+					alert("Mdp du joueur incorrect.");
+				}
+				
+				else if (a==2){
+					alert("Changement de pseudo effectué.");
+				}
+			});
+
+		}
+	}
+	
+	
+	
+	else if(id=="Modifier mdp"){
+		let passeur = {
+				pseudo1 : document.querySelector('input[name="pseudomodifmdp"]').value,
+				mdp1 : document.querySelector('input[name="mdpmodifmdp"]').value,
+				mdp2 : document.querySelector('input[name="newmdp"]').value  
+		};	
+		
+		let conf = document.querySelector('input[name="confnewmdp"]').value 
+		
+		
+		if (passeur.mdp1==passeur.mdp2){
+			alert("L'ancien et le nouveau mdp sont identiques. Veuillez choisir un mdp différent");
+		}
+		else if (conf!=passeur.mdp2){
+			alert("Les deux saisies du nouveau mdp ne sont pas identiques.");
+		}
+		
+		else {
+		
+			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/modifmdp");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.text())
+			.then(a => {
+			
+				if (a==0){
+					alert("Aucun joueur de ce nom existe.");
+				}
+				else if (a==1){
+					alert("Mdp du joueur incorrect.");
+				}
+				
+				else if (a==2){
+					alert("Changement de mdp effectué.");
+				}
+			});
+
+		}
+	}
+	else if(id=="Creer carte"){
+		let passeur = {
+				nom1 : document.querySelector('input[name="cartecreer"]').value,
+		};	
+		 
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/creercarte");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.text())
+			.then(a => {
+			
+				if (a==0){
+					alert("Cette carte existe déjà.");
+				}
+				else if (a==1){
+					alert("Carte créé.");
+				}
+				
+			});
+
+		
+	}
+	else if(id=="Modifier carte"){
+		let passeur = {
+				nom1 : document.querySelector('input[name="cartemodifnom"]').value,
+				nom2 : document.querySelector('input[name="cartenouveaunom"]').value,
+				
+		};	
+		
+		if (passeur.nom1==passeur.nom2){
+			alert("Les deux noms sont identiques.")
+		}
+		else{
+		 
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/modifcarte");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.text())
+			.then(a => {
+			
+				if (a==0){
+					alert("Aucune carte de ce nom existe.");
+				}
+				else if (a==1){
+					alert("Carte modifié.");
+				}
+				
+			});
+		}
+		
+	}
+	
+	else if(id=="Supprimer carte"){
+		let passeur = {
+				nom1 : document.querySelector('input[name="cartesupprimer"]').value,
+	
+		};	
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/supcarte");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.text())
+			.then(a => {
+			
+				if (a==0){
+					alert("Aucune carte de ce nom existe.");
+				}
+				else if (a==1){
+					alert("Carte supprimé.");
+				}
+				
+			});
+		
+		
+	}
+	
+	else if(id=="Consulter"){
+		let passeur = {
+				nom1 : document.querySelector('input[name="cartesupprimer"]').value,
+	
+		};	
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/supcarte");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.text())
+			.then(a => {
+			
+				if (a==0){
+					alert("Aucune carte de ce nom existe.");
+				}
+				else if (a==1){
+					alert("Carte supprimé.");
+				}
+				
+			});
+		
+		
+	}
+	
+	// ici
+	
+	
+	
+	
+	else if(id=="statjoueurbouton"){
 		
 		document.querySelector('div[id="historique"]').style.display='block';
 		document.querySelector('div[id="statistiquejoueur"]').style.display='block';
@@ -164,7 +448,7 @@ function reset(){
 		};
 		
 		const url = new URL("http://localhost:8080/codenames-web-final/statjoueurbouton");
-		Object.entries(params).forEach(([k, v]) => url.searchParams.append(k, v));
+		
 		
 		
 		fetch(url, {
