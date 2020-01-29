@@ -48,6 +48,12 @@ public class Joueur {
 	@JoinColumn(name = "JOUEUR_CARTE_CLES_ID")
 	private CartesCles cartecles;
 	
+	@ManyToOne
+	@JoinColumn(name = "partie")
+	private Partie partie;
+	
+	
+	
 	public int getNbrPartie() {
 		return nbrPartie;
 	}

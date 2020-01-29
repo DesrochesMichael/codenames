@@ -2,28 +2,27 @@ package fr.codenames.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import fr.codenames.dao.IDAOCartesNomDeCode;
-import fr.codenames.dao.IDAOJoueur;
+import fr.codenames.dao.IDAOPartie;
+import fr.codenames.model.Partie;
 
 @Controller
 public class LobbyController {
 
 	@Autowired
-	IDAOCartesNomDeCode daocarte;
-
-	@Autowired
-	IDAOJoueur daojoueur;
+	IDAOPartie daopartie;
 
 	@GetMapping("/Lobby")
-	public String affichage( ) {
+	@Transactional
+	public String affichage(Model model) {
+		Partie partie = new Partie();
+		daopartie.save(partie);
+		int id = daopartie.findTopByOrderByIdDesc().getId();
+		model.addAttribute("id", id);
 		return "Lobby";
 	}
-	
-	
-	
-	
-	
-	
+
 }

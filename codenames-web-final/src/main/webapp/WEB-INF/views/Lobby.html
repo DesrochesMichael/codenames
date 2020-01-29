@@ -49,10 +49,9 @@
 						name="pseudoconnect" placeholder="Votre pseudo" /></li>
 					<li>Password :<input type="password" class="form-control"
 						name="mdpconnect" placeholder="Votre mot de passe" /></li>
-					<li><input type="submit" class="btn"
-							value="Se connecter"/></li>
+					<li><input type="submit" class="btn" value="Se connecter" /></li>
 				</UL>
-				
+
 			</form>
 		</div>
 
@@ -72,26 +71,27 @@
 
 
 		<div id="creerjoueur" class="col-2 submenu">
-		<form method="post" action="creerjoueurbouton">
-			<nav>
-				<UL p-0>
-					<li>Pseudo :<input type="text" class="form-control"
-						name="pseudocreer" placeholder="Votre pseudo" /></li>
-					<li>Password :<input type="password" class="form-control"
-						name="mdpcreer" placeholder="Votre mot de passe"></li>
-					<li>Confirmation :<input type="password" class="form-control"
-						name="confmdpcreer" placeholder="Confirmation du mdp"></li>
-					<li><input type="submit" class="btn btn-lg" value="Creer joueur"/></li>
-				</UL>
-			</nav>
-			
-			<div th:if="${joueur!=null}">
-			<div th:errors="${joueur.pseudo}" class="alert alert-danger"
-			role="alert"></div>
-			<div th:errors="${joueur.mdp}" class="alert alert-danger"
-			role="alert"></div>
-			</div>
-			
+			<form method="post" action="creerjoueurbouton">
+				<nav>
+					<UL p-0>
+						<li>Pseudo :<input type="text" class="form-control"
+							name="pseudocreer" placeholder="Votre pseudo" /></li>
+						<li>Password :<input type="password" class="form-control"
+							name="mdpcreer" placeholder="Votre mot de passe"></li>
+						<li>Confirmation :<input type="password" class="form-control"
+							name="confmdpcreer" placeholder="Confirmation du mdp"></li>
+						<li><input type="submit" class="btn btn-lg"
+							value="Creer joueur" /></li>
+					</UL>
+				</nav>
+
+				<div th:if="${joueur!=null}">
+					<div th:errors="${joueur.pseudo}" class="alert alert-danger"
+						role="alert"></div>
+					<div th:errors="${joueur.mdp}" class="alert alert-danger"
+						role="alert"></div>
+				</div>
+
 			</form>
 		</div>
 
@@ -109,42 +109,44 @@
 		</div>
 
 		<div id="modifjoueur" class="col-2 submenu">
-		<form method="post" action="modifPseudo">
-			<nav>
-				<UL class="p-0">
+			<form method="post" action="modifPseudo">
+				<nav>
+					<UL class="p-0">
 
-					<li>Pseudo du joueur a modifier :<input type="text"
-						class="form-control" name="pseudomodifpseudo"
-						placeholder="Votre pseudo" /></li>
-					<li>Password :<input type="password" class="form-control"
-						name="mdpmodifpseudo" placeholder="Votre mot de passe"></li>
-					<li>Nouveau pseudo :<input type="text" class="form-control"
-						name="newpseudo" placeholder="Votre nouveau pseudo" /></li>
-					<li><input type="submit" class="btn btn-lg" value="Modifier pseudo"/></li>
-				</UL>
-			</nav>
+						<li>Pseudo du joueur a modifier :<input type="text"
+							class="form-control" name="pseudomodifpseudo"
+							placeholder="Votre pseudo" /></li>
+						<li>Password :<input type="password" class="form-control"
+							name="mdpmodifpseudo" placeholder="Votre mot de passe"></li>
+						<li>Nouveau pseudo :<input type="text" class="form-control"
+							name="newpseudo" placeholder="Votre nouveau pseudo" /></li>
+						<li><input type="submit" class="btn btn-lg"
+							value="Modifier pseudo" /></li>
+					</UL>
+				</nav>
 			</form>
 		</div>
 
 		<div id="modifpassword" class="col-2 submenu">
-		<form method="post" action="modifMdp">
-			<nav>
-				<UL class="p-0">
-					<li>Pseudo du joueur a modifier :<input type="text"
-						class="form-control" name="pseudomodifmdp"
-						placeholder="Votre pseudo" /></li>
-					<li>Password actuel :<input type="password"
-						class="form-control" name="mdpmodifmdp"
-						placeholder="Votre mot de passe actuel"></li>
-					<li>Nouveau password :<input type="password"
-						class="form-control" name="newmdp"
-						placeholder="Votre nouveau mot de passe" /></li>
-					<li>Confirmation du nouveau password :<input type="password"
-						class="form-control" name="confnewmdp"
-						placeholder="Confirmation du nouveau mdp" /></li>
-					<li><input type="submit" class="btn btn-lg" value="Modifier mdp"/></li>
-				</UL>
-			</nav>
+			<form method="post" action="modifMdp">
+				<nav>
+					<UL class="p-0">
+						<li>Pseudo du joueur a modifier :<input type="text"
+							class="form-control" name="pseudomodifmdp"
+							placeholder="Votre pseudo" /></li>
+						<li>Password actuel :<input type="password"
+							class="form-control" name="mdpmodifmdp"
+							placeholder="Votre mot de passe actuel"></li>
+						<li>Nouveau password :<input type="password"
+							class="form-control" name="newmdp"
+							placeholder="Votre nouveau mot de passe" /></li>
+						<li>Confirmation du nouveau password :<input type="password"
+							class="form-control" name="confnewmdp"
+							placeholder="Confirmation du nouveau mdp" /></li>
+						<li><input type="submit" class="btn btn-lg"
+							value="Modifier mdp" /></li>
+					</UL>
+				</nav>
 			</form>
 		</div>
 
@@ -176,15 +178,7 @@
 			</nav>
 		</div>
 
-		<div id="listecartes" class="submenu">
-			<nav>
-				<table class="table table-striped">
-					<tr th:each="CartesNomDeCode : ${cartes}">
-						<td th:text="${CartesNomDeCode.nom}"></td>
-					</tr>
-				</table>
-			</nav>
-		</div>
+		<div id="listecartes" class="col-2 submenu"></div>
 
 
 		<div id="creercarte" class="col-2 submenu">
@@ -194,7 +188,8 @@
 					<li>Cartes nom de code a creer :<input type="text"
 						class="form-control" name="cartecreer"
 						placeholder="Nom de la carte a creer" /></li>
-					<li><input type="submit" class="btn btn-lg" value="Creer carte"></li>
+					<li><input type="submit" class="btn btn-lg"
+						value="Creer carte"></li>
 				</UL>
 			</form>
 		</div>
@@ -205,11 +200,13 @@
 			<form method="post" action="modifiercartebouton">
 				<UL class="p-0">
 					<li>Cartes nom de code a modifier :<input type="text"
-						class="form-control" name="cartemodifnom" placeholder="Nom de la carte" /></li>
+						class="form-control" name="cartemodifnom"
+						placeholder="Nom de la carte" /></li>
 					<li>Nouveau nom de la carte :<input type="text"
 						class="form-control" name="cartenouveaunom"
 						placeholder="Nouveau nom de la carte" /></li>
-					<li><input type="submit" class="btn btn-lg" value="Modifier carte" /></li>
+					<li><input type="submit" class="btn btn-lg"
+						value="Modifier carte" /></li>
 				</UL>
 			</form>
 		</div>
@@ -220,7 +217,8 @@
 					<li>Cartes nom de code a supprimer :<input type="text"
 						class="form-control" name="cartesupprimer"
 						placeholder="Nom de la carte a supprimer" /></li>
-					<li><input type="submit" class="btn btn-lg" value="Supprimer carte"></li>
+					<li><input type="submit" class="btn btn-lg"
+						value="Supprimer carte"></li>
 				</UL>
 			</form>
 		</div>
@@ -242,20 +240,14 @@
 			</nav>
 		</div>
 
-		<div id="listejoueurs" class="col-2 submenu">
-			<table class="table table-striped">
-				<tr th:each="joueur : ${joueurs}">
-					<td th:text="${joueur.pseudo}"></td>
-				</tr>
-			</table>
-		</div>
+		<div id="listejoueurs" class="col-2 submenu"></div>
 
 
 
 		<div id="statistiquejoueur" class="col-2 submenu">
 			<form method="post" action="statjoueurbouton">
 				<UL class="p-0">
-					<li>Joueur :<input type="text" id="pseudostats"
+					<li>Joueur :<input type="text" name="histojoueur"
 						class="form-control" placeholder="Pseudo du joueur" /></li>
 					<li><input type="submit" class="btn btn-lg" value="Consulter"
 						id="statjoueurbouton"></li>
@@ -263,24 +255,23 @@
 			</form>
 		</div>
 
-		<div id="statjoueurbouton" class="col-2 submenu">
-			
-		</div>
+		<div id="insertionstat" class="col-2 submenu"></div>
 
 
 
 		<div id="supjoueur" class="col-2 submenu">
-		<form method="POST" action="supprimerJoueur">
-			<nav>
-				<UL class="p-0">
-					<li>Joueur a supprimer :<input type="text"
-						class="form-control" name="pseudo"
-						placeholder="Pseudo du joueur a supprimer" /></li>
-					<li>Password :<input type="password" class="form-control"
-						name="mdp" placeholder="Password du joueur" /></li>
-					<li><input type="submit" class="btn btn-lg" value="Supprimer"/></li>
-				</UL>
-			</nav>
+			<form method="POST" action="supprimerJoueur">
+				<nav>
+					<UL class="p-0">
+						<li>Joueur a supprimer :<input type="text"
+							class="form-control" name="joueurhistosup"
+							placeholder="Pseudo du joueur a supprimer" /></li>
+						<li>Password :<input type="password" class="form-control"
+							name="mdphistosup" placeholder="Password du joueur" /></li>
+						<li><input type="submit" class="btn btn-lg"
+							value="Supprimer joueur" /></li>
+					</UL>
+				</nav>
 			</form>
 		</div>
 

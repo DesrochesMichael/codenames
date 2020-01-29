@@ -28,6 +28,9 @@ public class Tour {
 	@OneToMany(mappedBy = "tour")
 	private List<CartesNomDeCode> listeCartesNomDeCode;
 	
+	@Column(name = "evenement")
+	private String evenement;
+	
 	
 
 	public boolean bonnereponse(String couleur, Equipe e) {

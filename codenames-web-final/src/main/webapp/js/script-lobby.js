@@ -85,6 +85,31 @@ function reset(){
 			document.querySelector('li[id="c"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="lc"]').style.backgroundColor='brown';	
 			document.querySelector(id).style.display='block';
+			
+			let passeur = {
+			};	
+			
+			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/listecarte");
+				
+				fetch (url, {
+					method: 'POST',
+					headers : {
+						'content-Type' : 'application/json'
+					},
+					body: JSON.stringify(passeur)
+					
+				}).then(resp => resp.json())
+				.then( cartes => {
+					cartes.forEach( (carte) => {
+						
+						let myElement = document.createElement("table");
+						myElement.innerHTML ="<tr>"+carte.nom+"</tr> "
+							
+						document.querySelector('div[id="listecartes"]').append(myElement);
+						document.querySelector('div[id="listecartes"]').style.display='block';
+					});
+					
+				});
 		}
 		
 		
@@ -120,6 +145,32 @@ function reset(){
 			document.querySelector('li[id="h"]').style.backgroundColor='brown';	
 			document.querySelector('li[id="lj"]').style.backgroundColor='brown';	
 			document.querySelector(id).style.display='block';
+						
+			let passeur = {
+			};	
+			
+			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/listejoueur");
+				
+				fetch (url, {
+					method: 'POST',
+					headers : {
+						'content-Type' : 'application/json'
+					},
+					body: JSON.stringify(passeur)
+					
+				}).then(resp => resp.json())
+				.then( joueurs => {
+					joueurs.forEach( (joueur) => {
+						
+						let myElement = document.createElement("table");
+						myElement.innerHTML ="<tr>"+joueur.pseudo+"</tr> "
+							
+						document.querySelector('div[id="listejoueurs"]').append(myElement);
+						document.querySelector('div[id="listejoueurs"]').style.display='block';
+					});
+					
+				});
+						
 		}
 		
 		
@@ -181,6 +232,7 @@ function reset(){
 			
 			else if(a==2){
 				alert("Joueur connecté");
+				
 			}
 		});
 	
@@ -401,11 +453,53 @@ function reset(){
 	
 	else if(id=="Consulter"){
 		let passeur = {
-				nom1 : document.querySelector('input[name="cartesupprimer"]').value,
+				pseudo1 : document.querySelector('input[name="histojoueur"]').value,
 	
 		};	
 		
-		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/supcarte");
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/histojoueur");
+			
+			fetch (url, {
+				method: 'POST',
+				headers : {
+					'content-Type' : 'application/json'
+				},
+				body: JSON.stringify(passeur)
+				
+			}).then(resp => resp.json())
+			.then( joueur => {
+			
+				if (joueur==null){
+					alert("Aucun joueur de ce nom existe.");
+				}
+				else if (joueur!=null) {
+
+					let myElement = document.createElement("table");
+					myElement.innerHTML ="<tr><th>Pseudo du joueur</th> " +
+							"<th>nombre de partie</th> " +
+							"<th>Nombre de victoire</th> " +
+							"<th>Nombre de maitre espion</th></tr>" +
+							"<tr><td>"+joueur.pseudo+"</td> " +
+							"<td>"+joueur.nbrPartie+"</td> " +
+							"<td>"+joueur.nbrVictoire+"</td> " +
+							"<td>"+joueur.nbrMaitreEspion+"</td></tr> "
+						
+					document.querySelector('div[id="insertionstat"]').append(myElement);
+					document.querySelector('div[id="insertionstat"]').style.display='block';
+				}
+				
+			});
+		
+		
+	}
+	
+	else if(id=="Supprimer joueur"){
+		let passeur = {
+				pseudo1 : document.querySelector('input[name="joueurhistosup"]').value,
+				mdp1 : document.querySelector('input[name="mdphistosup"]').value,
+		};	
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/histosup");
 			
 			fetch (url, {
 				method: 'POST',
@@ -415,53 +509,25 @@ function reset(){
 				body: JSON.stringify(passeur)
 				
 			}).then(resp => resp.text())
-			.then(a => {
+			.then( a => {
 			
 				if (a==0){
-					alert("Aucune carte de ce nom existe.");
+					alert("Aucun joueur de ce nom existe.");
 				}
-				else if (a==1){
-					alert("Carte supprimé.");
+				else if (a==1) {
+					alert("Le mdp du joueur est incorrect.");
+				}
+				
+				else if (a==2) {
+					alert("Joueur supprimé.");
 				}
 				
 			});
 		
 		
 	}
-	
 	// ici
 	
-	
-	
-	
-	else if(id=="statjoueurbouton"){
-		
-		document.querySelector('div[id="historique"]').style.display='block';
-		document.querySelector('div[id="statistiquejoueur"]').style.display='block';
-		document.querySelector('li[id="h"]').style.backgroundColor='brown';		
-		
-		var input = document.getElementById("pseudostats").value;
-				
-		
-		let params = {
-			pseudo : input
-		};
-		
-		const url = new URL("http://localhost:8080/codenames-web-final/statjoueurbouton");
-		
-		
-		
-		fetch(url, {
-			method: 'POST'
-				
-			}).then(r => {
-				
-				let myElement = document.createElement("p");
-				myElement.innerHTML = r;
-				
-				document.querySelector('div[id="statjoueurbouton"]').append(myElement);
-			})
-	}
 	 
 	});
 	});

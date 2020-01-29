@@ -1,5 +1,7 @@
 package fr.codenames.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,7 @@ public class JoueurController {
 		}
 
 		else {
+			
 			return 2;
 		}
 	}
@@ -50,8 +53,8 @@ public class JoueurController {
 		else if (daojoueur.findByPseudo(passeur.getPseudo2()) != null) {
 			return 0;
 		}
-		
-		else if (j.getMdp().equalsIgnoreCase(passeur.getMdp1())==false) {
+
+		else if (j.getMdp().equalsIgnoreCase(passeur.getMdp1()) == false) {
 			return 1;
 		}
 
@@ -68,8 +71,7 @@ public class JoueurController {
 
 		if (j == null) {
 			return 0;
-		}
-		else if (j.getMdp().equalsIgnoreCase(passeur.getMdp1())==false) {
+		} else if (j.getMdp().equalsIgnoreCase(passeur.getMdp1()) == false) {
 			return 1;
 		}
 
@@ -78,6 +80,31 @@ public class JoueurController {
 			daojoueur.save(j);
 			return 2;
 		}
+	}
+
+	@PostMapping("/Lobby/histojoueur")
+	public Joueur histojoueur(@RequestBody Passeur passeur) {
+		return daojoueur.findByPseudo(passeur.getPseudo1());
+	}
+
+	@PostMapping("/Lobby/histosup")
+	public int histosup(@RequestBody Passeur passeur) {
+		Joueur j = daojoueur.findByPseudo(passeur.getPseudo1());
+		if (j == null) {
+			return 0;
+		} else if (j.getMdp().equalsIgnoreCase(passeur.getMdp1()) == false) {
+			return 1;
+		} else {
+			daojoueur.delete(j);
+			return 2;
+		}
+
+	}
+
+	@PostMapping("/Lobby/listejoueur")
+	public List<Joueur> listejoueur() {
+		return daojoueur.findAll();
+
 	}
 
 }

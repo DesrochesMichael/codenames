@@ -8,19 +8,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "partie")
 public class Partie {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
-	private List<Joueur> joueurspartie = new ArrayList<Joueur>();
-	private List<Equipe> equipes = new ArrayList<Equipe>();
-	private List<Cases> cases = new ArrayList<Cases>();
-	private List<Cases> casesRestantes = new ArrayList<Cases>();
-	
-	
+
+	@OneToMany(mappedBy = "partie")
+	private List<CartesNomDeCode> liste25;
+
+	@OneToMany(mappedBy = "partie")
+	private List<Joueur> joueurspartie;
+
+	@OneToMany(mappedBy = "partie")
+	private List<Equipe> equipes;
+
+	@OneToMany(mappedBy = "partie")
+	private List<Cases> casesRestantes;
+
 	public boolean conditionDefaite(List<Cases> list) {
 		boolean defaite = true;
 
@@ -211,8 +220,6 @@ public class Partie {
 		this.liste25 = liste25;
 	}
 
-	
-
 	public List<Equipe> getEquipes() {
 		return equipes;
 	}
@@ -233,11 +240,13 @@ public class Partie {
 		this.joueurspartie = joueurspartie;
 	}
 
-	public List<Cases> getCases() {
-		return cases;
+	public int getId() {
+		return id;
 	}
 
-	public void setCases(List<Cases> cases) {
-		this.cases = cases;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
 }

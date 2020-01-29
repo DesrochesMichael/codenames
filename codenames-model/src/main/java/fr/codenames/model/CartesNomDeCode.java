@@ -31,6 +31,10 @@ public class CartesNomDeCode {
 	@JoinColumn(name="cartenomdecode")
 	private Cases code_cases;
 	
+	@ManyToOne
+	@JoinColumn(name="liste25")
+	private Partie partie;
+	
 	
 	
 	

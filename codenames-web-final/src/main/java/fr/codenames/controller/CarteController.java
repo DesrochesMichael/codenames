@@ -1,5 +1,7 @@
 package fr.codenames.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.codenames.dao.IDAOCartesNomDeCode;
 import fr.codenames.model.CartesNomDeCode;
+import fr.codenames.model.Joueur;
 import fr.codenames.model.Passeur;
 
 @RestController
@@ -58,6 +61,12 @@ public class CarteController {
 			daocarte.deleteByNom(passeur.getNom1());
 			return 1;
 		}
+	}
+	
+	@PostMapping("/Lobby/listecarte")
+	public List<CartesNomDeCode> listejoueur() {
+		return daocarte.findAll();
+
 	}
 
 //	// creer carte
