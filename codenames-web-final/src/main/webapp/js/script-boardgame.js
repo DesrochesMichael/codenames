@@ -14,22 +14,20 @@ function closeNav() {
 }
 
 
-//Changer background lors du clic sur cartes
-function bgImage(){}
-//	document.getElementById("test").style.backgroundImage = "url('assets/tuile-bleu.png')";
+// Changer background lors du clic sur cartes
 
-var el= document.querySelectorAll('button').forEach(button=>{
+
+document.querySelectorAll('button').forEach(button=>{
 	 
 	button.addEventListener("click", ( event ) => {   
     event.target.style.backgroundImage = "url('assets/tuile-bleu.png')";
-    var txt = el.textContent
-    console.log(txt)
+    console.log(event.target.textContent)
   });
 });
 
 
 
-//Recuperation des inputs
+// Recuperation des inputs
 document.querySelectorAll('input').forEach(bouton=>
 {bouton.addEventListener('click', (event) =>
 {
@@ -43,4 +41,21 @@ let id =event.target.getAttribute('id');
 })});
 
 
-
+// test pour affichage
+document.addEventListener('DOMContentLoaded', (event) =>{
+	
+	
+	let passeur = {};
+	
+	const url = new URL("http://localhost:8080/codenames-web-final/boardgame/initialisation");
+	
+	fetch (url, {
+		method: 'POST',
+		headers : {
+			'content-Type' : 'application/json'
+		},
+		body: JSON.stringify(passeur)
+		
+	});
+	
+});

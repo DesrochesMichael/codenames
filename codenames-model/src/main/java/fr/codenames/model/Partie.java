@@ -144,7 +144,7 @@ public class Partie {
 	}
 
 	public List<CartesNomDeCode> choixMots(List<CartesNomDeCode> liste) {
-
+		List<CartesNomDeCode> liste25 = new ArrayList<CartesNomDeCode>();
 		Collections.shuffle(liste);
 
 		for (int i = 0; i < 25; i++) {
@@ -247,6 +247,5 @@ public class Partie {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 }

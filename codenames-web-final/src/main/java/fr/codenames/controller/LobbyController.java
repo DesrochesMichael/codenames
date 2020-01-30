@@ -1,5 +1,7 @@
 package fr.codenames.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +19,11 @@ public class LobbyController {
 
 	@GetMapping("/Lobby")
 	@Transactional
-	public String affichage(Model model) {
+	public String affichage(Model model, HttpSession session) {
 		Partie partie = new Partie();
 		daopartie.save(partie);
 		int id = daopartie.findTopByOrderByIdDesc().getId();
-		model.addAttribute("id", id);
+		session.setAttribute("id", id);
 		return "Lobby";
 	}
 

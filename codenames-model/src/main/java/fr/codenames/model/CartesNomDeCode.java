@@ -32,12 +32,36 @@ public class CartesNomDeCode {
 	private Cases code_cases;
 	
 	@ManyToOne
-	@JoinColumn(name="liste25")
+	@JoinColumn(name="partie")
 	private Partie partie;
 	
 	
 	
 	
+	public Tour getTour() {
+		return tour;
+	}
+
+	public void setTour(Tour tour) {
+		this.tour = tour;
+	}
+
+	public Cases getCode_cases() {
+		return code_cases;
+	}
+
+	public void setCode_cases(Cases code_cases) {
+		this.code_cases = code_cases;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
 	public int getId() {
 		return id;
 	}

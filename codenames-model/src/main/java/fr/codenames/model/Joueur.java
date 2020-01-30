@@ -109,4 +109,29 @@ public class Joueur {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
+	public CartesCles getCartecles() {
+		return cartecles;
+	}
+
+	public void setCartecles(CartesCles cartecles) {
+		this.cartecles = cartecles;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+	
 }

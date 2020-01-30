@@ -2,13 +2,18 @@ package fr.codenames.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.codenames.dao.IDAOJoueur;
+import fr.codenames.dao.IDAOPartie;
 import fr.codenames.model.Joueur;
+import fr.codenames.model.Partie;
 import fr.codenames.model.Passeur;
 
 @RestController
@@ -17,8 +22,11 @@ public class JoueurController {
 	@Autowired
 	private IDAOJoueur daojoueur;
 
+	@Autowired
+	private IDAOPartie daopartie;
+
 	@PostMapping("/Lobby/connect")
-	public int connect(@RequestBody Joueur joueur) {
+	public int connect(@RequestBody Joueur joueur, HttpSession session) {
 
 		Joueur j = daojoueur.findByPseudo(joueur.getPseudo());
 
@@ -31,7 +39,17 @@ public class JoueurController {
 		}
 
 		else {
-			
+			int id = (Integer) session.getAttribute("id");
+			Partie p = daopartie.findById(id).get();
+
+			System.out.println("avant save ");
+
+			j.setPartie(p);
+			daojoueur.save(j);
+
+			System.out.println("Verif");
+			System.out.println(id);
+
 			return 2;
 		}
 	}
