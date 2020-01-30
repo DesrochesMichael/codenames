@@ -261,10 +261,16 @@ function reset(){
 				pseudo : document.querySelector('input[name="pseudocreer"]').value,
 				mdp : document.querySelector('input[name="mdpcreer"]').value
 		};	
-		let mdp = document.querySelector('input[name="confmdpcreer"]').value
+		let mdp = document.querySelector('input[name="confmdpcreer"]').value;
 		
 		if (joueur.mdp!=mdp){
-			alert("Les deux mdp sont différents.")
+			alert("Les deux mdp sont différents.");
+		}
+		else if(joueur.pseudo.length == 0){
+			alert("Met un pseudo Bruh");
+		}
+		else if(joueur.mdp.length ==0){
+			alert("Met un mdp Bruh");
 		}
 		else {
 		

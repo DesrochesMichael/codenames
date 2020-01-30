@@ -25,7 +25,7 @@ public class Joueur {
 	
 	@Column(name = "JOUEUR_MDP",length = 25, nullable = false)
 //	@Size(max=25)
-	@NotEmpty(message="Veuillez insérer un mot de passe")
+//	@NotEmpty(message="Veuillez insérer un mot de passe")
 	private String mdp;
 	
 	@Column(name = "JOUEUR_NB_PARTIE")
