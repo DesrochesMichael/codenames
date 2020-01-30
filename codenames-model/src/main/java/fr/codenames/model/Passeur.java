@@ -1,6 +1,10 @@
 package fr.codenames.model;
 
 public class Passeur {
+	
+	private String indice;
+	
+	private int nbr;
 
 	private String pseudo1;
 
@@ -13,6 +17,24 @@ public class Passeur {
 	private String nom1;
 	
 	private String nom2;
+
+	
+	
+	public String getIndice() {
+		return indice;
+	}
+
+	public void setIndice(String indice) {
+		this.indice = indice;
+	}
+
+	public int getNbr() {
+		return nbr;
+	}
+
+	public void setNbr(int nbr) {
+		this.nbr = nbr;
+	}
 
 	public String getNom1() {
 		return nom1;

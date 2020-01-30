@@ -14,7 +14,7 @@ function closeNav() {
 }
 
 
-//Changer background lors du clic sur cartes et récuperer les mots
+// Changer background lors du clic sur cartes et récuperer les mots
 document.querySelectorAll('button').forEach(button=>{
 	 
 	button.addEventListener("click", ( event ) => {   
@@ -24,38 +24,56 @@ document.querySelectorAll('button').forEach(button=>{
 });
 
 
-//const url = new URL("http://localhost:8080/codenames-web-final/boardgame");
-//fetch (url, {
-//	method: 'POST',
-//	headers : {
-//		'content-Type' : 'application/json'
-//	},
-//	body: JSON.stringify(passeur)
+// const url = new URL("http://localhost:8080/codenames-web-final/boardgame");
+// fetch (url, {
+// method: 'POST',
+// headers : {
+// 'content-Type' : 'application/json'
+// },
+// body: JSON.stringify(passeur)
 //	
-//}).then(resp => resp.json())
-//.then( carte => {
+// }).then(resp => resp.json())
+// .then( carte => {
 //
-//	if (carte==null){
-//		alert("Aucun joueur de ce nom existe.");
-//	}
+// if (carte==null){
+// alert("Aucun joueur de ce nom existe.");
+// }
 
-// Recuperation des inputs
-document.querySelectorAll('input').forEach(bouton=>
-{bouton.addEventListener('click', (event) =>
-{
-let id =event.target.getAttribute('id');
-	if (id=="test3"){
-		event.preventDefault();
-		console.log(document.querySelector('input[name="indice"]').value);
-		console.log(document.querySelector('input[name="nombre"]').value);
-		console.log(document.querySelector('input[name="illimite"]').value);
+// Recuperation des inputs des maitres espions
+document.querySelectorAll('input[name="envoyer"]').forEach(bouton=>
+{bouton.addEventListener('click', (event) =>{
+
+		
+	let passeur = {
+			indice : document.querySelector('input[name="indice"]').value,
+			nbr:document.querySelector('input[name="nombre"]').value
 	}
-})});
+	
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/boardgame/indice");
+		
+		fetch (url, {
+			method: 'POST',
+			headers : {
+				'content-Type' : 'application/json'
+			},
+			body: JSON.stringify(passeur)
+			
+		}).then(resp => resp.text())
+		.then(string => {
+			
+			let myElement = document.createElement("p");
+			myElement.innerHTML = string;
+			document.querySelector('div[name="tchat"]').append(myElement);
+		});
+		
+});
+});
+
 
 
 // test pour affichage
-document.addEventListener('DOMContentLoaded', (event) =>{
-	
+document.addEventListener('DOMContentLoaded', (load) =>{
 	
 	let passeur = {};
 	
@@ -67,6 +85,13 @@ document.addEventListener('DOMContentLoaded', (event) =>{
 			'content-Type' : 'application/json'
 		},
 		body: JSON.stringify(passeur)
+		
+	}).then(resp => resp.text())
+	.then(string => {
+		
+		let myElement = document.createElement("p");
+		myElement.innerHTML = string;
+		document.querySelector('div[name="tchat"]').append(myElement);
 		
 	});
 	
