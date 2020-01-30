@@ -194,7 +194,7 @@ function reset(){
 	});
 	});
 	
-	// query selector de tout els input avec fetch
+	// query selector de tout les input avec fetch
 	
 	document.querySelectorAll('input[type="submit"]').forEach(lien=>
 	{lien.addEventListener('click', (event) =>
@@ -629,3 +629,6 @@ document.querySelectorAll('button').forEach(button=>{
 
 	});
 	});
+	
+	
+	
