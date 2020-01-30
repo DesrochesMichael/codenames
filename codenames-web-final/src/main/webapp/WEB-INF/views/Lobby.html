@@ -75,22 +75,20 @@
 				<nav>
 					<UL p-0>
 						<li>Pseudo :<input type="text" class="form-control"
-							name="pseudocreer" placeholder="Votre pseudo" /></li>
+							name="pseudocreer" id="pseudocreer" placeholder="Votre pseudo" /><span id="misspseudocreer"></span></li>
 						<li>Password :<input type="password" class="form-control"
 							name="mdpcreer" placeholder="Votre mot de passe"></li>
 						<li>Confirmation :<input type="password" class="form-control"
 							name="confmdpcreer" placeholder="Confirmation du mdp"></li>
-						<li><input type="submit" class="btn btn-lg"
+						<li><input id="test18" type="submit" class="btn btn-lg"
 							value="Creer joueur" /></li>
 					</UL>
 				</nav>
 
-				<div th:if="${joueur!=null}">
-					<div th:errors="${joueur.pseudo}" class="alert alert-danger"
-						role="alert"></div>
-					<div th:errors="${joueur.mdp}" class="alert alert-danger"
-						role="alert"></div>
-				</div>
+				<!-- <div th:if="${joueur!=null}">
+					<div th:errors="${joueur.pseudo}" class="alert alert-danger" role="alert"></div>
+					<div th:errors="${joueur.mdp}" class="alert alert-danger" role="alert"></div>
+				</div> -->
 
 			</form>
 		</div>

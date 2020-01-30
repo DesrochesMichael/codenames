@@ -194,6 +194,25 @@ function reset(){
 	});
 	});
 	
+	
+//	var formValid = document.getElementById('test18');
+//	var pseudo = document.getElementById('pseudocreer');
+//	var missPseudo = document.getElementById('misspseudocreer');
+//	
+//	formValid.addEventListener('click', validation);
+//	
+//	function validation(event){
+//		//Si le champ est vide
+//		if(pseudo.validity.valueMissing){
+//			event.preventDefault();
+//			missPseudo.textConten='Pseudo manquant';
+//			missPseudo.style.color='red';
+//		}
+//	}
+	
+	
+	
+	
 	// query selector de tout les input avec fetch
 	
 	document.querySelectorAll('input[type="submit"]').forEach(lien=>
@@ -263,9 +282,13 @@ function reset(){
 			if (a==0){
 				alert("Joueur créé.")
 			}
-		});
+			});
 		}
-	}
+		}
+	
+	
+	
+	
 	
 	else if(id=="Modifier pseudo"){
 		let passeur = {

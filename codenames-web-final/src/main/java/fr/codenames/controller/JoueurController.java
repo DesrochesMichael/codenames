@@ -59,7 +59,7 @@ public class JoueurController {
 		daojoueur.save(joueur);
 		return 0;
 	}
-
+		
 	@PostMapping("/Lobby/modifpseudo")
 	public int modifpseudo(@RequestBody Passeur passeur) {
 		Joueur j = daojoueur.findByPseudo(passeur.getPseudo1());

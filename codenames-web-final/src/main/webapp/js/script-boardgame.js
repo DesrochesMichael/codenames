@@ -14,18 +14,30 @@ function closeNav() {
 }
 
 
-// Changer background lors du clic sur cartes
-
-
+//Changer background lors du clic sur cartes et récuperer les mots
 document.querySelectorAll('button').forEach(button=>{
 	 
 	button.addEventListener("click", ( event ) => {   
     event.target.style.backgroundImage = "url('assets/tuile-bleu.png')";
-    console.log(event.target.textContent)
+    console.log(event.target.textContent);
   });
 });
 
 
+//const url = new URL("http://localhost:8080/codenames-web-final/boardgame");
+//fetch (url, {
+//	method: 'POST',
+//	headers : {
+//		'content-Type' : 'application/json'
+//	},
+//	body: JSON.stringify(passeur)
+//	
+//}).then(resp => resp.json())
+//.then( carte => {
+//
+//	if (carte==null){
+//		alert("Aucun joueur de ce nom existe.");
+//	}
 
 // Recuperation des inputs
 document.querySelectorAll('input').forEach(bouton=>
