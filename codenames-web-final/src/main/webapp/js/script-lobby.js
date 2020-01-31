@@ -89,7 +89,7 @@ function reset(){
 			let passeur = {
 			};	
 			
-			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/listecarte");
+			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/listecartes");
 				
 				fetch (url, {
 					method: 'POST',
@@ -98,8 +98,11 @@ function reset(){
 					},
 					body: JSON.stringify(passeur)
 					
-				}).then(resp => resp.json())
-				.then( cartes => {
+				})
+				.then(resp => resp.json())
+//				.then(resp=>resp.text())
+//				.then(text=> console.log(text))
+				.then(cartes => {
 					cartes.forEach( (carte) => {
 						
 						let myElement = document.createElement("table");
@@ -158,7 +161,8 @@ function reset(){
 					},
 					body: JSON.stringify(passeur)
 					
-				}).then(resp => resp.json())
+				})
+				.then(resp => resp.json())
 				.then( joueurs => {
 					joueurs.forEach( (joueur) => {
 						
@@ -228,6 +232,7 @@ function reset(){
 				mdp : document.querySelector('input[name="mdpconnect"]').value
 		};
 				
+		
 		
 		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/connect");
 		
@@ -308,6 +313,12 @@ function reset(){
 		if (passeur.pseudo1==passeur.pseudo2){
 			alert("Les deux pseudo sont identiques. Veuillez choisir un pseudo différent");
 		}
+		else if(passeur.pseudo1.length==0 || passeur.pseudo2.length ==0){
+			alert("Veuillez rentrer un pseudo mamène");
+		}
+		else if(passeur.mdp1.length==0){
+			alert("Veuillez rentrer un mdp mamène");
+		}
 		else {
 		
 			const url = new URL("http://localhost:8080/codenames-web-final/Lobby/modifpseudo");
@@ -357,6 +368,12 @@ function reset(){
 		else if (conf!=passeur.mdp2){
 			alert("Les deux saisies du nouveau mdp ne sont pas identiques.");
 		}
+		else if(passeur.pseudo1.length==0){
+			alert("Il faut rentrer un pseudo, t'es bête ou quoi ?!");
+		}
+		else if(passeur.mdp1.length==0 || passeur.mdp2.length==0){
+			alert("Tu ne feras rien sans rentrer de mdp");
+		}
 		
 		else {
 		
@@ -390,7 +407,11 @@ function reset(){
 		let passeur = {
 				nom1 : document.querySelector('input[name="cartecreer"]').value,
 		};	
-		 
+		
+		if(passeur.nom1.length==0){
+			alert("Tu veux vraiment créer une carte sans nom ? Tsss ...");
+		}
+		else{
 		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/creercarte");
 			
 			fetch (url, {
@@ -412,7 +433,7 @@ function reset(){
 				
 			});
 
-		
+		}
 	}
 	else if(id=="Modifier carte"){
 		let passeur = {
@@ -422,7 +443,10 @@ function reset(){
 		};	
 		
 		if (passeur.nom1==passeur.nom2){
-			alert("Les deux noms sont identiques.")
+			alert("Les deux noms sont identiques.");
+		}
+		else if(passeur.nom1.length==0 || passeur.nom2.length ==0) {
+			alert("YOU SHALL NOT PASS !! (T'as oublié de rentrer le mot)");
 		}
 		else{
 		 
@@ -456,6 +480,11 @@ function reset(){
 	
 		};	
 		
+		if(passeur.nom1.length==0){
+			alert("Tu veux supprimer une carte ? Rentre un mot alors.")
+		}
+		else{
+			
 		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/supcarte");
 			
 			fetch (url, {
@@ -477,7 +506,7 @@ function reset(){
 				
 			});
 		
-		
+		}
 	}
 	
 	else if(id=="Consulter"){
@@ -527,7 +556,14 @@ function reset(){
 				pseudo1 : document.querySelector('input[name="joueurhistosup"]').value,
 				mdp1 : document.querySelector('input[name="mdphistosup"]').value,
 		};	
-		
+		if(passeur.pseudo1.length==0){
+			alert("Quel joueur veux-tu supprimer ? Il faut rentrer un nom")
+		}
+		else if(passeur.mdp1.length==0){
+			alert("Tututuu tu vas où comme ça ? Si tu veux supprimer un joueur il faut son mdp")	
+		}
+		else{
+			
 		const url = new URL("http://localhost:8080/codenames-web-final/Lobby/histosup");
 			
 			fetch (url, {
@@ -552,7 +588,7 @@ function reset(){
 				}
 				
 			});
-		
+		}
 		
 	}
 	// ici

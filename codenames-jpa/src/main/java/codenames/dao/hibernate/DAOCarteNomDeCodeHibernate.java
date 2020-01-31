@@ -28,7 +28,6 @@ public class DAOCarteNomDeCodeHibernate extends DAOHibernate<CartesNomDeCode> im
 	
 	@Override
 	public List<CartesNomDeCode> findAll() {
-		// TODO Auto-generated method stub
 		return em.createQuery("select c from CartesNomDeCode c", CartesNomDeCode.class).getResultList();
 	}
 
