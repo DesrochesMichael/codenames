@@ -116,23 +116,25 @@ document.querySelectorAll('button').forEach(button=>{
 		}).then(resp => resp.text())
 		.then(a => {
 			if (a==0){
-				
+				alert("noir perdue")
 			}
 			
 			else if (a==1){
-							
+				alert("gris changement de tour")	
 			}
 			
 			else if (a==2){
-				
+				alert("BOnne réponse")	
+				event.target.style.backgroundImage = "url('assets/tuile-rouge.png')";
 			}
 			
 			else if (a==3){
-				
+				alert("Réponse de l'équipe adverse")	
+				event.target.style.backgroundImage = "url('assets/tuile-bleu.png')";
 			}
 		});
 		
-    event.target.style.backgroundImage = "url('assets/tuile-bleu.png')";
+    
     console.log(event.target.textContent);
   });
 });

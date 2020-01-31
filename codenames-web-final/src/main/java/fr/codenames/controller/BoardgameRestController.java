@@ -84,8 +84,6 @@ public class BoardgameRestController {
 //			c.setPartie(p);
 //			daocase.save(c);
 		}
-		
-		
 
 		p.setEquipes(p.affecterEquipe(p.getJoueurspartie()));
 
@@ -118,16 +116,16 @@ public class BoardgameRestController {
 		s = s + "L'equipe " + p.getEquipes().get(index).getNom() + " commence.";
 
 		// save en bdd
-		p.getEquipes().get(0).setPartie(p);
-		p.getEquipes().get(1).setPartie(p);
-		daoequipe.save(p.getEquipes().get(0));
-		daoequipe.save(p.getEquipes().get(1));
+//		p.getEquipes().get(0).setPartie(p);
+//		p.getEquipes().get(1).setPartie(p);
+//		daoequipe.save(p.getEquipes().get(0));
+//		daoequipe.save(p.getEquipes().get(1));
 
 		Tour tour = new Tour();
 
 		tour.setEquipe(p.getEquipes().get(index));
 		tour.setPartie(p);
-		daotour.save(tour);
+//		daotour.save(tour);
 		return s;
 	}
 
@@ -146,20 +144,25 @@ public class BoardgameRestController {
 	@Transactional
 	public int reponse(@RequestBody Passeur passeur, HttpSession session) {
 		System.out.println(passeur.getCarte());
-		CartesNomDeCode carte = daocarte.findByNom(passeur.getCarte());
-		System.out.println("Carte : " + carte.getNom()+" " +carte.getPartie().getId());
-		Cases c = daocase.findByCartenomdecode(carte);
-		System.out.println("Case : " + c.getCouleur());
+		List<Cases> cases = daocase.findByPartieId((int) session.getAttribute("id"));
+		String couleur = null;
+		for (Cases c : cases) {
+			if (c.getCartenomdecode().getNom().equalsIgnoreCase(passeur.getCarte()) == true) {
+				couleur = c.getCouleur();
+			}
+		}
 
-		if (c.getCouleur().equalsIgnoreCase("noir")) {
+		System.out.println("Cases : " + couleur);
+
+		if (couleur.equalsIgnoreCase("noir")) {
 			return 0;
 		}
 
-		else if (c.getCouleur().equalsIgnoreCase("gris")) {
+		else if (couleur.equalsIgnoreCase("gris")) {
 			return 1;
 		}
 
-		else if (c.getCouleur().equalsIgnoreCase("bleu")) {
+		else if (couleur.equalsIgnoreCase("bleu")) {
 
 			if (daotour.findTopOneByPartieIdOrderByIdDesc((int) session.getAttribute("id")).getEquipe().getNom()
 					.equalsIgnoreCase("bleu") == true) {
@@ -169,7 +172,7 @@ public class BoardgameRestController {
 			}
 		}
 
-		else if (c.getCouleur().equalsIgnoreCase("rouge")) {
+		else if (couleur.equalsIgnoreCase("rouge")) {
 			if (daotour.findTopOneByPartieIdOrderByIdDesc((int) session.getAttribute("id")).getEquipe().getNom()
 					.equalsIgnoreCase("rouge") == true) {
 				return 2;
@@ -177,8 +180,8 @@ public class BoardgameRestController {
 				return 3;
 			}
 		}
-
 		return 0;
+
 	}
 
 }
