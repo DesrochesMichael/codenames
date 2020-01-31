@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import fr.codenames.model.CartesNomDeCode;
 import fr.codenames.model.Partie;
 
-@EnableJpaRepositories
+
 public interface IDAOCartesNomDeCode extends JpaRepository<CartesNomDeCode, Integer> {
 
 	public List<CartesNomDeCode> findAll();

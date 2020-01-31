@@ -44,8 +44,6 @@ public class CartesCles {
 	}
 
 	public List<Cases> attributionCases(List<CartesNomDeCode> cartenomdecode) {
-		// 0 == bleu ==> commence
-		// 1 == rouge ==> commence
 		List<Cases> cartescles = new ArrayList<Cases>();
 		
 		for (int i = 0; i < 8; i++) {

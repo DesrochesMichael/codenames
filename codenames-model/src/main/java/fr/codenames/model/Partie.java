@@ -30,6 +30,9 @@ public class Partie {
 	@OneToMany(mappedBy = "partie")
 	private List<Cases> casesRestantes;
 
+	@OneToMany(mappedBy = "partie")
+	private List<Tour> tours;
+
 	public boolean conditionDefaite(List<Cases> list) {
 		boolean defaite = true;
 
@@ -156,12 +159,16 @@ public class Partie {
 	}
 
 	public List<Equipe> affecterEquipe(List<Joueur> joueurs) {
+
 		List<Equipe> equipes = new ArrayList<Equipe>();
 
 		Collections.shuffle(joueurs);
 
-		Equipe rouge = new Equipe("rouge");
-		Equipe bleu = new Equipe("bleu");
+		Equipe rouge = new Equipe();
+		Equipe bleu = new Equipe();
+
+		rouge.setNom("rouge");
+		bleu.setNom("bleu");
 
 		// dans le cas de joueur en nombre impair on attribut le premier
 		int reste = joueurs.size() % 2;
@@ -180,12 +187,13 @@ public class Partie {
 		}
 
 		// on attribut une equipe aux autres joueurs.
-		for (int i = 0; i < joueurs.size() / 2 + 1; i++) {
+		for (int i = 0; i < joueurs.size() / 2; i++) {
 
 			rouge.getListeJoueur().add(joueurs.remove(0));
 			bleu.getListeJoueur().add(joueurs.remove(0));
 
 		}
+
 		// choix des maitres espions dans chaque equipe
 
 		int max = bleu.getListeJoueur().size() - 1;
@@ -246,6 +254,14 @@ public class Partie {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Tour> getTours() {
+		return tours;
+	}
+
+	public void setTours(List<Tour> tours) {
+		this.tours = tours;
 	}
 
 }

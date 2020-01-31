@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import fr.codenames.model.Joueur;
 
-@EnableJpaRepositories
+
 public interface IDAOJoueur extends JpaRepository<Joueur, Integer> {
 
 	public Joueur findByPseudo(String pseudo);

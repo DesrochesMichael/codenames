@@ -14,12 +14,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "cases")
 public class Cases {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CASE_ID")
 	private int id;
-	
+
 	@OneToOne
 	@JoinColumn(name="code_cases")
 	private CartesNomDeCode cartenomdecode;
@@ -27,20 +27,31 @@ public class Cases {
 	@OneToOne
 	@JoinColumn(name="cle_cases")
 	private CartesCles cartescles;
-	
+
 	@Column(name = "CASE_COULEUR", nullable = false)
 	@NotNull
 	private String couleur;
-	
+
 	@ManyToOne
-	@JoinColumn(name="partie")
+	@JoinColumn(name = "partie")
 	private Partie partie;
 
-	
-	
-	
-	
-	
+	public CartesCles getCartescles() {
+		return cartescles;
+	}
+
+	public void setCartescles(CartesCles cartescles) {
+		this.cartescles = cartescles;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
 	public int getId() {
 		return id;
 	}

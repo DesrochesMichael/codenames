@@ -14,14 +14,7 @@ function closeNav() {
 }
 
 
-// Changer background lors du clic sur cartes et récuperer les mots
-document.querySelectorAll('button').forEach(button=>{
-	 
-	button.addEventListener("click", ( event ) => {   
-    event.target.style.backgroundImage = "url('assets/tuile-bleu.png')";
-    console.log(event.target.textContent);
-  });
-});
+
 
 
 // const url = new URL("http://localhost:8080/codenames-web-final/boardgame");
@@ -72,7 +65,7 @@ document.querySelectorAll('input[name="envoyer"]').forEach(bouton=>
 
 
 
-// test pour affichage
+// affichage au démarrage de l'appli
 document.addEventListener('DOMContentLoaded', (load) =>{
 	
 	let passeur = {};
@@ -95,4 +88,51 @@ document.addEventListener('DOMContentLoaded', (load) =>{
 		
 	});
 	
+});
+
+
+
+// cartes nom de code
+
+// Changer background lors du clic sur cartes et récuperer les mots
+document.querySelectorAll('button').forEach(button=>{
+
+	button.addEventListener("click", ( event ) => {
+		
+		
+		let passeur = {
+				carte : event.target.textContent
+				};
+		
+		const url = new URL("http://localhost:8080/codenames-web-final/boardgame/reponse");
+		
+		fetch (url, {
+			method: 'POST',
+			headers : {
+				'content-Type' : 'application/json'
+			},
+			body: JSON.stringify(passeur)
+			
+		}).then(resp => resp.text())
+		.then(a => {
+			if (a==0){
+				
+			}
+			
+			else if (a==1){
+							
+			}
+			
+			else if (a==2){
+				
+			}
+			
+			else if (a==3){
+				
+			}
+		});
+		
+    event.target.style.backgroundImage = "url('assets/tuile-bleu.png')";
+    console.log(event.target.textContent);
+  });
 });

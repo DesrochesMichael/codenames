@@ -30,7 +30,7 @@ public class BoardgameController {
 	public String affichage(Model model, HttpSession session) {
 
 		// triche a supprimer
-		session.setAttribute("id", 2);
+		session.setAttribute("id", 4);
 
 		// pas sa par contre !!!!
 		Partie p = daopartie.findById((int) session.getAttribute("id")).get();
@@ -38,10 +38,10 @@ public class BoardgameController {
 		
 		model.addAttribute("cartes", cartes);
 		
-//		for (int i=0;i<25;i++) {
-//			cartes.get(i).setPartie(p);
+		for (int i=0;i<25;i++) {
+			cartes.get(i).setPartie(p);
 //			daocarte.save(cartes.get(i));
-//		}
+		}
 		System.out.println("fini l'affichage");
 
 		return "boardgame";

@@ -22,10 +22,6 @@ public class CartesNomDeCode {
 	@Column(name = "NOM_DE_CODE_NOM", nullable = false)
 	@NotNull
 	private String nom;
-
-	@ManyToOne
-	@JoinColumn(name = "listeCartesNomDeCode")
-	private Tour tour;
 	
 	@OneToOne
 	@JoinColumn(name="cartenomdecode")
@@ -38,13 +34,6 @@ public class CartesNomDeCode {
 	
 	
 	
-	public Tour getTour() {
-		return tour;
-	}
-
-	public void setTour(Tour tour) {
-		this.tour = tour;
-	}
 
 	public Cases getCode_cases() {
 		return code_cases;

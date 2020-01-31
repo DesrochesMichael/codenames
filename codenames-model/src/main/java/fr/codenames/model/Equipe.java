@@ -28,7 +28,7 @@ public class Equipe {
 	private String nom;
 
 	@OneToMany(mappedBy = "equipe")
-	private List<Joueur> listeJoueur;
+	private List<Joueur> listeJoueur = new ArrayList<Joueur>();
 
 	@OneToMany(mappedBy = "equipe")
 	private List<Tour> listeTour;
@@ -37,10 +37,14 @@ public class Equipe {
 	@JoinColumn(name = "partie")
 	private Partie partie;
 
-	// constructeur
-	public Equipe(String nom) {
-		this.listeJoueur = new ArrayList<Joueur>();
-		this.nom = nom;
+	
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
 	}
 
 	public int getId() {

@@ -25,13 +25,15 @@ public class Tour {
 	@JoinColumn(name = "TOUR_EQUIPE_ID")
 	private Equipe equipe;
 
-	@OneToMany(mappedBy = "tour")
-	private List<CartesNomDeCode> listeCartesNomDeCode;
-	
-	@Column(name = "evenement")
-	private String evenement;
-	
-	
+	@Column(name = "indice")
+	private String indice;
+
+	@Column(name = "nbrReponse")
+	private int nbrReponse;
+
+	@ManyToOne
+	@JoinColumn(name = "partie")
+	private Partie partie;
 
 	public boolean bonnereponse(String couleur, Equipe e) {
 		if (couleur.equalsIgnoreCase(e.getNom()))
@@ -98,6 +100,31 @@ public class Tour {
 
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
+	}
+
+
+	public String getIndice() {
+		return indice;
+	}
+
+	public void setIndice(String indice) {
+		this.indice = indice;
+	}
+
+	public int getNbrReponse() {
+		return nbrReponse;
+	}
+
+	public void setNbrReponse(int nbrReponse) {
+		this.nbrReponse = nbrReponse;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
 	}
 
 }
