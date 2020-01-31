@@ -52,7 +52,7 @@ label[name="indice"] {
 	margin-top: 30px;
 }
 
-input[name="indice"], input[name="nombre"], input[name="bouton"], input[name="illimite"]
+input[name="indice"], input[name="nombre"], input[name="envoyer"], input[name="illimite"]
 	{
 	margin-bottom: 30px;
 }

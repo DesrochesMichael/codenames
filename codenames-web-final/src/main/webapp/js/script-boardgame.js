@@ -39,7 +39,8 @@ document.querySelectorAll('input[name="envoyer"]').forEach(bouton=>
 		
 	let passeur = {
 			indice : document.querySelector('input[name="indice"]').value,
-			nbr:document.querySelector('input[name="nombre"]').value
+			nbr:document.querySelector('input[name="nombre"]').value,
+			illimite:document.getElementById('illimite').value
 	}
 	
 		

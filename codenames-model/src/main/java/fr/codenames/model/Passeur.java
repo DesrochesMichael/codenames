@@ -19,9 +19,17 @@ public class Passeur {
 	
 	private String nom2;
 
+	private String illimite;
 	
 	
-	
+
+	public String getIllimite() {
+		return illimite;
+	}
+
+	public void setIllimite(String illimite) {
+		this.illimite = illimite;
+	}
 
 	public String getCarte() {
 		return carte;

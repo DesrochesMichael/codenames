@@ -37,8 +37,8 @@ public class BoardgameController {
 		
 		List<CartesNomDeCode> cartes = daocarte.findByPartieId((int) session.getAttribute("id"));
 		model.addAttribute("cartes", cartes);
-
-		for (int i = 0; i < cartes.size(); i++) {
+		
+		for (int i=0;i<25;i++) {
 //			cartes.get(i).setPartie(p);
 //			daocarte.save(cartes.get(i));
 		}

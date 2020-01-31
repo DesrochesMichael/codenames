@@ -87,7 +87,7 @@ public class BoardgameRestController {
 
 		p.setEquipes(p.affecterEquipe(p.getJoueurspartie()));
 
-		// montration des équipes
+		// montration des ï¿½quipes
 		String s = "Composition des equipes : ";
 
 		for (Equipe e : p.getEquipes()) {
